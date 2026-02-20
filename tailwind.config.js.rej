@@ -1,0 +1,35 @@
+diff a/tailwind.config.js b/tailwind.config.js	(rejected hunks)
+@@ -4,8 +4,30 @@ export default {
+     "./index.html",
+     "./src/**/*.{js,ts,jsx,tsx}",
+   ],
++  darkMode: "selector",
+   theme: {
+-    extend: {},
++    extend: {
++      colors: {
++        "primary": "#13c8ec",
++        "background-light": "#f6f8f8",
++        "background-dark": "#050a0c", // Deep cosmic dark
++        "surface-dark": "#0f1618",
++      },
++      fontFamily: {
++        "display": ["Space Grotesk", "sans-serif"],
++        "body": ["Noto Sans", "sans-serif"],
++      },
++      borderRadius: {
++        "DEFAULT": "0.25rem",
++        "lg": "0.5rem",
++        "xl": "0.75rem",
++        "2xl": "1rem",
++        "full": "9999px"
++      },
++      backgroundImage: {
++        'cosmic-gradient': 'radial-gradient(circle at 50% 50%, #112a30 0%, #050a0c 100%)',
++      }
++    },
+   },
+   plugins: [],
+-}
+\ No newline at end of file
++}
