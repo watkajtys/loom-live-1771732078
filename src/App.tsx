@@ -1,3 +1,82 @@
+import React from 'react';
+
+// --- Types ---
+
+interface NodeData {
+  id: string;
+  type: 'start' | 'action' | 'ghost';
+  title: string;
+  subtitle?: string;
+  act?: string;
+  position: { x: number; y: number };
+  status?: 'active' | 'future';
+  paths?: number;
+  opacity?: number;
+}
+
+interface EdgeData {
+  id: string;
+  source: string;
+  target: string;
+  type: 'solid' | 'dashed';
+  label?: string;
+  path: string; // Using explicit path for now to match design exactly
+  color?: string;
+}
+
+// --- Data ---
+
+const NODES: NodeData[] = [
+  {
+    id: '1',
+    type: 'start',
+    title: 'The Discovery',
+    subtitle: 'Detective Miller finds the clue.',
+    act: 'Act 1',
+    position: { x: 60, y: 100 },
+    status: 'active',
+  },
+  {
+    id: '2',
+    type: 'action',
+    title: 'Docks Encounter',
+    subtitle: 'Confrontation with the suspect.',
+    act: 'Act 1',
+    position: { x: 200, y: 320 },
+    status: 'active',
+    paths: 2,
+  },
+  {
+    id: '3',
+    type: 'ghost',
+    title: 'Alternate Ending',
+    position: { x: 420, y: 130 },
+    status: 'future',
+    opacity: 0.6,
+  },
+];
+
+const EDGES: EdgeData[] = [
+  {
+    id: 'e1-2',
+    source: '1',
+    target: '2',
+    type: 'solid',
+    path: 'M 180 160 C 180 250, 180 250, 250 320',
+    color: '#7311d4',
+  },
+  {
+    id: 'e1-3',
+    source: '1',
+    target: '3',
+    type: 'dashed',
+    path: 'M 180 160 C 350 160, 350 160, 420 160',
+    color: '#4b5563',
+  },
+];
+
+// --- Components ---
+
 const Header = () => (
   <header className="flex items-center justify-between p-4 z-20 bg-background-light/90 dark:bg-surface-darker/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/30 shrink-0">
     <div className="flex items-center gap-3">
@@ -20,7 +99,7 @@ const Header = () => (
   </header>
 );
 
-const ConnectionLayer = () => (
+const ConnectionLayer = ({ edges }: { edges: EdgeData[] }) => (
   <svg className="connector-svg">
     <defs>
       <marker id="arrowhead" markerHeight="7" markerWidth="10" orient="auto" refX="9" refY="3.5">
@@ -30,12 +109,68 @@ const ConnectionLayer = () => (
         <polygon fill="#4b5563" points="0 0, 10 3.5, 0 7"></polygon>
       </marker>
     </defs>
-    {/* Line from Node 1 to Node 2 */}
-    <path d="M 180 160 C 180 250, 180 250, 250 320" fill="none" markerEnd="url(#arrowhead)" opacity="0.8" stroke="#7311d4" strokeWidth="2"></path>
-    {/* Line from Node 1 to Node 3 */}
-    <path d="M 180 160 C 350 160, 350 160, 420 160" fill="none" markerEnd="url(#arrowhead-dim)" opacity="0.5" stroke="#4b5563" strokeDasharray="5,5" strokeWidth="2"></path>
+    {edges.map((edge) => (
+      <path
+        key={edge.id}
+        d={edge.path}
+        fill="none"
+        markerEnd={edge.type === 'solid' ? 'url(#arrowhead)' : 'url(#arrowhead-dim)'}
+        opacity={edge.type === 'solid' ? 1 : 0.5}
+        stroke={edge.color}
+        strokeDasharray={edge.type === 'dashed' ? '5,5' : undefined}
+        strokeWidth="2"
+      />
+    ))}
   </svg>
 );
+
+const NodeComponent = ({ node }: { node: NodeData }) => {
+  const style = {
+    top: `${node.position.y}px`,
+    left: `${node.position.x}px`,
+    opacity: node.opacity,
+    zIndex: 10,
+  };
+
+  // Render logic based on node type
+  if (node.type === 'ghost') {
+    return (
+      <div className="absolute w-52" style={style}>
+        <div className="node-card bg-surface-darker border border-dashed border-slate-600 rounded-xl p-3 flex items-center gap-3 cursor-pointer">
+          <div className="w-8 h-8 rounded-full bg-slate-800/50 flex items-center justify-center shrink-0 text-slate-500">
+            <span className="material-symbols-outlined text-lg">question_mark</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <h3 className="text-slate-300 font-medium text-sm leading-tight italic">{node.title}</h3>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="absolute w-60" style={style}>
+      <div className={`node-card bg-surface-dark dark:bg-surface-dark ${node.type === 'start' ? 'border-2 border-primary ring-4 ring-primary/20' : 'border border-slate-700/50 hover:border-primary/50'} rounded-xl p-3 flex items-start gap-3 cursor-pointer transition-colors`}>
+        <div className={`w-10 h-10 rounded-full ${node.type === 'start' ? 'bg-primary/20 text-primary' : 'bg-slate-800 text-slate-400'} flex items-center justify-center shrink-0`}>
+          <span className="material-symbols-outlined">{node.type === 'start' ? 'search' : 'location_on'}</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex justify-between items-start mb-1">
+            <span className={`text-xs font-bold ${node.type === 'start' ? 'text-primary' : 'text-slate-500'} uppercase tracking-wider`}>{node.act}</span>
+            {node.type === 'start' && <span className="w-2 h-2 rounded-full bg-green-500"></span>}
+          </div>
+          <h3 className="text-slate-100 font-bold text-sm leading-tight truncate">{node.title}</h3>
+          <p className="text-slate-400 text-xs mt-1 truncate">{node.subtitle}</p>
+        </div>
+      </div>
+      {node.paths && (
+        <div className="absolute -bottom-3 right-4 bg-slate-800 text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-slate-700">
+          {node.paths} PATHS
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Toolbar = () => (
   <div className="absolute left-4 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-3">
@@ -158,9 +293,9 @@ function App() {
     <div className="h-full w-full flex flex-col">
       <Header />
       <main className="relative flex-1 w-full overflow-hidden bg-background-light dark:bg-background-dark grid-background group/canvas">
-        <ConnectionLayer />
+        <ConnectionLayer edges={EDGES} />
 
-        {/* Condition Label */}
+        {/* Condition Label - Hardcoded for now as it's a specific UI element overlaid */}
         <div className="absolute top-[230px] left-[150px] z-[15] transform translate-x-3 translate-y-1">
           <button className="group flex items-center gap-2 bg-surface-darker border border-primary text-xs text-primary font-medium px-3 py-1.5 rounded-full glow-effect hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg shadow-primary/20">
             <span className="material-symbols-outlined text-[14px] text-primary group-hover:text-white transition-colors">alt_route</span>
@@ -169,54 +304,9 @@ function App() {
           </button>
         </div>
         
-        {/* Node 1: Start */}
-        <div className="absolute top-[100px] left-[60px] w-60 z-10">
-          <div className="node-card bg-surface-dark dark:bg-surface-dark border-2 border-primary rounded-xl p-3 flex items-start gap-3 cursor-pointer ring-4 ring-primary/20">
-            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary">
-              <span className="material-symbols-outlined">search</span>
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex justify-between items-start mb-1">
-                <span className="text-xs font-bold text-primary uppercase tracking-wider">Act 1</span>
-                <span className="w-2 h-2 rounded-full bg-green-500"></span>
-              </div>
-              <h3 className="text-slate-100 font-bold text-sm leading-tight truncate">The Discovery</h3>
-              <p className="text-slate-400 text-xs mt-1 truncate">Detective Miller finds the clue.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Node 2: Below */}
-        <div className="absolute top-[320px] left-[200px] w-60 z-10">
-          <div className="node-card bg-surface-dark dark:bg-surface-dark border border-slate-700/50 rounded-xl p-3 flex items-start gap-3 cursor-pointer hover:border-primary/50 transition-colors">
-            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center shrink-0 text-slate-400">
-              <span className="material-symbols-outlined">location_on</span>
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex justify-between items-start mb-1">
-                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Act 1</span>
-              </div>
-              <h3 className="text-slate-100 font-bold text-sm leading-tight truncate">Docks Encounter</h3>
-              <p className="text-slate-400 text-xs mt-1 truncate">Confrontation with the suspect.</p>
-            </div>
-          </div>
-          {/* Branch badge */}
-          <div className="absolute -bottom-3 right-4 bg-slate-800 text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-slate-700">
-            2 PATHS
-          </div>
-        </div>
-
-        {/* Node 3: Right (Ghosted/Future) */}
-        <div className="absolute top-[130px] left-[420px] w-52 z-10 opacity-60">
-          <div className="node-card bg-surface-darker border border-dashed border-slate-600 rounded-xl p-3 flex items-center gap-3 cursor-pointer">
-            <div className="w-8 h-8 rounded-full bg-slate-800/50 flex items-center justify-center shrink-0 text-slate-500">
-              <span className="material-symbols-outlined text-lg">question_mark</span>
-            </div>
-            <div className="flex-1 min-w-0">
-              <h3 className="text-slate-300 font-medium text-sm leading-tight italic">Alternate Ending</h3>
-            </div>
-          </div>
-        </div>
+        {NODES.map((node) => (
+          <NodeComponent key={node.id} node={node} />
+        ))}
 
         <Toolbar />
         <NodeInspector />
