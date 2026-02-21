@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState, type MouseEvent } from 'react';
 import './index.css';
 
 function App() {
@@ -116,7 +116,7 @@ function App() {
             </button>
             <div className="flex flex-col">
               <h1 className="text-sm font-bold text-white leading-tight">Project Alpha</h1>
-              <span className="text-[10px] text-slate-400 font-medium">Mind Map • Last edited just now</span>
+              <span className="text-[10px] text-slate-400 font-medium">Mind Map {'\u2022'} Last edited just now</span>
             </div>
             <div className="h-6 w-px bg-white/10 mx-1"></div>
             <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/5 text-slate-300 transition-colors">
