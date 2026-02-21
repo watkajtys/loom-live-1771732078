@@ -3,27 +3,77 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-primary: #135bec;
-  --color-background-light: #f6f6f8;
-  --color-background-dark: #101622;
-  --font-display: "Inter", sans-serif;
+  --color-primary: #7311d4;
+  --color-background-light: #f7f6f8;
+  --color-background-dark: #191022;
+  --color-surface-dark: #261933;
+  --color-surface-darker: #1a1122;
+
+  --font-display: "Space Grotesk", sans-serif;
+
+  --radius-DEFAULT: 1rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+  --radius-full: 9999px;
 }
 
-@utility bg-grid-pattern {
+@utility grid-background {
   background-size: 40px 40px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, rgba(115, 17, 212, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(115, 17, 212, 0.05) 1px, transparent 1px);
 }
 
-@utility no-scrollbar {
-  &::-webkit-scrollbar {
-    display: none;
+@utility connector-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@utility node-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: scale(0.98);
   }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+}
+
+@utility glass-panel {
+  background: rgba(38, 25, 51, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #362348;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7311d4;
 }
 
 body {
   font-family: var(--font-display);
-  @apply bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 h-screen w-full overflow-hidden;
+  @apply bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 h-screen w-full overflow-hidden flex flex-col;
+}
+
+#root {
+  @apply h-full w-full;
 }
