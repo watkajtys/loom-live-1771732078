@@ -1,240 +1,592 @@
+diff --git a/index.html b/index.html
+index 4eeb3fe..0d50b75 100644
+--- a/index.html
++++ b/index.html
+@@ -4,11 +4,10 @@
+     <meta charset="UTF-8" />
+     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+-    <title>Narrative Node Canvas</title>
++    <title>Chronos: The Fractal Lore Mapper</title>
+     <link rel="preconnect" href="https://fonts.googleapis.com" />
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
++    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+   </head>
+   <body>
 diff --git a/src/App.tsx b/src/App.tsx
-index 173a5c2..3896937 100644
+index 3896937..956f9a9 100644
 --- a/src/App.tsx
 +++ b/src/App.tsx
-@@ -1,3 +1,82 @@
-+import React from 'react';
-+
-+// --- Types ---
-+
-+interface NodeData {
-+  id: string;
-+  type: 'start' | 'action' | 'ghost';
-+  title: string;
-+  subtitle?: string;
-+  act?: string;
-+  position: { x: number; y: number };
-+  status?: 'active' | 'future';
-+  paths?: number;
-+  opacity?: number;
-+}
-+
-+interface EdgeData {
-+  id: string;
-+  source: string;
-+  target: string;
-+  type: 'solid' | 'dashed';
-+  label?: string;
-+  path: string; // Using explicit path for now to match design exactly
-+  color?: string;
-+}
-+
-+// --- Data ---
-+
-+const NODES: NodeData[] = [
-+  {
-+    id: '1',
-+    type: 'start',
-+    title: 'The Discovery',
-+    subtitle: 'Detective Miller finds the clue.',
-+    act: 'Act 1',
-+    position: { x: 60, y: 100 },
-+    status: 'active',
-+  },
-+  {
-+    id: '2',
-+    type: 'action',
-+    title: 'Docks Encounter',
-+    subtitle: 'Confrontation with the suspect.',
-+    act: 'Act 1',
-+    position: { x: 200, y: 320 },
-+    status: 'active',
-+    paths: 2,
-+  },
-+  {
-+    id: '3',
-+    type: 'ghost',
-+    title: 'Alternate Ending',
-+    position: { x: 420, y: 130 },
-+    status: 'future',
-+    opacity: 0.6,
-+  },
-+];
-+
-+const EDGES: EdgeData[] = [
-+  {
-+    id: 'e1-2',
-+    source: '1',
-+    target: '2',
-+    type: 'solid',
-+    path: 'M 180 160 C 180 250, 180 250, 250 320',
-+    color: '#7311d4',
-+  },
-+  {
-+    id: 'e1-3',
-+    source: '1',
-+    target: '3',
-+    type: 'dashed',
-+    path: 'M 180 160 C 350 160, 350 160, 420 160',
-+    color: '#4b5563',
-+  },
-+];
-+
-+// --- Components ---
-+
+@@ -1,317 +1,138 @@
+-import React from 'react';
+-
+-// --- Types ---
+-
+-interface NodeData {
+-  id: string;
+-  type: 'start' | 'action' | 'ghost';
+-  title: string;
+-  subtitle?: string;
+-  act?: string;
+-  position: { x: number; y: number };
+-  status?: 'active' | 'future';
+-  paths?: number;
+-  opacity?: number;
+-}
+-
+-interface EdgeData {
+-  id: string;
+-  source: string;
+-  target: string;
+-  type: 'solid' | 'dashed';
+-  label?: string;
+-  path: string; // Using explicit path for now to match design exactly
+-  color?: string;
+-}
+-
+-// --- Data ---
+-
+-const NODES: NodeData[] = [
+-  {
+-    id: '1',
+-    type: 'start',
+-    title: 'The Discovery',
+-    subtitle: 'Detective Miller finds the clue.',
+-    act: 'Act 1',
+-    position: { x: 60, y: 100 },
+-    status: 'active',
+-  },
+-  {
+-    id: '2',
+-    type: 'action',
+-    title: 'Docks Encounter',
+-    subtitle: 'Confrontation with the suspect.',
+-    act: 'Act 1',
+-    position: { x: 200, y: 320 },
+-    status: 'active',
+-    paths: 2,
+-  },
+-  {
+-    id: '3',
+-    type: 'ghost',
+-    title: 'Alternate Ending',
+-    position: { x: 420, y: 130 },
+-    status: 'future',
+-    opacity: 0.6,
+-  },
+-];
+-
+-const EDGES: EdgeData[] = [
+-  {
+-    id: 'e1-2',
+-    source: '1',
+-    target: '2',
+-    type: 'solid',
+-    path: 'M 180 160 C 180 250, 180 250, 250 320',
+-    color: '#7311d4',
+-  },
+-  {
+-    id: 'e1-3',
+-    source: '1',
+-    target: '3',
+-    type: 'dashed',
+-    path: 'M 180 160 C 350 160, 350 160, 420 160',
+-    color: '#4b5563',
+-  },
+-];
+-
+ // --- Components ---
+ 
  const Header = () => (
-   <header className="flex items-center justify-between p-4 z-20 bg-background-light/90 dark:bg-surface-darker/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/30 shrink-0">
-     <div className="flex items-center gap-3">
-@@ -20,7 +99,7 @@ const Header = () => (
+-  <header className="flex items-center justify-between p-4 z-20 bg-background-light/90 dark:bg-surface-darker/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/30 shrink-0">
+-    <div className="flex items-center gap-3">
+-      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white">
+-        <span className="material-symbols-outlined text-sm">hub</span>
+-      </div>
+-      <div>
+-        <h1 className="text-lg font-bold leading-tight tracking-tight">The Obsidian Protocol</h1>
+-        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium tracking-wide">LAST EDITED: 2 MINS AGO</p>
++  <header className="absolute top-0 left-0 right-0 z-50 pt-12 pb-4 px-6 flex justify-between items-center bg-gradient-to-b from-mono-bg/90 to-transparent pointer-events-none">
++    <div className="flex items-center gap-3 text-mono-text-secondary pointer-events-auto">
++      <span className="material-symbols-outlined text-sm opacity-70">menu_book</span>
++      <div className="flex items-center gap-2 text-xs tracking-widest uppercase font-medium">
++        <span className="opacity-50">Eldoria</span>
++        <span className="opacity-30">/</span>
++        <span className="opacity-50">Fractured Lands</span>
++        <span className="opacity-30">/</span>
++        <span className="text-white border-b border-white/20 pb-0.5">Whispering Woods</span>
+       </div>
+     </div>
+-    <div className="flex items-center gap-2">
+-      <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-700/50 transition-colors">
+-        <span className="material-symbols-outlined text-slate-600 dark:text-slate-300">share</span>
+-      </button>
+-      <button className="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/30">
+-        <span className="material-symbols-outlined">play_arrow</span>
+-      </button>
+-    </div>
++    <button className="w-8 h-8 flex items-center justify-center rounded-full border border-mono-border hover:bg-white/5 transition-colors text-mono-text-primary pointer-events-auto">
++      <span className="material-symbols-outlined text-sm">settings</span>
++    </button>
    </header>
  );
  
--const ConnectionLayer = () => (
-+const ConnectionLayer = ({ edges }: { edges: EdgeData[] }) => (
-   <svg className="connector-svg">
-     <defs>
-       <marker id="arrowhead" markerHeight="7" markerWidth="10" orient="auto" refX="9" refY="3.5">
-@@ -30,13 +109,69 @@ const ConnectionLayer = () => (
-         <polygon fill="#4b5563" points="0 0, 10 3.5, 0 7"></polygon>
-       </marker>
-     </defs>
--    {/* Line from Node 1 to Node 2 */}
--    <path d="M 180 160 C 180 250, 180 250, 250 320" fill="none" markerEnd="url(#arrowhead)" opacity="0.8" stroke="#7311d4" strokeWidth="2"></path>
--    {/* Line from Node 1 to Node 3 */}
--    <path d="M 180 160 C 350 160, 350 160, 420 160" fill="none" markerEnd="url(#arrowhead-dim)" opacity="0.5" stroke="#4b5563" strokeDasharray="5,5" strokeWidth="2"></path>
-+    {edges.map((edge) => (
-+      <path
-+        key={edge.id}
-+        d={edge.path}
-+        fill="none"
-+        markerEnd={edge.type === 'solid' ? 'url(#arrowhead)' : 'url(#arrowhead-dim)'}
-+        opacity={edge.type === 'solid' ? 1 : 0.5}
-+        stroke={edge.color}
-+        strokeDasharray={edge.type === 'dashed' ? '5,5' : undefined}
-+        strokeWidth="2"
-+      />
-+    ))}
+-const ConnectionLayer = ({ edges }: { edges: EdgeData[] }) => (
+-  <svg className="connector-svg">
+-    <defs>
+-      <marker id="arrowhead" markerHeight="7" markerWidth="10" orient="auto" refX="9" refY="3.5">
+-        <polygon fill="#7311d4" points="0 0, 10 3.5, 0 7"></polygon>
+-      </marker>
+-      <marker id="arrowhead-dim" markerHeight="7" markerWidth="10" orient="auto" refX="9" refY="3.5">
+-        <polygon fill="#4b5563" points="0 0, 10 3.5, 0 7"></polygon>
+-      </marker>
+-    </defs>
+-    {edges.map((edge) => (
+-      <path
+-        key={edge.id}
+-        d={edge.path}
+-        fill="none"
+-        markerEnd={edge.type === 'solid' ? 'url(#arrowhead)' : 'url(#arrowhead-dim)'}
+-        opacity={edge.type === 'solid' ? 1 : 0.5}
+-        stroke={edge.color}
+-        strokeDasharray={edge.type === 'dashed' ? '5,5' : undefined}
+-        strokeWidth="2"
+-      />
+-    ))}
++const ConnectionLayer = () => (
++  <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
++    <path className="connector-line" d="M180,300 C250,300 150,520 220,520" fill="none" stroke="#888"></path>
++    <path className="connector-line" d="M220,520 C280,520 300,450 340,400" fill="none" stroke="#888" strokeOpacity="0.5"></path>
++    <rect fill="#1c1c1e" height="18" rx="4" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" width="90" x="185" y="383"></rect>
++    <text fill="#ccc" fontFamily="Inter" fontSize="9" letterSpacing="0.5" textAnchor="middle" x="230" y="396">CORRUPTION</text>
    </svg>
  );
  
-+const NodeComponent = ({ node }: { node: NodeData }) => {
-+  const style = {
-+    top: `${node.position.y}px`,
-+    left: `${node.position.x}px`,
-+    opacity: node.opacity,
-+    zIndex: 10,
-+  };
-+
-+  // Render logic based on node type
-+  if (node.type === 'ghost') {
-+    return (
-+      <div className="absolute w-52" style={style}>
-+        <div className="node-card bg-surface-darker border border-dashed border-slate-600 rounded-xl p-3 flex items-center gap-3 cursor-pointer">
-+          <div className="w-8 h-8 rounded-full bg-slate-800/50 flex items-center justify-center shrink-0 text-slate-500">
-+            <span className="material-symbols-outlined text-lg">question_mark</span>
-+          </div>
-+          <div className="flex-1 min-w-0">
-+            <h3 className="text-slate-300 font-medium text-sm leading-tight italic">{node.title}</h3>
-+          </div>
-+        </div>
+-const NodeComponent = ({ node }: { node: NodeData }) => {
+-  const style = {
+-    top: `${node.position.y}px`,
+-    left: `${node.position.x}px`,
+-    opacity: node.opacity,
+-    zIndex: 10,
+-  };
+-
+-  // Render logic based on node type
+-  if (node.type === 'ghost') {
+-    return (
+-      <div className="absolute w-52" style={style}>
+-        <div className="node-card bg-surface-darker border border-dashed border-slate-600 rounded-xl p-3 flex items-center gap-3 cursor-pointer">
+-          <div className="w-8 h-8 rounded-full bg-slate-800/50 flex items-center justify-center shrink-0 text-slate-500">
+-            <span className="material-symbols-outlined text-lg">question_mark</span>
+-          </div>
+-          <div className="flex-1 min-w-0">
+-            <h3 className="text-slate-300 font-medium text-sm leading-tight italic">{node.title}</h3>
+-          </div>
+-        </div>
+-      </div>
+-    );
+-  }
+-
+-  return (
+-    <div className="absolute w-60" style={style}>
+-      <div className={`node-card bg-surface-dark dark:bg-surface-dark ${node.type === 'start' ? 'border-2 border-primary ring-4 ring-primary/20' : 'border border-slate-700/50 hover:border-primary/50'} rounded-xl p-3 flex items-start gap-3 cursor-pointer transition-colors`}>
+-        <div className={`w-10 h-10 rounded-full ${node.type === 'start' ? 'bg-primary/20 text-primary' : 'bg-slate-800 text-slate-400'} flex items-center justify-center shrink-0`}>
+-          <span className="material-symbols-outlined">{node.type === 'start' ? 'search' : 'location_on'}</span>
+-        </div>
+-        <div className="flex-1 min-w-0">
+-          <div className="flex justify-between items-start mb-1">
+-            <span className={`text-xs font-bold ${node.type === 'start' ? 'text-primary' : 'text-slate-500'} uppercase tracking-wider`}>{node.act}</span>
+-            {node.type === 'start' && <span className="w-2 h-2 rounded-full bg-green-500"></span>}
+-          </div>
+-          <h3 className="text-slate-100 font-bold text-sm leading-tight truncate">{node.title}</h3>
+-          <p className="text-slate-400 text-xs mt-1 truncate">{node.subtitle}</p>
+-        </div>
++const ObsidianSpireNode = () => (
++  <div className="absolute top-[220px] left-6 w-64 glass-panel rounded-sm p-5 cursor-grab active:cursor-grabbing hover:border-white/30 transition-colors group">
++    <div className="active-node-glow opacity-0 group-hover:opacity-100 transition-opacity"></div>
++    <div className="flex items-start justify-between mb-4">
++      <div className="flex flex-col gap-1">
++        <span className="text-[10px] uppercase tracking-wider text-mono-text-secondary">Location</span>
++        <h3 className="text-white font-serif font-normal text-xl leading-tight italic">The Obsidian Spire</h3>
+       </div>
+-      {node.paths && (
+-        <div className="absolute -bottom-3 right-4 bg-slate-800 text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-slate-700">
+-          {node.paths} PATHS
+-        </div>
+-      )}
++      <span className="material-symbols-outlined text-mono-text-secondary text-base opacity-50">castle</span>
+     </div>
+-  );
+-};
+-
+-const Toolbar = () => (
+-  <div className="absolute left-4 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-3">
+-    <div className="glass-panel p-2 rounded-full flex flex-col gap-2 shadow-xl shadow-black/50">
+-      <button className="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-white hover:bg-primary/90 transition-all shadow-lg shadow-primary/40 group relative">
+-        <span className="material-symbols-outlined">add</span>
+-        <span className="absolute left-14 bg-slate-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Add Node</span>
+-      </button>
+-      <button className="w-10 h-10 rounded-full flex items-center justify-center text-slate-300 hover:bg-white/10 hover:text-white transition-all group relative">
+-        <span className="material-symbols-outlined">timeline</span>
+-        <span className="absolute left-14 bg-slate-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Connect</span>
+-      </button>
+-      <button className="w-10 h-10 rounded-full flex items-center justify-center text-slate-300 hover:bg-white/10 hover:text-white transition-all group relative">
+-        <span className="material-symbols-outlined">call_split</span>
+-        <span className="absolute left-14 bg-slate-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Branch</span>
+-      </button>
+-      <button className="w-10 h-10 rounded-full flex items-center justify-center text-slate-300 hover:bg-white/10 hover:text-white transition-all group relative">
+-        <span className="material-symbols-outlined">label</span>
+-        <span className="absolute left-14 bg-slate-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Tags</span>
+-      </button>
++    <div className="h-20 w-full bg-black/40 mb-4 overflow-hidden relative border border-white/5 grayscale hover:grayscale-0 transition-all duration-500">
++      <img
++        alt="Dark gothic spire silhouette against a purple night sky"
++        className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity"
++        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAByVTR-yxgCClyixotMUZlPor2O-lqoFPHuXmgVjWa4bFIy_XOXtFuDFgEpSxw9jT2LbYlAUdQ6_jrnu2IC7WYOEozccyXXobBTeyyixE_B9_SnkRIGd1IXmMVOVLZhrGxZMDqisvQxGzBcYenfCND1earVxqjOC5rYdJ96dVnhzBlMHchYwLidtYINofq5wxl9RBCCETqyug6U5ioV2hLz-xhcfr1b-_6WXJvMU-9P5k20l5aAECVQpD1NoTgoSqzCsTve9ON1cA"
++      />
+     </div>
+-    <div className="glass-panel p-2 rounded-full flex flex-col gap-2 shadow-xl shadow-black/50 mt-2">
+-      <button className="w-10 h-10 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all">
+-        <span className="material-symbols-outlined">settings</span>
+-      </button>
++    <div className="border-t border-white/10 pt-3 mt-1 flex justify-between items-center">
++      <span className="text-[10px] text-mono-text-secondary">Magical Focus Point</span>
++      <div className="w-1.5 h-1.5 rounded-full bg-white/20"></div>
+     </div>
+   </div>
+ );
+ 
+-const NodeInspector = () => (
+-  <div className="absolute bottom-4 left-4 right-4 md:left-auto md:right-4 md:bottom-4 md:w-80 md:top-4 z-40 flex flex-col justify-end md:justify-start pointer-events-none">
+-    <div className="glass-panel rounded-lg md:rounded-xl p-0 shadow-2xl shadow-black/80 flex flex-col max-h-[50vh] md:max-h-[calc(100vh-8rem)] pointer-events-auto overflow-hidden animate-in slide-in-from-bottom-4 fade-in duration-300">
+-      {/* Panel Header */}
+-      <div className="flex items-center justify-between p-4 border-b border-slate-700/50 bg-surface-darker/50">
+-        <div className="flex items-center gap-2">
+-          <span className="material-symbols-outlined text-primary">edit_note</span>
+-          <h2 className="text-sm font-bold text-white uppercase tracking-wider">Node Details</h2>
+-        </div>
+-        <button className="text-slate-400 hover:text-white">
+-          <span className="material-symbols-outlined text-sm">close</span>
+-        </button>
++const WhisperingWoodsNode = () => (
++  <div className="absolute top-[480px] left-1/2 -translate-x-1/2 w-72 glass-panel rounded-sm p-6 cursor-grab active:cursor-grabbing hover:border-white/40 transition-colors group z-20">
++    <div className="active-node-glow opacity-100"></div>
++    <div className="flex items-start justify-between mb-4">
++      <div className="flex flex-col gap-1">
++        <span className="text-[10px] uppercase tracking-wider text-mono-text-secondary">Territory</span>
++        <h3 className="text-white font-serif font-semibold text-2xl leading-tight">Whispering Woods</h3>
+       </div>
+-      {/* Panel Content */}
+-      <div className="overflow-y-auto p-4 flex flex-col gap-4">
+-        {/* Cover Image */}
+-        <div className="w-full aspect-video rounded-lg bg-slate-800 relative overflow-hidden group">
+-          <img
+-            alt="Futuristic neon city street at night with cyber noir atmosphere"
+-            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-MN91fAShROkg_UQI4bPSGYwlr350NdQGXU9v3bqWJA34wKntLDJ7IXX7WLomCEORInKQ_xw_HwKEMZ-emYGOmvTTumwekeCQ_Yf-YoAg7uSGClKSfQ68hw6n6sKdiAQrn3PkQI1VePqaSOumrnxt6nvFeYbpyWD-e4UIw02UIs8Ms7JC5O8mx6OeNbsY7siVzFs804R2fdHgkWpFN_6A9nC6LdxsZzTw-ChJhg4AWJzatz1utMUGwQCuQn7h3I8pb32hWkF3kw"
+-          />
+-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+-          <button className="absolute bottom-2 right-2 p-1.5 rounded-full bg-black/50 text-white hover:bg-primary transition-colors">
+-            <span className="material-symbols-outlined text-sm">image</span>
+-          </button>
+-        </div>
+-        {/* Title Input */}
+-        <div className="space-y-1">
+-          <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Title</label>
+-          <input
+-            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-white font-bold text-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+-            type="text"
+-            defaultValue="The Discovery"
+-          />
+-        </div>
+-        {/* Tags */}
+-        <div className="flex flex-wrap gap-2">
+-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/30">
+-            Act 1
+-          </span>
+-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">
+-            Detective Miller
+-          </span>
+-          <button className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 border border-slate-700 border-dashed">
+-            <span className="material-symbols-outlined text-sm">add</span>
+-          </button>
+-        </div>
+-        {/* Synopsis */}
+-        <div className="space-y-1">
+-          <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Synopsis</label>
+-          <textarea
+-            className="w-full bg-slate-900/50 border border-slate-700 rounded-lg px-3 py-2 text-slate-300 text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all h-24 resize-none leading-relaxed"
+-            defaultValue="Detective Miller finds a encrypted data drive hidden in the rain gutter of the abandoned warehouse."
+-          ></textarea>
+-        </div>
+-        {/* Actions */}
+-        <div className="grid grid-cols-2 gap-3 pt-2">
+-          <button className="flex items-center justify-center gap-2 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium transition-colors">
+-            <span className="material-symbols-outlined text-sm">delete</span>
+-            Delete
+-          </button>
+-          <button className="flex items-center justify-center gap-2 py-2 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-bold transition-colors shadow-lg shadow-primary/25">
+-            <span className="material-symbols-outlined text-sm">save</span>
+-            Save
+-          </button>
+-        </div>
++      <div className="w-6 h-6 border border-white/20 flex items-center justify-center text-white/70 rounded-full">
++        <span className="material-symbols-outlined text-sm">forest</span>
+       </div>
+     </div>
++    <p className="text-sm font-serif italic text-mono-text-secondary mb-5 leading-relaxed border-l-2 border-white/20 pl-3">
++      "Home of the unseen fae. The trees themselves seem to shift when not observed directly."
++    </p>
++    <div className="flex items-center justify-between pt-2 border-t border-white/10">
++      <div className="flex -space-x-3 opacity-70 grayscale group-hover:grayscale-0 transition-all">
++        <div className="w-6 h-6 rounded-full bg-gray-600 border border-mono-bg"></div>
++        <div className="w-6 h-6 rounded-full bg-gray-500 border border-mono-bg"></div>
++        <div className="w-6 h-6 rounded-full bg-gray-800 border border-mono-bg flex items-center justify-center text-[8px] text-white">+3</div>
 +      </div>
-+    );
-+  }
-+
-+  return (
-+    <div className="absolute w-60" style={style}>
-+      <div className={`node-card bg-surface-dark dark:bg-surface-dark ${node.type === 'start' ? 'border-2 border-primary ring-4 ring-primary/20' : 'border border-slate-700/50 hover:border-primary/50'} rounded-xl p-3 flex items-start gap-3 cursor-pointer transition-colors`}>
-+        <div className={`w-10 h-10 rounded-full ${node.type === 'start' ? 'bg-primary/20 text-primary' : 'bg-slate-800 text-slate-400'} flex items-center justify-center shrink-0`}>
-+          <span className="material-symbols-outlined">{node.type === 'start' ? 'search' : 'location_on'}</span>
-+        </div>
-+        <div className="flex-1 min-w-0">
-+          <div className="flex justify-between items-start mb-1">
-+            <span className={`text-xs font-bold ${node.type === 'start' ? 'text-primary' : 'text-slate-500'} uppercase tracking-wider`}>{node.act}</span>
-+            {node.type === 'start' && <span className="w-2 h-2 rounded-full bg-green-500"></span>}
-+          </div>
-+          <h3 className="text-slate-100 font-bold text-sm leading-tight truncate">{node.title}</h3>
-+          <p className="text-slate-400 text-xs mt-1 truncate">{node.subtitle}</p>
-+        </div>
-+      </div>
-+      {node.paths && (
-+        <div className="absolute -bottom-3 right-4 bg-slate-800 text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-slate-700">
-+          {node.paths} PATHS
-+        </div>
-+      )}
++      <button className="text-[10px] uppercase tracking-widest text-white hover:text-white/70 transition-colors border border-white/20 px-3 py-1 rounded-full hover:bg-white/5">
++        Inspect
++      </button>
 +    </div>
-+  );
-+};
+   </div>
+ );
+ 
+-const ZoomControls = () => (
+-  <div className="absolute bottom-24 right-4 md:bottom-4 md:right-auto md:left-20 z-30 flex flex-col md:flex-row gap-2">
+-    <div className="glass-panel p-1 rounded-full flex flex-col md:flex-row gap-1 shadow-lg">
+-      <button className="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all">
++const SunkenGrottoNode = () => (
++  <div className="absolute top-[350px] left-[320px] w-48 glass-panel rounded-sm p-4 opacity-40 hover:opacity-100 transition-opacity scale-95 border-dashed border-white/20">
++    <div className="flex items-center justify-between mb-2">
++      <h4 className="text-slate-200 font-serif text-lg italic">Sunken Grotto</h4>
++      <span className="material-symbols-outlined text-xs text-mono-text-secondary">water_drop</span>
++    </div>
++    <div className="h-[1px] w-full bg-white/10 mt-2 mb-2">
++      <div className="h-full bg-white w-1/3"></div>
++    </div>
++    <p className="text-[9px] uppercase tracking-widest text-mono-text-secondary text-right">Draft</p>
++  </div>
++);
 +
- const Toolbar = () => (
-   <div className="absolute left-4 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-3">
-     <div className="glass-panel p-2 rounded-full flex flex-col gap-2 shadow-xl shadow-black/50">
-@@ -158,9 +293,9 @@ function App() {
-     <div className="h-full w-full flex flex-col">
++const FloatingControls = () => (
++  <div className="absolute bottom-10 right-8 z-50 flex flex-col items-end gap-4 group pointer-events-none">
++    <div className="flex flex-col gap-3 items-end transition-all duration-300 opacity-0 translate-y-4 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto mb-2">
++      <button className="w-10 h-10 glass-panel rounded-full flex items-center justify-center text-mono-text-secondary hover:text-white hover:border-white transition-all shadow-lg pointer-events-auto" title="Add Node">
+         <span className="material-symbols-outlined text-lg">add</span>
+       </button>
+-      <div className="w-8 h-8 flex items-center justify-center text-xs font-mono text-slate-500 select-none">
+-        100%
+-      </div>
+-      <button className="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/10 transition-all">
+-        <span className="material-symbols-outlined text-lg">remove</span>
++      <button className="w-10 h-10 glass-panel rounded-full flex items-center justify-center text-mono-text-secondary hover:text-white hover:border-white transition-all shadow-lg pointer-events-auto" title="Search">
++        <span className="material-symbols-outlined text-lg">search</span>
+       </button>
++      <button className="w-10 h-10 glass-panel rounded-full flex items-center justify-center text-mono-text-secondary hover:text-white hover:border-white transition-all shadow-lg pointer-events-auto" title="Zoom">
++        <span className="material-symbols-outlined text-lg">center_focus_strong</span>
++      </button>
++    </div>
++    <button className="w-14 h-14 bg-white text-mono-bg rounded-full shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,255,255,0.2)] flex items-center justify-center transition-all hover:scale-105 active:scale-95 z-50 pointer-events-auto">
++      <span className="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform duration-300">more_horiz</span>
++    </button>
++  </div>
++);
++
++const Pagination = () => (
++  <div className="absolute bottom-0 w-full z-40 flex justify-center pb-4 pointer-events-none">
++    <div className="flex gap-1.5 pointer-events-auto glass-panel px-3 py-1.5 rounded-full border border-white/10">
++      <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
++      <div className="w-1.5 h-1.5 bg-white/20 rounded-full hover:bg-white/50 transition-colors cursor-pointer"></div>
++      <div className="w-1.5 h-1.5 bg-white/20 rounded-full hover:bg-white/50 transition-colors cursor-pointer"></div>
+     </div>
+   </div>
+ );
+ 
+ function App() {
+   return (
+-    <div className="h-full w-full flex flex-col">
++    <div className="h-full w-full flex flex-col bg-mono-bg text-mono-text-primary font-sans overflow-hidden relative antialiased selection:bg-white selection:text-mono-bg">
        <Header />
-       <main className="relative flex-1 w-full overflow-hidden bg-background-light dark:bg-background-dark grid-background group/canvas">
--        <ConnectionLayer />
-+        <ConnectionLayer edges={EDGES} />
- 
--        {/* Condition Label */}
-+        {/* Condition Label - Hardcoded for now as it's a specific UI element overlaid */}
-         <div className="absolute top-[230px] left-[150px] z-[15] transform translate-x-3 translate-y-1">
-           <button className="group flex items-center gap-2 bg-surface-darker border border-primary text-xs text-primary font-medium px-3 py-1.5 rounded-full glow-effect hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg shadow-primary/20">
-             <span className="material-symbols-outlined text-[14px] text-primary group-hover:text-white transition-colors">alt_route</span>
-@@ -169,54 +304,9 @@ function App() {
-           </button>
-         </div>
-         
--        {/* Node 1: Start */}
--        <div className="absolute top-[100px] left-[60px] w-60 z-10">
--          <div className="node-card bg-surface-dark dark:bg-surface-dark border-2 border-primary rounded-xl p-3 flex items-start gap-3 cursor-pointer ring-4 ring-primary/20">
--            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0 text-primary">
--              <span className="material-symbols-outlined">search</span>
--            </div>
--            <div className="flex-1 min-w-0">
--              <div className="flex justify-between items-start mb-1">
--                <span className="text-xs font-bold text-primary uppercase tracking-wider">Act 1</span>
--                <span className="w-2 h-2 rounded-full bg-green-500"></span>
--              </div>
--              <h3 className="text-slate-100 font-bold text-sm leading-tight truncate">The Discovery</h3>
--              <p className="text-slate-400 text-xs mt-1 truncate">Detective Miller finds the clue.</p>
--            </div>
--          </div>
--        </div>
+-      <main className="relative flex-1 w-full overflow-hidden bg-background-light dark:bg-background-dark grid-background group/canvas">
+-        <ConnectionLayer edges={EDGES} />
 -
--        {/* Node 2: Below */}
--        <div className="absolute top-[320px] left-[200px] w-60 z-10">
--          <div className="node-card bg-surface-dark dark:bg-surface-dark border border-slate-700/50 rounded-xl p-3 flex items-start gap-3 cursor-pointer hover:border-primary/50 transition-colors">
--            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center shrink-0 text-slate-400">
--              <span className="material-symbols-outlined">location_on</span>
--            </div>
--            <div className="flex-1 min-w-0">
--              <div className="flex justify-between items-start mb-1">
--                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Act 1</span>
--              </div>
--              <h3 className="text-slate-100 font-bold text-sm leading-tight truncate">Docks Encounter</h3>
--              <p className="text-slate-400 text-xs mt-1 truncate">Confrontation with the suspect.</p>
--            </div>
--          </div>
--          {/* Branch badge */}
--          <div className="absolute -bottom-3 right-4 bg-slate-800 text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-slate-700">
--            2 PATHS
--          </div>
+-        {/* Condition Label - Hardcoded for now as it's a specific UI element overlaid */}
+-        <div className="absolute top-[230px] left-[150px] z-[15] transform translate-x-3 translate-y-1">
+-          <button className="group flex items-center gap-2 bg-surface-darker border border-primary text-xs text-primary font-medium px-3 py-1.5 rounded-full glow-effect hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg shadow-primary/20">
+-            <span className="material-symbols-outlined text-[14px] text-primary group-hover:text-white transition-colors">alt_route</span>
+-            <span className="text-primary group-hover:text-white transition-colors">Choice: Hack the Drive</span>
+-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse ml-1"></span>
+-          </button>
 -        </div>
+-        
+-        {NODES.map((node) => (
+-          <NodeComponent key={node.id} node={node} />
+-        ))}
 -
--        {/* Node 3: Right (Ghosted/Future) */}
--        <div className="absolute top-[130px] left-[420px] w-52 z-10 opacity-60">
--          <div className="node-card bg-surface-darker border border-dashed border-slate-600 rounded-xl p-3 flex items-center gap-3 cursor-pointer">
--            <div className="w-8 h-8 rounded-full bg-slate-800/50 flex items-center justify-center shrink-0 text-slate-500">
--              <span className="material-symbols-outlined text-lg">question_mark</span>
--            </div>
--            <div className="flex-1 min-w-0">
--              <h3 className="text-slate-300 font-medium text-sm leading-tight italic">Alternate Ending</h3>
--            </div>
--          </div>
--        </div>
-+        {NODES.map((node) => (
-+          <NodeComponent key={node.id} node={node} />
-+        ))}
+-        <Toolbar />
+-        <NodeInspector />
+-        <ZoomControls />
++      <main className="flex-1 relative w-full h-full overflow-hidden z-10 touch-none">
++        <ConnectionLayer />
++        <ObsidianSpireNode />
++        <WhisperingWoodsNode />
++        <SunkenGrottoNode />
+       </main>
++      <FloatingControls />
++      <Pagination />
+     </div>
+   );
+ }
+diff --git a/src/index.css b/src/index.css
+index c1d4899..91480ed 100644
+--- a/src/index.css
++++ b/src/index.css
+@@ -3,86 +3,52 @@
+ @custom-variant dark (&:where(.dark, .dark *));
  
-         <Toolbar />
-         <NodeInspector />
+ @theme {
+-  --color-primary: #7311d4;
+-  --color-background-light: #f7f6f8;
+-  --color-background-dark: #191022;
+-  --color-surface-dark: #261933;
+-  --color-surface-darker: #1a1122;
++  --color-mono-bg: #1c1c1e;
++  --color-mono-surface: #2c2c2e;
++  --color-mono-border: rgba(255, 255, 255, 0.2);
++  --color-mono-text-primary: #f2f2f7;
++  --color-mono-text-secondary: #aeaeb2;
+ 
+-  --font-display: "Space Grotesk", sans-serif;
++  --font-serif: "Playfair Display", serif;
++  --font-sans: "Inter", sans-serif;
+ 
+-  --radius-DEFAULT: 1rem;
+-  --radius-lg: 2rem;
+-  --radius-xl: 3rem;
+-  --radius-full: 9999px;
++  --background-image-soft-gradient: radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, transparent 70%);
+ }
+ 
+-@utility grid-background {
+-  background-size: 40px 40px;
+-  background-image:
+-    linear-gradient(to right, rgba(115, 17, 212, 0.05) 1px, transparent 1px),
+-    linear-gradient(to bottom, rgba(115, 17, 212, 0.05) 1px, transparent 1px);
++@utility glass-panel {
++  background: rgba(30, 30, 32, 0.85);
++  backdrop-filter: blur(16px);
++  -webkit-backdrop-filter: blur(16px);
++  border: 1px solid rgba(255, 255, 255, 0.15);
++  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+ }
+ 
+-@utility connector-svg {
++@utility active-node-glow {
+   position: absolute;
+-  top: 0;
+-  left: 0;
+-  width: 100%;
+-  height: 100%;
++  z-index: -1;
++  width: 140%;
++  height: 140%;
++  top: -20%;
++  left: -20%;
++  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 60%);
+   pointer-events: none;
+-  z-index: 0;
+-}
+-
+-@utility node-card {
+-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+-  transition: all 0.2s ease;
+-
+-  &:active {
+-    transform: scale(0.98);
+-  }
+ }
+ 
+-@utility glass-panel {
+-  background: rgba(38, 25, 51, 0.85);
+-  backdrop-filter: blur(12px);
+-  -webkit-backdrop-filter: blur(12px);
+-  border: 1px solid rgba(255, 255, 255, 0.05);
+-}
+-
+-@utility glow-effect {
+-  box-shadow: 0 0 10px rgba(115, 17, 212, 0.5), 0 0 20px rgba(115, 17, 212, 0.3);
+-  animation: pulse-glow 3s infinite;
++@utility connector-line {
++  stroke-dasharray: 2, 4;
++  stroke-width: 0.8px;
+ }
+ 
+-@keyframes pulse-glow {
+-  0% { box-shadow: 0 0 5px rgba(115, 17, 212, 0.4); }
+-  50% { box-shadow: 0 0 15px rgba(115, 17, 212, 0.7); }
+-  100% { box-shadow: 0 0 5px rgba(115, 17, 212, 0.4); }
+-}
+-
+-/* Custom scrollbar for webkit */
++/* Custom scrollbar */
+ ::-webkit-scrollbar {
+-  width: 6px;
+-  height: 6px;
+-}
+-
+-::-webkit-scrollbar-track {
+-  background: transparent;
+-}
+-
+-::-webkit-scrollbar-thumb {
+-  background: #362348;
+-  border-radius: 3px;
+-}
+-
+-::-webkit-scrollbar-thumb:hover {
+-  background: #7311d4;
++  display: none;
+ }
+ 
++/* Base styles */
+ body {
+-  font-family: var(--font-display);
+-  @apply bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 h-screen w-full overflow-hidden flex flex-col;
++  font-family: var(--font-sans);
++  @apply bg-mono-bg text-mono-text-primary h-screen w-full overflow-hidden flex flex-col relative antialiased selection:bg-white selection:text-mono-bg;
++  min-height: max(884px, 100dvh);
+ }
+ 
+ #root {
+diff --git a/tailwind.config.js b/tailwind.config.js
+index 89a305e..d48ac9d 100644
+--- a/tailwind.config.js
++++ b/tailwind.config.js
+@@ -4,8 +4,24 @@ export default {
+     "./index.html",
+     "./src/**/*.{js,ts,jsx,tsx}",
+   ],
++  darkMode: "class",
+   theme: {
+-    extend: {},
++    extend: {
++      colors: {
++        "mono-bg": "#1c1c1e",
++        "mono-surface": "#2c2c2e",
++        "mono-border": "rgba(255, 255, 255, 0.2)",
++        "mono-text-primary": "#f2f2f7",
++        "mono-text-secondary": "#aeaeb2",
++      },
++      fontFamily: {
++        serif: ["Playfair Display", "serif"],
++        sans: ["Inter", "sans-serif"],
++      },
++      backgroundImage: {
++        'soft-gradient': "radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, transparent 70%)",
++      }
++    },
+   },
+   plugins: [],
+ }
+\ No newline at end of file
