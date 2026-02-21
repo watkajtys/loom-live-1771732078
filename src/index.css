@@ -2,60 +2,28 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Custom styles for the grid background simulation */
-.perspective-grid {
-    background-image: 
-        linear-gradient(rgba(19, 200, 236, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(19, 200, 236, 0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
-    transform: perspective(500px) rotateX(20deg) scale(1.5);
-    opacity: 0.2;
-    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
+@theme {
+  --color-primary: #135bec;
+  --color-background-light: #f6f6f8;
+  --color-background-dark: #101622;
+  --font-display: "Inter", sans-serif;
 }
 
-/* Node pulse animation */
-@keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 15px rgba(19, 200, 236, 0.4); }
-    50% { box-shadow: 0 0 25px rgba(19, 200, 236, 0.8); }
-}
-.animate-glow {
-    animation: pulse-glow 3s infinite;
+@utility bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
-/* Floating motion */
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-}
-.animate-float {
-    animation: float 6s ease-in-out infinite;
-}
-.animate-float-delayed {
-    animation: float 7s ease-in-out infinite 1s;
-}
-
-/* Connecting lines simulation */
-.connector {
-    position: absolute;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #13c8ec, transparent);
-    transform-origin: left center;
-    opacity: 0.4;
-    z-index: 0;
-}
-
-/* Manual background gradient override to ensure it works */
-.bg-cosmic-gradient {
-  background-image: radial-gradient(circle at 50% 50%, #112a30 0%, #050a0c 100%);
-}
-
-/* Manual dark background override */
-.dark .bg-background-dark {
-  background-color: #050a0c;
+@utility no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 body {
-  min-height: max(884px, 100dvh);
-  background-color: #050a0c; /* Default to dark */
-  color: #f1f5f9; /* slate-100 */
+  font-family: var(--font-display);
+  @apply bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 h-screen w-full overflow-hidden;
 }
