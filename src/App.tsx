@@ -159,6 +159,15 @@ function App() {
       <Header />
       <main className="relative flex-1 w-full overflow-hidden bg-background-light dark:bg-background-dark grid-background group/canvas">
         <ConnectionLayer />
+
+        {/* Condition Label */}
+        <div className="absolute top-[230px] left-[150px] z-[15] transform translate-x-3 translate-y-1">
+          <button className="group flex items-center gap-2 bg-surface-darker border border-primary text-xs text-primary font-medium px-3 py-1.5 rounded-full glow-effect hover:bg-primary hover:text-white hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg shadow-primary/20">
+            <span className="material-symbols-outlined text-[14px] text-primary group-hover:text-white transition-colors">alt_route</span>
+            <span className="text-primary group-hover:text-white transition-colors">Choice: Hack the Drive</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse ml-1"></span>
+          </button>
+        </div>
         
         {/* Node 1: Start */}
         <div className="absolute top-[100px] left-[60px] w-60 z-10">
