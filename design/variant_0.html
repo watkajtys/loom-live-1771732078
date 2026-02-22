@@ -2,272 +2,293 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Chronos Canvas: Cyber HUD Variant</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<title>Loominal Main Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Orbitron:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script>
+<script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        primary: "#00f0ff",secondary: "#bd00ff","background-dark": "#000000","surface-dark": "#0a0a0a",
-                        "grid-line": "#1a1a2e",
+                        "primary": "#2547f4",
+                        "neon-pink": "#ff00cc",
+                        "neon-mint": "#00ff9d",
+                        "neon-gold": "#ffd700",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#050b14", // Deeper obsidian
+                        "surface-dark": "rgba(2, 6, 23, 0.4)", // Glassy dark
+                        "surface-lighter": "rgba(30, 41, 59, 0.3)", // Glassy lighter
                     },
                     fontFamily: {
-                        display: ["Space Grotesk", "sans-serif"],
-                        mono: ["JetBrains Mono", "monospace"],
-                        body: ["Space Grotesk", "sans-serif"],
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "sans": ["Space Grotesk", "sans-serif"],
+                        "mono": ["Orbitron", "monospace"], // Futuristic mono
                     },
-                    backgroundImage: {
-                        'grid-pattern': "linear-gradient(to right, #2a2a40 1px, transparent 1px), linear-gradient(to bottom, #2a2a40 1px, transparent 1px)",
-                    },
-                    animation: {
-                        'flow': 'flow 20s linear infinite',
-                        'pulse-glow': 'pulse-glow 3s infinite',
-                    },
-                    keyframes: {
-                        flow: {
-                            '0%': { strokeDashoffset: '100' },
-                            '100%': { strokeDashoffset: '0' },
-                        },
-                        'pulse-glow': {
-                            '0%, 100%': { boxShadow: '0 0 5px #00f0ff, 0 0 10px #00f0ff' },
-                            '50%': { boxShadow: '0 0 2px #00f0ff, 0 0 5px #00f0ff' },
-                        }
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                    boxShadow: {
+                        "neon-pink": "0 0 20px rgba(255, 0, 204, 0.5), 0 0 40px rgba(255, 0, 204, 0.3)",
+                        "neon-blue": "0 0 20px rgba(37, 71, 244, 0.5), 0 0 40px rgba(37, 71, 244, 0.3)",
+                        "neon-mint": "0 0 20px rgba(0, 255, 157, 0.5), 0 0 40px rgba(0, 255, 157, 0.3)",
+                        "neon-gold": "0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3)",
                     }
                 },
             },
         }
     </script>
 <style>
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }.cyber-panel {
-            background: rgba(0, 0, 0, 0.85);
-            border: 1px solid #00f0ff;
-            box-shadow: 0 0 8px rgba(0, 240, 255, 0.2), inset 0 0 20px rgba(0, 240, 255, 0.05);
-            backdrop-filter: blur(4px);
-        }
-        .cyber-panel-secondary {
-            background: rgba(0, 0, 0, 0.85);
-            border: 1px solid #bd00ff;
-            box-shadow: 0 0 8px rgba(189, 0, 255, 0.2), inset 0 0 20px rgba(189, 0, 255, 0.05);
-            backdrop-filter: blur(4px);
-        }
-        .infinite-grid {
-            background-size: 60px 60px;mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
-            -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
-        }
-        .corner-accent {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border-style: solid;
-            border-color: #00f0ff;
-            border-width: 0;
-            pointer-events: none;
-        }
-        .corner-tl { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
-        .corner-tr { top: -1px; right: -1px; border-top-width: 2px; border-right-width: 2px; }
-        .corner-bl { bottom: -1px; left: -1px; border-bottom-width: 2px; border-left-width: 2px; }
-        .corner-br { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
-        .flowing-dash {
-            stroke-dasharray: 10, 10;
-            animation: flow 1s linear infinite;
-        }
-    </style>
-<style>
         body {
-            min-height: max(884px, 100dvh);
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #050b14;
+            background-image: radial-gradient(circle at 50% 50%, #0f172a 0%, #050b14 100%);
+        }.loom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .loom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.3);
+        }
+        .loom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(51, 65, 85, 0.5);
+            border-radius: 4px;
+        }
+        .loom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(71, 85, 105, 0.8);
+        }.glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .glass-sidebar {
+            background: rgba(2, 6, 23, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-header {
+            background: rgba(5, 11, 20, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .task-card-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }.glow-text-pink { text-shadow: 0 0 10px rgba(255, 0, 204, 0.7); }
+        .glow-text-blue { text-shadow: 0 0 10px rgba(37, 71, 244, 0.7); }
+        .floating-gold-btn {
+            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 50%, #ffd700 100%);
+            background-size: 200% 200%;
+            animation: liquidGold 4s ease infinite;
+            border: none;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        @keyframes liquidGold {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
-  </head>
-<body class="bg-background-dark text-slate-100 font-display h-screen w-full overflow-hidden flex flex-col relative selection:bg-primary selection:text-black">
-<div class="absolute inset-0 z-0 pointer-events-none opacity-40 infinite-grid bg-grid-pattern shadow-[inset_0_0_100px_rgba(0,0,0,1)]"></div>
-<div class="absolute inset-0 z-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(0,240,255,0.03),transparent_70%)]"></div>
-<header class="absolute top-0 left-0 right-0 z-50 pt-12 pb-4 px-4 flex justify-between items-center bg-gradient-to-b from-black/90 to-transparent">
-<div class="flex items-center gap-0 cyber-panel rounded-none px-2 py-1 clip-path-polygon">
-<div class="flex items-center gap-2 px-2 border-r border-primary/30 h-full">
-<span class="material-symbols-outlined text-primary text-sm">terminal</span>
+</head>
+<body class="bg-background-dark text-slate-200 h-screen overflow-hidden flex flex-col md:flex-row selection:bg-neon-pink selection:text-white">
+<aside class="w-full md:w-80 lg:w-96 flex-shrink-0 glass-sidebar flex flex-col h-full z-20 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-64 bg-primary/10 blur-[80px] pointer-events-none"></div>
+<div class="p-6 border-b border-white/5 flex items-center gap-3 relative z-10">
+<div class="size-10 rounded-full bg-gradient-to-tr from-primary to-neon-pink flex items-center justify-center shadow-neon-blue">
+<span class="material-symbols-outlined text-white text-xl">all_inclusive</span>
 </div>
-<div class="flex items-center gap-1 px-3 font-mono text-[10px] tracking-widest uppercase">
-<span class="text-slate-500">SYS</span>
-<span class="text-primary">&gt;</span>
-<button class="text-slate-300 hover:text-primary transition-colors">ELDORIA</button>
-<span class="text-primary">&gt;</span>
-<button class="text-slate-300 hover:text-primary transition-colors">SEC_01</button>
-<span class="text-primary">&gt;</span>
-<span class="text-white font-bold drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">WHISPERING_WOODS</span>
+<div>
+<h1 class="text-white text-2xl font-bold leading-none tracking-tight font-display">Loominal</h1>
+<p class="text-slate-400 text-xs font-medium tracking-widest uppercase mt-1">ThreadSpool</p>
 </div>
 </div>
-<button class="cyber-panel p-2 rounded-none text-primary hover:bg-primary/10 transition-colors">
-<span class="material-symbols-outlined text-lg">settings_suggest</span>
+<div class="p-6 flex flex-col gap-6 overflow-y-auto loom-scrollbar flex-1 relative z-10">
+<div class="flex flex-col gap-2">
+<label class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">New Thread</label>
+<div class="relative group">
+<textarea class="w-full bg-surface-lighter border border-white/10 rounded-xl p-4 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all resize-none h-24 backdrop-blur-sm" placeholder="What needs weaving?"></textarea>
+<button class="absolute bottom-3 right-3 p-1.5 bg-primary/80 hover:bg-primary rounded-lg text-white transition-all shadow-lg shadow-blue-900/40 border border-white/10 backdrop-blur-md">
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
 </button>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<label class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Category &amp; Color</label>
+<div class="flex flex-wrap gap-2">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-lighter border border-white/10 hover:border-neon-pink/50 group transition-all hover:bg-white/5">
+<div class="size-2 rounded-full bg-neon-pink shadow-[0_0_8px_rgba(255,0,204,0.8)]"></div>
+<span class="text-xs font-medium text-slate-300 group-hover:text-white font-mono tracking-tight">Deep Work</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-lighter border border-white/10 hover:border-primary/50 group transition-all hover:bg-white/5">
+<div class="size-2 rounded-full bg-primary shadow-[0_0_8px_rgba(37,71,244,0.8)]"></div>
+<span class="text-xs font-medium text-slate-300 group-hover:text-white font-mono tracking-tight">Meetings</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-lighter border border-white/10 hover:border-neon-mint/50 group transition-all hover:bg-white/5">
+<div class="size-2 rounded-full bg-neon-mint shadow-[0_0_8px_rgba(0,255,157,0.8)]"></div>
+<span class="text-xs font-medium text-slate-300 group-hover:text-white font-mono tracking-tight">Personal</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<label class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Est. Duration</label>
+<span class="text-xs font-mono text-primary glow-text-blue">45m</span>
+</div>
+<input class="w-full h-1 bg-slate-700/50 rounded-lg appearance-none cursor-pointer accent-primary hover:accent-blue-400 transition-all" type="range"/>
+</div>
+<div class="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent my-2 opacity-50"></div>
+<div class="flex flex-col gap-3">
+<label class="text-slate-400 text-[10px] font-bold uppercase tracking-widest flex items-center justify-between">
+<span>Unwoven Threads</span>
+<span class="bg-white/5 border border-white/5 text-slate-400 px-1.5 py-0.5 rounded text-[10px] font-mono">3</span>
+</label>
+<div class="group relative p-3 rounded-xl bg-surface-lighter border border-white/5 hover:border-neon-pink/60 cursor-grab active:cursor-grabbing transition-all hover:shadow-[0_0_20px_-5px_rgba(255,0,204,0.3)] flex gap-3 items-center backdrop-blur-sm">
+<div class="w-1 self-stretch rounded-full bg-neon-pink shadow-[0_0_8px_rgba(255,0,204,0.6)]"></div>
+<div class="flex-1">
+<h4 class="text-sm font-medium text-white group-hover:text-neon-pink transition-colors">Q3 Strategy Review</h4>
+<p class="text-[10px] text-slate-500 mt-0.5 flex items-center gap-1 font-mono">
+<span class="material-symbols-outlined text-[10px]">schedule</span> 90m
+                    </p>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-neon-pink transition-colors text-lg">drag_indicator</span>
+</div>
+<div class="group relative p-3 rounded-xl bg-surface-lighter border border-white/5 hover:border-primary/60 cursor-grab active:cursor-grabbing transition-all hover:shadow-[0_0_20px_-5px_rgba(37,71,244,0.3)] flex gap-3 items-center backdrop-blur-sm">
+<div class="w-1 self-stretch rounded-full bg-primary shadow-[0_0_8px_rgba(37,71,244,0.6)]"></div>
+<div class="flex-1">
+<h4 class="text-sm font-medium text-white group-hover:text-primary transition-colors">Client Sync: Alpha</h4>
+<p class="text-[10px] text-slate-500 mt-0.5 flex items-center gap-1 font-mono">
+<span class="material-symbols-outlined text-[10px]">schedule</span> 30m
+                    </p>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors text-lg">drag_indicator</span>
+</div>
+<div class="group relative p-3 rounded-xl bg-surface-lighter border border-white/5 hover:border-neon-mint/60 cursor-grab active:cursor-grabbing transition-all hover:shadow-[0_0_20px_-5px_rgba(0,255,157,0.3)] flex gap-3 items-center backdrop-blur-sm">
+<div class="w-1 self-stretch rounded-full bg-neon-mint shadow-[0_0_8px_rgba(0,255,157,0.6)]"></div>
+<div class="flex-1">
+<h4 class="text-sm font-medium text-white group-hover:text-neon-mint transition-colors">Gym Session</h4>
+<p class="text-[10px] text-slate-500 mt-0.5 flex items-center gap-1 font-mono">
+<span class="material-symbols-outlined text-[10px]">schedule</span> 60m
+                    </p>
+</div>
+<span class="material-symbols-outlined text-slate-600 group-hover:text-neon-mint transition-colors text-lg">drag_indicator</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-white/5 relative z-10">
+<button class="flex w-full items-center justify-center gap-2 rounded-lg py-2 text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined text-lg">settings</span>
+            Preferences
+        </button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full relative overflow-hidden bg-transparent">
+<header class="h-20 glass-header flex items-center justify-between px-8 z-30 sticky top-0">
+<div class="flex items-center gap-6">
+<button class="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors border border-transparent hover:border-white/10">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex flex-col">
+<h2 class="text-2xl font-bold text-white tracking-tight drop-shadow-md">Today's Weave</h2>
+<p class="text-xs text-primary font-mono tracking-widest uppercase glow-text-blue">Tuesday, October 24</p>
+</div>
+<button class="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors border border-transparent hover:border-white/10">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10 focus-within:border-primary/50 focus-within:bg-white/10 transition-all">
+<span class="material-symbols-outlined text-slate-400 text-sm">search</span>
+<input class="bg-transparent border-none text-sm text-white placeholder:text-slate-600 focus:ring-0 w-32 lg:w-48 p-0" placeholder="Search threads..." type="text"/>
+</div>
+<button class="floating-gold-btn flex items-center gap-2 px-6 py-2.5 rounded-full text-black font-bold text-sm tracking-wide transform hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-xl">content_cut</span>
+                Snip
+            </button>
+</div>
 </header>
-<main class="flex-1 relative w-full h-full overflow-hidden z-10 touch-none">
-<svg class="absolute inset-0 w-full h-full pointer-events-none z-0 filter drop-shadow-[0_0_3px_#00f0ff]">
-<defs>
-<linearGradient id="gradientLine" x1="0%" x2="100%" y1="0%" y2="0%">
-<stop offset="0%" style="stop-color:#00f0ff;stop-opacity:0"></stop>
-<stop offset="50%" style="stop-color:#00f0ff;stop-opacity:1"></stop>
-<stop offset="100%" style="stop-color:#bd00ff;stop-opacity:1"></stop>
-</linearGradient>
-</defs>
-<path class="flowing-dash" d="M180,300 C250,300 150,520 220,520" fill="none" stroke="#00f0ff" stroke-width="2"></path>
-<path d="M220,520 C280,520 300,450 340,400" fill="none" stroke="#bd00ff" stroke-dasharray="2,4" stroke-opacity="0.8" stroke-width="2"></path>
-<g transform="translate(180, 375)">
-<rect fill="#000" height="24" stroke="#00f0ff" stroke-width="1" width="140" x="0" y="0"></rect>
-<text fill="#00f0ff" font-family="JetBrains Mono" font-size="9" font-weight="bold" letter-spacing="1px" text-anchor="middle" x="70" y="16">DATA_LINK::CORRUPT</text>
-<rect fill="#00f0ff" height="4" width="4" x="-2" y="-2"></rect>
-<rect fill="#00f0ff" height="4" width="4" x="138" y="22"></rect>
-</g>
-</svg>
-<div class="absolute top-[220px] left-6 w-64 cyber-panel-secondary p-0 group hover:shadow-[0_0_15px_rgba(189,0,255,0.4)] transition-all duration-300">
-<div class="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-secondary"></div>
-<div class="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-secondary"></div>
-<div class="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-secondary"></div>
-<div class="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-secondary"></div>
-<div class="p-4 relative bg-black/40">
-<div class="flex items-start justify-between mb-3">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 border border-secondary bg-secondary/10 flex items-center justify-center text-secondary shadow-[0_0_10px_rgba(189,0,255,0.3)]">
-<span class="material-symbols-outlined text-lg">fort</span>
+<div class="flex-1 overflow-y-auto loom-scrollbar relative" style="background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 100% 80px;">
+<div class="flex min-h-[1440px] relative pb-20"> 
+<div class="w-16 md:w-24 flex-shrink-0 border-r border-white/5 bg-background-dark/30 backdrop-blur-sm z-10">
+<div class="relative h-full text-xs font-mono text-slate-500 text-right pr-4 pt-2">
+<div class="absolute top-[480px]">08:00</div>
+<div class="absolute top-[540px] text-white/80 font-bold glow-text-blue">09:00</div>
+<div class="absolute top-[600px]">10:00</div>
+<div class="absolute top-[660px]">11:00</div>
+<div class="absolute top-[720px] text-white/80 font-bold glow-text-blue">12:00</div>
+<div class="absolute top-[780px]">13:00</div>
+<div class="absolute top-[840px]">14:00</div>
+<div class="absolute top-[900px]">15:00</div>
+<div class="absolute top-[960px]">16:00</div>
+<div class="absolute top-[1020px]">17:00</div>
 </div>
+</div>
+<div class="flex-1 relative p-2">
+<div class="absolute top-[615px] left-0 w-full flex items-center z-20 pointer-events-none">
+<div class="h-[1px] w-full bg-gradient-to-r from-neon-pink via-primary to-transparent opacity-100 shadow-[0_0_15px_rgba(255,0,204,0.8)]"></div>
+<div class="absolute -left-1.5 size-3 bg-neon-pink rounded-full shadow-[0_0_15px_rgba(255,0,204,1)] border border-white"></div>
+</div>
+<div class="absolute top-[540px] left-4 right-8 h-[120px] rounded-2xl overflow-hidden group cursor-pointer transition-transform hover:scale-[1.01] hover:z-20 shadow-neon-pink">
+<div class="absolute inset-0 bg-gradient-to-br from-neon-pink/10 to-transparent backdrop-blur-md border border-neon-pink/40 rounded-2xl"></div>
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-neon-pink shadow-[0_0_20px_rgba(255,0,204,1)]"></div>
+<div class="relative p-5 h-full flex flex-col justify-between z-10">
 <div>
-<h3 class="text-white font-mono font-bold text-sm tracking-wider uppercase leading-tight text-shadow-[0_0_5px_rgba(255,255,255,0.5)]">Obsidian_Spire</h3>
-<p class="text-[10px] text-secondary font-mono mt-0.5">LOC::MAGIC_FOCUS</p>
+<h3 class="text-white font-bold text-lg leading-tight tracking-tight drop-shadow-sm">Project Alpha: Deep Work</h3>
+<p class="text-pink-100/70 text-sm mt-1 font-light">Focus Mode â¢ No interruptions</p>
 </div>
-</div>
-<button class="text-secondary/50 hover:text-secondary"><span class="material-symbols-outlined text-lg">drag_handle</span></button>
-</div>
-<div class="h-24 w-full border border-secondary/30 mb-3 overflow-hidden relative group-hover:border-secondary transition-colors">
-<img alt="Dark gothic spire silhouette against a purple night sky" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity grayscale hover:grayscale-0" data-alt="Dark gothic spire silhouette against a purple night sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAByVTR-yxgCClyixotMUZlPor2O-lqoFPHuXmgVjWa4bFIy_XOXtFuDFgEpSxw9jT2LbYlAUdQ6_jrnu2IC7WYOEozccyXXobBTeyyixE_B9_SnkRIGd1IXmMVOVLZhrGxZMDqisvQxGzBcYenfCND1earVxqjOC5rYdJ96dVnhzBlMHchYwLidtYINofq5wxl9RBCCETqyug6U5ioV2hLz-xhcfr1b-_6WXJvMU-9P5k20l5aAECVQpD1NoTgoSqzCsTve9ON1cA"/>
-<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-<div class="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10 bg-[length:100%_2px,3px_100%] pointer-events-none"></div>
-</div>
-<div class="flex gap-2 text-[9px] font-mono uppercase tracking-widest">
-<span class="px-2 py-1 bg-secondary/20 text-secondary border border-secondary/50">Ancient</span>
-<span class="px-2 py-1 bg-red-900/40 text-red-500 border border-red-500/50">Danger_Lvl:High</span>
+<div class="flex items-center gap-2">
+<span class="bg-black/50 text-pink-200 text-[10px] font-mono px-2 py-1 rounded backdrop-blur-md border border-white/10">09:00 - 11:00</span>
+<div class="flex -space-x-2">
+<div class="size-8 rounded-full border border-black bg-slate-700 bg-center bg-cover ring-2 ring-pink-500/20" data-alt="User avatar 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHkkUmEf5zaPERwUWT8VHLpf9k0Q5xGOxYLvQrqcWiWEQ7QqdIrugSUrhvAF0GQHujf-P26M91ZuSoNPKMX0uadGHNywX6cWZuqgav1jmO7Wvp9Pm82_vUk-5z8djgN3QITCNJOIT91CCjADPAxwxCqmRMulsoTdfNt-C-kTBXxkwSoF0jrmVzj0V7y4qft9P63ihcuJfwLJYy2sTnUu4xmPU7ihVls-qdnKoEZ0kPV9TC8Eq4SUlK71CuweR3fIZcR_spRY28rD4')"></div>
 </div>
 </div>
 </div>
-<div class="absolute top-[480px] left-1/2 -translate-x-1/2 w-72 cyber-panel p-0 group transition-all z-20 hover:scale-[1.02]">
-<div class="corner-accent corner-tl"></div>
-<div class="corner-accent corner-tr"></div>
-<div class="corner-accent corner-bl"></div>
-<div class="corner-accent corner-br"></div>
-<div class="absolute -top-3 -right-3 w-6 h-6 bg-black border border-primary text-primary flex items-center justify-center text-[10px] font-mono font-bold shadow-[0_0_10px_#00f0ff] z-10">02</div>
-<div class="p-5 bg-black/60 relative overflow-hidden">
-<div class="absolute top-0 left-0 w-full h-[1px] bg-primary/50 shadow-[0_0_10px_#00f0ff] animate-[scan_3s_ease-in-out_infinite]"></div>
-<div class="flex items-start justify-between mb-3">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 border border-primary bg-primary/10 flex items-center justify-center text-primary shadow-[0_0_15px_rgba(0,240,255,0.3)]">
-<span class="material-symbols-outlined text-xl">token</span>
 </div>
+<div class="absolute top-[690px] left-4 right-1/2 mr-4 h-[60px] rounded-xl overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02] hover:z-20 shadow-neon-blue">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent backdrop-blur-md border border-primary/40 rounded-xl"></div>
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary shadow-[0_0_20px_rgba(37,71,244,1)]"></div>
+<div class="relative px-4 py-2 h-full flex flex-col justify-center z-10">
+<h3 class="text-white font-semibold text-sm leading-tight truncate">Weekly Design Sync</h3>
+<p class="text-blue-200/70 text-xs truncate font-mono">Team A â¢ Zoom</p>
+</div>
+</div>
+<div class="absolute top-[720px] left-1/2 right-8 ml-4 h-[60px] rounded-xl overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02] hover:z-20 shadow-neon-mint">
+<div class="absolute inset-0 bg-gradient-to-br from-neon-mint/10 to-transparent backdrop-blur-md border border-neon-mint/40 rounded-xl"></div>
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-neon-mint shadow-[0_0_20px_rgba(0,255,157,1)]"></div>
+<div class="relative px-4 py-2 h-full flex flex-col justify-center z-10">
+<h3 class="text-white font-semibold text-sm leading-tight truncate">Lunch with Client</h3>
+<p class="text-emerald-200/70 text-xs truncate font-mono">Downtown Cafe</p>
+</div>
+</div>
+<div class="absolute top-[840px] left-4 right-8 h-[150px] rounded-2xl overflow-hidden group cursor-pointer transition-transform hover:scale-[1.01] hover:z-20 shadow-neon-blue">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent backdrop-blur-md border border-primary/40 rounded-2xl"></div>
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary shadow-[0_0_20px_rgba(37,71,244,1)]"></div>
+<div class="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPg=='); background-size: cover;"></div>
+<div class="relative p-5 h-full flex flex-col justify-between z-10">
 <div>
-<h3 class="text-white font-mono font-bold text-base tracking-widest uppercase leading-tight drop-shadow-md">Whispering<br/>Woods</h3>
-<p class="text-[10px] text-primary font-mono mt-1">TERRITORY::FAE</p>
+<h3 class="text-white font-bold text-lg leading-tight tracking-tight">Frontend Implementation</h3>
+<p class="text-blue-200/60 text-sm mt-1 font-light">Loominal v2.0</p>
 </div>
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2">
+<div class="size-8 rounded-full border border-black bg-slate-700 bg-center bg-cover ring-2 ring-blue-500/20" data-alt="User avatar 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYcrXwUFdeiewT9s5Kvnqqd6alj_zNs-eg8kBL98eTl7fJDgbZFU5c3rmS5McE-vsiq_hWWNv1fYgKlYE2oRLzFJI4-5H1WNJAho_LZt26G_11KIYzMKsc82Svc1Vb9LfKJczyqp1A71czgwlZ_1g4L_mXe_nHiuYCULcq9bkuLS3E85_EfsjPDZ2er7rwfAvD3ryLGZjfBnVkpwe5KHmzjN8MZI37kZg2LJBj6pcKvv7EJFFjpl3RbOhfcASeuL3-YyJdhkUGim8')"></div>
+<div class="size-8 rounded-full border border-black bg-slate-700 bg-center bg-cover ring-2 ring-blue-500/20" data-alt="User avatar 3" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrPe6pUPkfZYi2EAsikd2c3ghaxamxnjRnCIi9lLNQ3sffHMz7Po4kK185EPr8E-RmRF4KsNBmhdN97C_XtcB60ivAvtBrRmAJHScEKKu34ml-A9A-93bvbBygKOdAmchMcqkBDx0kXikv10tS69vk18Owl8c-6lKktU8AT2LxufdNtlXs3CWnisr9jATJoam42f5KEO7SXlsT6UuvkyRrDMAYIRJUUcM-zvMovt1RuykJtkSz72aPpTgEwyJV0t_zW7GT2YwNdfs')"></div>
 </div>
-<button class="text-primary/50 hover:text-primary"><span class="material-symbols-outlined">drag_handle</span></button>
-</div>
-<p class="text-xs font-mono text-slate-300 mb-4 leading-relaxed border-l-2 border-primary/30 pl-3">
-                &gt; ALERT: Reality shift detected.<br/>
-                &gt; Flora exhibits quantum instability when unobserved.
-            </p>
-<div class="flex items-center justify-between mt-2 pt-3 border-t border-primary/20">
-<div class="flex -space-x-3">
-<div class="w-6 h-6 border border-primary bg-black flex items-center justify-center text-[8px] text-primary font-mono">A</div>
-<div class="w-6 h-6 border border-primary bg-black flex items-center justify-center text-[8px] text-primary font-mono">B</div>
-<div class="w-6 h-6 border border-primary bg-primary/20 flex items-center justify-center text-[8px] text-primary font-mono">+3</div>
-</div>
-<button class="text-primary text-[10px] font-mono font-bold uppercase tracking-widest hover:bg-primary hover:text-black px-2 py-1 transition-colors border border-transparent hover:border-primary">
-                    [ EXPAND_DATA ]
-                </button>
+<div class="bg-primary/20 border border-primary/40 px-3 py-1 rounded-full text-[10px] text-blue-200 font-bold tracking-wider shadow-[0_0_10px_rgba(37,71,244,0.3)]">IN PROGRESS</div>
 </div>
 </div>
 </div>
-<div class="absolute top-[350px] left-[320px] w-48 border border-slate-700 bg-black/80 p-3 opacity-60 hover:opacity-100 transition-opacity scale-90">
-<div class="flex items-center gap-2 mb-2">
-<div class="w-6 h-6 border border-slate-600 flex items-center justify-center">
-<span class="material-symbols-outlined text-xs text-slate-400">water</span>
+<div class="absolute top-[1020px] left-4 right-8 h-[60px] rounded-xl border-2 border-dashed border-slate-600/50 bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none backdrop-blur-sm">
+<span class="text-slate-400 text-sm font-medium font-mono">Drop to schedule 17:00</span>
 </div>
-<h4 class="text-slate-400 font-mono font-bold text-xs uppercase tracking-wider">Sunken_Grotto</h4>
 </div>
-<div class="h-1 w-full bg-slate-900 overflow-hidden border border-slate-800">
-<div class="h-full bg-slate-500 w-1/3"></div>
 </div>
-<p class="text-[9px] font-mono text-slate-600 mt-1 uppercase">Loading_Assets...</p>
 </div>
+<button class="md:hidden absolute bottom-6 right-6 size-16 rounded-full floating-gold-btn flex items-center justify-center z-50">
+<span class="material-symbols-outlined text-2xl text-black">content_cut</span>
+</button>
 </main>
-<div class="absolute bottom-28 right-4 flex flex-col gap-3 z-20">
-<div class="bg-black border border-primary/30 p-1 flex flex-col gap-1 shadow-[0_0_10px_rgba(0,0,0,0.8)]">
-<button class="w-8 h-8 flex items-center justify-center text-primary hover:bg-primary hover:text-black transition-colors border border-transparent hover:border-primary/50">
-<span class="material-symbols-outlined text-lg">add</span>
-</button>
-<div class="h-[1px] w-full bg-primary/20"></div>
-<button class="w-8 h-8 flex items-center justify-center text-primary hover:bg-primary hover:text-black transition-colors border border-transparent hover:border-primary/50">
-<span class="material-symbols-outlined text-lg">remove</span>
-</button>
-</div>
-<button class="w-10 h-10 bg-black border border-primary text-primary hover:bg-primary hover:text-black transition-all shadow-[0_0_15px_rgba(0,240,255,0.2)] flex items-center justify-center group">
-<span class="material-symbols-outlined text-lg group-hover:scale-110 transition-transform">center_focus_weak</span>
-</button>
-</div>
-<div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-30">
-<button class="group relative flex items-center justify-center h-14 pl-6 pr-8 bg-black border-2 border-primary shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] transition-all active:scale-95 text-primary overflow-hidden clip-path-polygon">
-<div class="absolute inset-0 bg-primary/10 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"></div>
-<span class="material-symbols-outlined mr-3 text-2xl group-hover:rotate-90 transition-transform duration-500">add_circle</span>
-<div class="flex flex-col items-start">
-<span class="font-mono font-bold tracking-widest text-sm">CREATE_NODE</span>
-<span class="text-[9px] font-mono opacity-60">INIT_SEQUENCE</span>
-</div>
-<div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-primary"></div>
-<div class="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-primary"></div>
-</button>
-</div>
-<nav class="absolute bottom-0 w-full z-40 pointer-events-none">
-<div class="w-full flex justify-center pointer-events-auto">
-<div class="flex gap-8 border-t border-l border-r border-primary/50 bg-black/90 px-8 pb-8 pt-4 clip-path-polygon backdrop-blur-md shadow-[0_-5px_20px_rgba(0,0,0,0.8)] rounded-t-lg relative">
-<div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_10px_#00f0ff]"></div>
-<a class="flex flex-col items-center justify-end gap-1 text-primary group" href="#">
-<div class="relative">
-<span class="material-symbols-outlined text-[24px] group-hover:text-white transition-colors z-10 relative">grid_view</span>
-<div class="absolute inset-0 bg-primary blur-md opacity-40 group-hover:opacity-80 transition-opacity"></div>
-</div>
-<span class="text-[9px] font-mono font-bold tracking-widest uppercase mt-1">Canvas</span>
-</a>
-<a class="flex flex-col items-center justify-end gap-1 text-slate-500 hover:text-primary transition-colors group" href="#">
-<span class="material-symbols-outlined text-[24px]">account_tree</span>
-<span class="text-[9px] font-mono font-bold tracking-widest uppercase mt-1">Timeline</span>
-</a>
-<a class="flex flex-col items-center justify-end gap-1 text-slate-500 hover:text-primary transition-colors group" href="#">
-<span class="material-symbols-outlined text-[24px]">group</span>
-<span class="text-[9px] font-mono font-bold tracking-widest uppercase mt-1">Entities</span>
-</a>
-<a class="flex flex-col items-center justify-end gap-1 text-slate-500 hover:text-primary transition-colors group" href="#">
-<span class="material-symbols-outlined text-[24px]">settings_system_daydream</span>
-<span class="text-[9px] font-mono font-bold tracking-widest uppercase mt-1">Config</span>
-</a>
-</div>
-</div>
-</nav>
-<div class="absolute top-20 right-4 z-20">
-<button class="w-10 h-10 bg-black border border-primary/40 rounded-none flex items-center justify-center text-primary/70 hover:text-primary hover:border-primary hover:shadow-[0_0_10px_rgba(0,240,255,0.3)] transition-all">
-<span class="material-symbols-outlined text-xl">search</span>
-</button>
-</div>
 
 </body></html>
