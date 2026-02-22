@@ -1,148 +1,386 @@
 diff --git a/package-lock.json b/package-lock.json
-index 434e175..451ac75 100644
+index 2929695..451ac75 100644
 --- a/package-lock.json
 +++ b/package-lock.json
-@@ -78,7 +78,6 @@
-       "integrity": "sha512-CGOfOJqWjg2qW/Mb6zNsDm+u5vFQ8DxXfbM09z69p5Z6+mE1ikP2jUXw+j42Pf1XTYED2Rni5f95npYeuwMDQA==",
-       "dev": true,
+@@ -346,7 +346,6 @@
+       "resolved": "https://registry.npmjs.org/@dnd-kit/core/-/core-6.3.1.tgz",
+       "integrity": "sha512-xkGBRQQab4RLwgXxoqETICr6S5JlogafbhNsidmrkVv2YRs5MLwpjoF2qpiGjQt8S9AoxtIV603s0GIUpY5eYQ==",
        "license": "MIT",
 -      "peer": true,
        "dependencies": {
-         "@babel/code-frame": "^7.29.0",
-         "@babel/generator": "^7.29.0",
-@@ -1277,7 +1276,6 @@
-       "integrity": "sha512-oH72nZRfDv9lADUBSo104Aq7gPHpQZc4BTx38r9xf9pg5LfP6EzSyH2n7qFmmxRQXh7YlUXODcYsg6PuTDSxGg==",
-       "dev": true,
+         "@dnd-kit/accessibility": "^3.1.1",
+         "@dnd-kit/utilities": "^3.2.2",
+@@ -1287,7 +1286,6 @@
+       "integrity": "sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==",
+       "devOptional": true,
        "license": "MIT",
 -      "peer": true,
        "dependencies": {
-         "undici-types": "~7.16.0"
+         "csstype": "^3.2.2"
        }
-@@ -1347,7 +1345,6 @@
-       "integrity": "sha512-IgSWvLobTDOjnaxAfDTIHaECbkNlAlKv2j5SjpB2v7QHKv1FIfjwMy8FsDbVfDX/KjmCmYICcw7uGaXLhtsLNg==",
-       "dev": true,
+@@ -3004,7 +3002,6 @@
+       "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-19.2.4.tgz",
+       "integrity": "sha512-AXJdLo8kgMbimY95O2aKQqsz2iWi9jMgKJhRBAxECE4IFxfcazB2LmzloIoibJI3C12IlY20+KFaLv+71bUJeQ==",
        "license": "MIT",
 -      "peer": true,
        "dependencies": {
-         "@typescript-eslint/scope-manager": "8.56.0",
-         "@typescript-eslint/types": "8.56.0",
-@@ -1612,7 +1609,6 @@
-       "integrity": "sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "bin": {
-         "acorn": "bin/acorn"
+         "scheduler": "^0.27.0"
        },
-@@ -1758,7 +1754,6 @@
-         }
-       ],
-       "license": "MIT",
--      "peer": true,
-       "dependencies": {
-         "baseline-browser-mapping": "^2.9.0",
-         "caniuse-lite": "^1.0.30001759",
-@@ -1960,7 +1955,6 @@
-       "integrity": "sha512-LEyamqS7W5HB3ujJyvi0HQK/dtVINZvd5mAAp9eT5S/ujByGjiZLCzPcHVzuXbpJDJF/cxwHlfceVUDZ2lnSTw==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "dependencies": {
-         "@eslint-community/eslint-utils": "^4.8.0",
-         "@eslint-community/regexpp": "^4.12.1",
-@@ -2932,7 +2926,6 @@
-       "integrity": "sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "engines": {
-         "node": ">=12"
-       },
-@@ -2959,7 +2952,6 @@
-         }
-       ],
-       "license": "MIT",
--      "peer": true,
-       "dependencies": {
-         "nanoid": "^3.3.11",
-         "picocolors": "^1.1.1",
-@@ -3001,7 +2993,6 @@
-       "resolved": "https://registry.npmjs.org/react/-/react-19.2.4.tgz",
-       "integrity": "sha512-9nfp2hYpCwOjAN+8TZFGhtWEwgvWHXqESH8qT89AT/lWklpLON22Lc8pEtnpsZz7VmawabSU0gCjnj8aC0euHQ==",
-       "license": "MIT",
--      "peer": true,
-       "engines": {
-         "node": ">=0.10.0"
-       }
-@@ -3225,7 +3216,6 @@
-       "integrity": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==",
-       "dev": true,
-       "license": "Apache-2.0",
--      "peer": true,
-       "bin": {
-         "tsc": "bin/tsc",
-         "tsserver": "bin/tsserver"
-@@ -3312,7 +3302,6 @@
-       "integrity": "sha512-RHX7IvsJlEfjyA1rS7MY0UsmF91etdLAamslHR5lfuO3W/BXRdXm2tRE64ztpSPZbKqB4wAAZ0AwtF6QzfKZLA==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "dependencies": {
-         "@oxc-project/runtime": "0.114.0",
-         "lightningcss": "^1.31.1",
-@@ -3438,7 +3427,6 @@
-       "integrity": "sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "funding": {
-         "url": "https://github.com/sponsors/colinhacks"
-       }
 diff --git a/src/components/LoomBoard.tsx b/src/components/LoomBoard.tsx
-index 09ea5aa..965d239 100644
+index 965d239..97b71ac 100644
 --- a/src/components/LoomBoard.tsx
 +++ b/src/components/LoomBoard.tsx
-@@ -195,7 +195,6 @@ function BoardThread({ thread, isActive, isScalpelMode, onSplit }: {
-   const isFrontendImpl = thread.title === 'Frontend Impl.';
-   const isProjectAlpha = thread.title.includes('Project Alpha'); // Or rely on ID/duration
-   const displayActive = isActive || isFrontendImpl;
--  const [isHovered, setIsHovered] = useState(false);
+@@ -127,7 +127,7 @@ interface Spark {
  
-   // Calculate split line position
-   const [splitLineTop, setSplitLineTop] = useState<number | null>(null);
-@@ -228,13 +227,20 @@ function BoardThread({ thread, isActive, isScalpelMode, onSplit }: {
-       ? { backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')", opacity: 0.2 }
+ function SparksContainer({ sparks }: { sparks: Spark[] }) {
+     return (
+-        <div className="fixed inset-0 pointer-events-none z-[100]">
++        <div className="fixed inset-0 pointer-events-none z-[9999]">
+             {sparks.map((spark) => (
+                 <div 
+                     key={spark.id} 
+@@ -136,7 +136,7 @@ function SparksContainer({ sparks }: { sparks: Spark[] }) {
+                         left: spark.x, 
+                         top: spark.y, 
+                         backgroundColor: spark.color,
+-                        boxShadow: `0 0 8px ${spark.color}`,
++                        boxShadow: `0 0 12px ${spark.color}`,
+                         '--tx': `${spark.tx}px`, 
+                         '--ty': `${spark.ty}px` 
+                     } as React.CSSProperties}
+@@ -163,17 +163,25 @@ function ScalpelCursor() {
+   return (
+     <div 
+         ref={ref}
+-        className="fixed z-[100] pointer-events-none transform -translate-x-1/2 -translate-y-1/2" 
++        className="fixed z-[9999] pointer-events-none transform -translate-x-1/2 -translate-y-1/2" 
+         style={{ left: -100, top: -100 }}
+     >
+-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-cyber-magenta/30 blur-xl rounded-full animate-pulse"></div>
+-        <svg className="drop-shadow-[0_0_10px_rgba(255,113,206,1)] transform -rotate-12" fill="none" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
+-            <circle cx="14" cy="36" fill="#050014" r="5" stroke="#ff0055" strokeWidth="3"></circle>
+-            <circle cx="34" cy="36" fill="#050014" r="5" stroke="#ff0055" strokeWidth="3"></circle>
+-            <path d="M16 32 L34 12" stroke="#00f0ff" strokeLinecap="round" strokeWidth="3"></path>
+-            <path d="M32 32 L14 12" stroke="#00f0ff" strokeLinecap="round" strokeWidth="3"></path>
+-            <circle className="animate-pulse" cx="24" cy="22" fill="#fcee0a" r="2"></circle>
+-            <path className="animate-bounce" d="M24 6 L26 10 L30 12 L26 14 L24 18 L22 14 L18 12 L22 10 Z" fill="#fcee0a" style={{ animationDuration: '2s' }}></path>
++        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-cyber-magenta/20 blur-xl rounded-full animate-pulse"></div>
++        <svg 
++            width="64" 
++            height="64" 
++            viewBox="0 0 64 64" 
++            fill="none" 
++            xmlns="http://www.w3.org/2000/svg"
++            className="transform -rotate-12 drop-shadow-[0_0_8px_rgba(255,113,206,0.8)]"
++        >
++            <path d="M40 24L56 8" stroke="#00ffff" strokeWidth="4" strokeLinecap="round" />
++            <path d="M52 28L44 20" stroke="#00ffff" strokeWidth="4" strokeLinecap="round" />
++            <circle cx="20" cy="44" r="8" stroke="#ff71ce" strokeWidth="4" />
++            <circle cx="44" cy="44" r="8" stroke="#ff71ce" strokeWidth="4" />
++            <path d="M26 38L48 16" stroke="#00ffff" strokeWidth="4" strokeLinecap="round" />
++            <path d="M44 36L22 14" stroke="#00ffff" strokeWidth="4" strokeLinecap="round" />
++            <circle cx="32" cy="26" r="3" fill="#fff05a" className="animate-pulse" />
+         </svg>
+     </div>
+   );
+@@ -222,9 +230,9 @@ function BoardThread({ thread, isActive, isScalpelMode, onSplit }: {
+ 
+ 
+   const patternStyle = thread.category === 'cyber-cyan' 
+-    ? { backgroundImage: "radial-gradient(circle at 2px 2px, rgba(0,240,255,1) 1px, transparent 0)", backgroundSize: "20px 20px", opacity: 0.1 }
++    ? { backgroundImage: "radial-gradient(circle at 2px 2px, rgba(0,255,255,1) 1px, transparent 0)", backgroundSize: "20px 20px", opacity: 0.1 }
+     : thread.category === 'cyber-magenta'
+-      ? { backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')", opacity: 0.2 }
++      ? { backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmY3MWNlIiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')", opacity: 0.2 }
        : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
  
-+  const meltClass = thread.isCutTop && thread.isCutBottom 
-+    ? 'melt-both' 
-+    : thread.isCutTop 
-+      ? 'melt-top' 
-+      : thread.isCutBottom 
-+        ? 'melt-bottom' 
-+        : '';
-+
+   const meltClass = thread.isCutTop && thread.isCutBottom 
+@@ -256,10 +264,10 @@ function BoardThread({ thread, isActive, isScalpelMode, onSplit }: {
+             {/* Split Line Indicator */}
+             {isScalpelMode && splitLineTop !== null && (
+                 <div 
+-                    className="absolute w-full h-0.5 border-t-2 border-dashed border-white/80 z-50 pointer-events-none flex items-center justify-end pr-2 drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]"
++                    className="absolute w-full h-1 border-t-2 border-dashed border-cyber-magenta z-[60] pointer-events-none flex items-center justify-end pr-2 shadow-[0_0_10px_#ff71ce,0_0_5px_#ff71ce]"
+                     style={{ top: `${splitLineTop}px` }}
+                 >
+-                    <span className="text-[9px] font-mono font-bold bg-black/70 text-white px-1 rounded transform -translate-y-1/2">
++                    <span className="text-[10px] font-mono font-bold bg-cyber-magenta text-deep-void px-2 py-0.5 rounded-sm transform -translate-y-1/2 shadow-sm">
+                         SPLIT
+                     </span>
+                 </div>
+@@ -360,19 +368,19 @@ export default function LoomBoard() {
+     
+     // Add sparks
+     const id = Date.now();
+-    const colors = ['#00f0ff', '#ff0055', '#fcee0a', '#ffffff'];
+-    const newSparks = Array.from({ length: 8 }).map((_, i) => ({
++    const colors = ['#00ffff', '#ff71ce', '#fff05a', '#ffffff'];
++    const newSparks = Array.from({ length: 12 }).map((_, i) => ({
+         id: id + i,
+         x: clientX,
+         y: clientY,
+-        tx: (Math.random() - 0.5) * 100,
+-        ty: (Math.random() - 0.5) * 100,
++        tx: (Math.random() - 0.5) * 150,
++        ty: (Math.random() - 0.5) * 150,
+         color: colors[Math.floor(Math.random() * colors.length)]
+     }));
+     
+     setSparks((prev) => [...prev, ...newSparks]);
+     setTimeout(() => {
+-        setSparks((prev) => prev.filter((s) => s.id < id || s.id >= id + 8));
++        setSparks((prev) => prev.filter((s) => s.id < id || s.id >= id + 12));
+     }, 800);
+ 
+     splitThread(threadId, snappedTime);
+@@ -417,40 +425,6 @@ export default function LoomBoard() {
+     return markers;
+   };
+ 
+-    const handleSeverThreads = () => {
+-        const svgContent = `
+-            <svg xmlns="http://www.w3.org/2000/svg" width="800" height="1440" viewBox="0 0 800 1440" style="background-color: #05050a; font-family: monospace;">
+-                <defs>
+-                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+-                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1"/>
+-                    </pattern>
+-                </defs>
+-                <rect width="100%" height="100%" fill="url(#grid)" />
+-                ${layoutThreads.map(t => {
+-                    const color = t.category === 'cyber-cyan' ? '#00f0ff' : t.category === 'cyber-magenta' ? '#ff0055' : '#fcee0a';
+-                    // Calculate position based on layout (total width 600px starting at x=100)
+-                    const xPos = 100 + (t.svgLeft / 100) * 600;
+-                    const width = (t.svgWidth / 100) * 600;
+-                    
+-                    return `
+-                        <g transform="translate(${xPos}, ${t.startTime})">
+-                            <rect width="${width}" height="${t.duration}" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="2" />
+-                            <text x="10" y="20" fill="white" font-size="14" font-weight="bold" clip-path="inset(0 0 0 0)">${t.title}</text>
+-                            <text x="10" y="40" fill="${color}" font-size="10">${formatTime(t.startTime!)} - ${formatTime(t.startTime! + t.duration)}</text>
+-                        </g>
+-                    `;
+-                }).join('')}
+-            </svg>
+-        `;
+-        const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+-        const url = URL.createObjectURL(blob);
+-        const a = document.createElement('a');
+-        a.href = url;
+-        a.download = `loominal-export-${new Date().toISOString().split('T')[0]}.svg`;
+-        a.click();
+-        URL.revokeObjectURL(url);
+-    };
+-
    return (
-     <div
-       style={thread.style}
--      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''} ${thread.isCutTop ? 'melt-top' : ''} ${thread.isCutBottom ? 'melt-bottom' : ''}`}
--      onMouseEnter={() => setIsHovered(true)}
-+      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''} ${meltClass}`}
-       onMouseMove={handleMouseMove}
--      onMouseLeave={() => { setIsHovered(false); setSplitLineTop(null); }}
-+      onMouseLeave={() => { setSplitLineTop(null); }}
-       onClick={(e) => {
-           if (isScalpelMode) {
-               e.stopPropagation();
+     <main 
+         className={`flex-1 flex flex-col h-full bg-deep-void relative overflow-hidden ${isScalpelMode ? 'cursor-scalpel' : ''}`}
+@@ -477,16 +451,6 @@ export default function LoomBoard() {
+               <span className="material-symbols-outlined text-white/40 text-sm skew-x-[12deg]">search</span>
+               <input className="bg-transparent border-none text-sm text-white placeholder:text-white/30 focus:ring-0 w-48 p-0 font-mono skew-x-[12deg]" placeholder="SCAN_THREADS..." type="text" />
+             </div>
+-            <button 
+-                onClick={handleSeverThreads}
+-                className="relative px-6 py-2 bg-transparent text-cyber-yellow text-sm font-bold font-mono tracking-widest uppercase border border-cyber-yellow/30 hover:bg-cyber-yellow/10 hover:border-cyber-yellow hover:shadow-[0_0_15px_rgba(252,238,10,0.4)] transition-all group overflow-hidden"
+-            >
+-              <span className="relative z-10 flex items-center gap-2">
+-                <span className="material-symbols-outlined text-lg">content_cut</span>
+-                Sever Threads
+-              </span>
+-              <div className="absolute inset-0 bg-cyber-yellow/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+-            </button>
+           </div>
+         </header>
+         <div className="flex-1 overflow-y-auto cyber-scrollbar relative">
+@@ -503,8 +467,8 @@ export default function LoomBoard() {
+               
+               {/* NOW Indicator (Hardcoded for visual at 10:15 AM) */}
+               <div className="absolute top-[615px] left-0 w-full flex items-center z-40 pointer-events-none">
+-                <div className="absolute -left-1.5 size-3 bg-cyber-magenta shadow-[0_0_10px_#ff0055] rotate-45"></div>
+-                <div className="h-[1px] w-full bg-cyber-magenta shadow-[0_0_8px_#ff0055]"></div>
++                <div className="absolute -left-1.5 size-3 bg-cyber-magenta shadow-[0_0_10px_#ff71ce] rotate-45"></div>
++                <div className="h-[1px] w-full bg-cyber-magenta shadow-[0_0_8px_#ff71ce]"></div>
+                 <div className="absolute right-0 bg-cyber-magenta text-black text-[10px] font-bold px-1 font-mono">NOW</div>
+               </div>
+ 
 diff --git a/src/index.css b/src/index.css
-index 65175a5..7f850c4 100644
+index 7f850c4..c273109 100644
 --- a/src/index.css
 +++ b/src/index.css
-@@ -133,3 +133,7 @@ body {
- .laser-beam {
-   animation: beam-pulse 2s infinite ease-in-out;
+@@ -1,34 +1,35 @@
+ @import "tailwindcss";
+ 
+ @theme {
+-  --color-cyber-cyan: #00f0ff;
+-  --color-cyber-magenta: #ff0055;
++  /* Vaporwave Palette */
++  --color-cyber-cyan: #00ffff;
++  --color-cyber-magenta: #ff71ce;
+   --color-cyber-yellow: #fcee0a;
+-  --color-deep-void: #05050a;
+-  --color-grid-line: #00f0ff20;
+-  --color-panel-bg: #0a0a12;
+-  --color-panel-border: #1a1a2e;
++  --color-deep-void: #120524;
++  --color-grid-line: rgba(255, 113, 206, 0.2);
++  --color-panel-bg: #1e1035;
++  --color-panel-border: #2d1b4e;
+ 
+   --font-display: "Rajdhani", sans-serif;
+   --font-mono: "Space Mono", monospace;
+ 
+-  --background-image-cyber-grid: linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
++  --background-image-cyber-grid: radial-gradient(rgba(255, 113, 206, 0.3) 1px, transparent 1px);
+ 
+-  --shadow-neon-cyan: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
+-  --shadow-neon-magenta: 0 0 10px rgba(255, 0, 85, 0.5), 0 0 20px rgba(255, 0, 85, 0.3);
++  --shadow-neon-cyan: 0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.4);
++  --shadow-neon-magenta: 0 0 10px rgba(255, 113, 206, 0.6), 0 0 20px rgba(255, 113, 206, 0.4);
  }
+ 
+ /* Custom Utilities */
+ @layer utilities {
+   .cyber-scrollbar::-webkit-scrollbar {
+-    width: 4px;
++    width: 6px;
+   }
+   .cyber-scrollbar::-webkit-scrollbar-track {
+-    background: #05050a;
++    background: #120524;
+   }
+   .cyber-scrollbar::-webkit-scrollbar-thumb {
+-    background: #00f0ff;
+-    border-radius: 0;
++    background: linear-gradient(to bottom, #00ffff, #ff71ce);
++    border-radius: 3px;
+   }
+ 
+   .cyber-ribbon {
+@@ -52,9 +53,7 @@
+   }
+   .grid-bg {
+     background-size: 40px 40px;
+-    background-image: 
+-        linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+-        linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
++    background-image: radial-gradient(circle, rgba(255, 113, 206, 0.15) 1px, transparent 1px);
+   }
+   .thread-spool {
+     width: 64px;
+@@ -76,7 +75,7 @@
+   }
+   .glitch-text:hover {
+     animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+-    color: #00f0ff;
++    color: #00ffff;
+   }
+ }
+ 
+@@ -93,7 +92,7 @@
+ body {
+   font-family: var(--font-display);
+   background-color: var(--color-deep-void);
+-  @apply text-slate-300 h-screen overflow-hidden flex flex-row selection:bg-cyber-cyan selection:text-black;
++  @apply text-slate-200 h-screen overflow-hidden flex flex-row selection:bg-cyber-magenta selection:text-white;
+ }
+ 
+ /* Scalpel Mode */
+@@ -103,18 +102,17 @@ body {
+ 
+ /* Animations */
+ @keyframes sparkle {
+-  0% { transform: scale(0) translate(0, 0); opacity: 1; }
+-  100% { transform: scale(1.5) translate(var(--tx), var(--ty)); opacity: 0; }
++  0% { transform: scale(0) rotate(0deg) translate(0, 0); opacity: 1; }
++  100% { transform: scale(0) rotate(180deg) translate(var(--tx), var(--ty)); opacity: 0; }
+ }
+ 
+ .spark {
+   position: absolute;
+-  width: 6px;
+-  height: 6px;
+-  background: #fffb96;
+-  box-shadow: 0 0 8px #fffb96;
+-  border-radius: 50%;
+-  animation: sparkle 0.8s ease-out forwards;
++  width: 8px;
++  height: 8px;
++  background: #fff;
++  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
++  animation: sparkle 0.6s ease-out forwards;
+ }
+ 
+ .melt-bottom {
+@@ -126,8 +124,8 @@ body {
+ }
+ 
+ @keyframes beam-pulse {
+-  0%, 100% { opacity: 0.8; box-shadow: 0 0 15px #01cdfe, 0 0 30px #b967ff; }
+-  50% { opacity: 1; box-shadow: 0 0 25px #01cdfe, 0 0 40px #b967ff; }
++  0%, 100% { opacity: 0.8; box-shadow: 0 0 15px #00ffff, 0 0 30px #ff71ce; }
++  50% { opacity: 1; box-shadow: 0 0 25px #00ffff, 0 0 40px #ff71ce; }
+ }
+ 
+ .laser-beam {
+diff --git a/verification/verify_scalpel.py b/verification/verify_scalpel.py
+new file mode 100644
+index 0000000..4b041e7
+--- /dev/null
++++ b/verification/verify_scalpel.py
+@@ -0,0 +1,57 @@
++from playwright.sync_api import sync_playwright
++import time
 +
-+.melt-both {
-+  clip-path: polygon(0 15%, 8% 5%, 15% 10%, 25% 2%, 35% 10%, 45% 2%, 55% 10%, 65% 2%, 75% 10%, 85% 5%, 92% 10%, 100% 0, 100% 85%, 92% 95%, 85% 90%, 75% 98%, 65% 92%, 55% 98%, 45% 90%, 35% 98%, 25% 90%, 15% 98%, 0 85%);
-+}
++def run():
++    with sync_playwright() as p:
++        browser = p.chromium.launch(headless=True)
++        page = browser.new_page(viewport={"width": 1280, "height": 800})
++        
++        print("Navigating to app...")
++        page.goto("http://localhost:5173")
++        
++        # Wait for threads to load
++        page.wait_for_selector("text=Project Alpha: Deep Work")
++        print("App loaded.")
++        
++        # 1. Test Scalpel Mode Activation
++        print("Pressing Alt...")
++        page.keyboard.down("Alt")
++        
++        # Move mouse over "Project Alpha" thread
++        # It starts at 09:00 (540 mins). 540px top.
++        # Let's target somewhere in the middle.
++        # The timeline container is relative.
++        # We can find the element and hover.
++        thread = page.locator("text=Project Alpha: Deep Work").first
++        thread_box = thread.bounding_box()
++        
++        if thread_box:
++            print(f"Hovering over thread at {thread_box['x'] + 50}, {thread_box['y'] + 50}")
++            page.mouse.move(thread_box['x'] + 50, thread_box['y'] + 50)
++            
++            # Wait for visual update (cursor, split line)
++            time.sleep(1)
++            
++            print("Taking screenshot of Scalpel Mode...")
++            page.screenshot(path="verification_scalpel_hover.png")
++            
++            # 2. Test Split
++            print("Clicking to split...")
++            page.mouse.click(thread_box['x'] + 50, thread_box['y'] + 50)
++            
++            # Release Alt
++            page.keyboard.up("Alt")
++            
++            # Wait for split to happen
++            time.sleep(1)
++            
++            print("Taking screenshot of Split Result...")
++            page.screenshot(path="verification_split_result.png")
++            
++        else:
++            print("Could not find thread element.")
++        
++        browser.close()
++
++if __name__ == "__main__":
++    run()

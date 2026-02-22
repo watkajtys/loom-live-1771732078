@@ -127,7 +127,7 @@ interface Spark {
 
 function SparksContainer({ sparks }: { sparks: Spark[] }) {
     return (
-        <div className="fixed inset-0 pointer-events-none z-[100]">
+        <div className="fixed inset-0 pointer-events-none z-[9999]">
             {sparks.map((spark) => (
                 <div 
                     key={spark.id} 
@@ -136,7 +136,7 @@ function SparksContainer({ sparks }: { sparks: Spark[] }) {
                         left: spark.x, 
                         top: spark.y, 
                         backgroundColor: spark.color,
-                        boxShadow: `0 0 8px ${spark.color}`,
+                        boxShadow: `0 0 12px ${spark.color}`,
                         '--tx': `${spark.tx}px`, 
                         '--ty': `${spark.ty}px` 
                     } as React.CSSProperties}
@@ -163,17 +163,25 @@ function ScalpelCursor() {
   return (
     <div 
         ref={ref}
-        className="fixed z-[100] pointer-events-none transform -translate-x-1/2 -translate-y-1/2" 
+        className="fixed z-[9999] pointer-events-none transform -translate-x-1/2 -translate-y-1/2" 
         style={{ left: -100, top: -100 }}
     >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-cyber-magenta/30 blur-xl rounded-full animate-pulse"></div>
-        <svg className="drop-shadow-[0_0_10px_rgba(255,113,206,1)] transform -rotate-12" fill="none" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="14" cy="36" fill="#050014" r="5" stroke="#ff0055" strokeWidth="3"></circle>
-            <circle cx="34" cy="36" fill="#050014" r="5" stroke="#ff0055" strokeWidth="3"></circle>
-            <path d="M16 32 L34 12" stroke="#00f0ff" strokeLinecap="round" strokeWidth="3"></path>
-            <path d="M32 32 L14 12" stroke="#00f0ff" strokeLinecap="round" strokeWidth="3"></path>
-            <circle className="animate-pulse" cx="24" cy="22" fill="#fcee0a" r="2"></circle>
-            <path className="animate-bounce" d="M24 6 L26 10 L30 12 L26 14 L24 18 L22 14 L18 12 L22 10 Z" fill="#fcee0a" style={{ animationDuration: '2s' }}></path>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-cyber-magenta/20 blur-xl rounded-full animate-pulse"></div>
+        <svg 
+            width="64" 
+            height="64" 
+            viewBox="0 0 64 64" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+            className="transform -rotate-12 drop-shadow-[0_0_8px_rgba(255,113,206,0.8)]"
+        >
+            <path d="M40 24L56 8" stroke="#00ffff" strokeWidth="4" strokeLinecap="round" />
+            <path d="M52 28L44 20" stroke="#00ffff" strokeWidth="4" strokeLinecap="round" />
+            <circle cx="20" cy="44" r="8" stroke="#ff71ce" strokeWidth="4" />
+            <circle cx="44" cy="44" r="8" stroke="#ff71ce" strokeWidth="4" />
+            <path d="M26 38L48 16" stroke="#00ffff" strokeWidth="4" strokeLinecap="round" />
+            <path d="M44 36L22 14" stroke="#00ffff" strokeWidth="4" strokeLinecap="round" />
+            <circle cx="32" cy="26" r="3" fill="#fff05a" className="animate-pulse" />
         </svg>
     </div>
   );
@@ -222,9 +230,9 @@ function BoardThread({ thread, isActive, isScalpelMode, onSplit }: {
 
 
   const patternStyle = thread.category === 'cyber-cyan' 
-    ? { backgroundImage: "radial-gradient(circle at 2px 2px, rgba(0,240,255,1) 1px, transparent 0)", backgroundSize: "20px 20px", opacity: 0.1 }
+    ? { backgroundImage: "radial-gradient(circle at 2px 2px, rgba(0,255,255,1) 1px, transparent 0)", backgroundSize: "20px 20px", opacity: 0.1 }
     : thread.category === 'cyber-magenta'
-      ? { backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')", opacity: 0.2 }
+      ? { backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmY3MWNlIiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')", opacity: 0.2 }
       : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
 
   const meltClass = thread.isCutTop && thread.isCutBottom 
@@ -256,10 +264,10 @@ function BoardThread({ thread, isActive, isScalpelMode, onSplit }: {
             {/* Split Line Indicator */}
             {isScalpelMode && splitLineTop !== null && (
                 <div 
-                    className="absolute w-full h-0.5 border-t-2 border-dashed border-white/80 z-50 pointer-events-none flex items-center justify-end pr-2 drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]"
+                    className="absolute w-full h-1 border-t-2 border-dashed border-cyber-magenta z-[60] pointer-events-none flex items-center justify-end pr-2 shadow-[0_0_10px_#ff71ce,0_0_5px_#ff71ce]"
                     style={{ top: `${splitLineTop}px` }}
                 >
-                    <span className="text-[9px] font-mono font-bold bg-black/70 text-white px-1 rounded transform -translate-y-1/2">
+                    <span className="text-[10px] font-mono font-bold bg-cyber-magenta text-deep-void px-2 py-0.5 rounded-sm transform -translate-y-1/2 shadow-sm">
                         SPLIT
                     </span>
                 </div>
@@ -360,19 +368,19 @@ export default function LoomBoard() {
     
     // Add sparks
     const id = Date.now();
-    const colors = ['#00f0ff', '#ff0055', '#fcee0a', '#ffffff'];
-    const newSparks = Array.from({ length: 8 }).map((_, i) => ({
+    const colors = ['#00ffff', '#ff71ce', '#fff05a', '#ffffff'];
+    const newSparks = Array.from({ length: 12 }).map((_, i) => ({
         id: id + i,
         x: clientX,
         y: clientY,
-        tx: (Math.random() - 0.5) * 100,
-        ty: (Math.random() - 0.5) * 100,
+        tx: (Math.random() - 0.5) * 150,
+        ty: (Math.random() - 0.5) * 150,
         color: colors[Math.floor(Math.random() * colors.length)]
     }));
     
     setSparks((prev) => [...prev, ...newSparks]);
     setTimeout(() => {
-        setSparks((prev) => prev.filter((s) => s.id < id || s.id >= id + 8));
+        setSparks((prev) => prev.filter((s) => s.id < id || s.id >= id + 12));
     }, 800);
 
     splitThread(threadId, snappedTime);
@@ -417,40 +425,6 @@ export default function LoomBoard() {
     return markers;
   };
 
-    const handleSeverThreads = () => {
-        const svgContent = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="800" height="1440" viewBox="0 0 800 1440" style="background-color: #05050a; font-family: monospace;">
-                <defs>
-                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1"/>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid)" />
-                ${layoutThreads.map(t => {
-                    const color = t.category === 'cyber-cyan' ? '#00f0ff' : t.category === 'cyber-magenta' ? '#ff0055' : '#fcee0a';
-                    // Calculate position based on layout (total width 600px starting at x=100)
-                    const xPos = 100 + (t.svgLeft / 100) * 600;
-                    const width = (t.svgWidth / 100) * 600;
-                    
-                    return `
-                        <g transform="translate(${xPos}, ${t.startTime})">
-                            <rect width="${width}" height="${t.duration}" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="2" />
-                            <text x="10" y="20" fill="white" font-size="14" font-weight="bold" clip-path="inset(0 0 0 0)">${t.title}</text>
-                            <text x="10" y="40" fill="${color}" font-size="10">${formatTime(t.startTime!)} - ${formatTime(t.startTime! + t.duration)}</text>
-                        </g>
-                    `;
-                }).join('')}
-            </svg>
-        `;
-        const blob = new Blob([svgContent], { type: 'image/svg+xml' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `loominal-export-${new Date().toISOString().split('T')[0]}.svg`;
-        a.click();
-        URL.revokeObjectURL(url);
-    };
-
   return (
     <main 
         className={`flex-1 flex flex-col h-full bg-deep-void relative overflow-hidden ${isScalpelMode ? 'cursor-scalpel' : ''}`}
@@ -477,16 +451,6 @@ export default function LoomBoard() {
               <span className="material-symbols-outlined text-white/40 text-sm skew-x-[12deg]">search</span>
               <input className="bg-transparent border-none text-sm text-white placeholder:text-white/30 focus:ring-0 w-48 p-0 font-mono skew-x-[12deg]" placeholder="SCAN_THREADS..." type="text" />
             </div>
-            <button 
-                onClick={handleSeverThreads}
-                className="relative px-6 py-2 bg-transparent text-cyber-yellow text-sm font-bold font-mono tracking-widest uppercase border border-cyber-yellow/30 hover:bg-cyber-yellow/10 hover:border-cyber-yellow hover:shadow-[0_0_15px_rgba(252,238,10,0.4)] transition-all group overflow-hidden"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                <span className="material-symbols-outlined text-lg">content_cut</span>
-                Sever Threads
-              </span>
-              <div className="absolute inset-0 bg-cyber-yellow/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-            </button>
           </div>
         </header>
         <div className="flex-1 overflow-y-auto cyber-scrollbar relative">
@@ -503,8 +467,8 @@ export default function LoomBoard() {
               
               {/* NOW Indicator (Hardcoded for visual at 10:15 AM) */}
               <div className="absolute top-[615px] left-0 w-full flex items-center z-40 pointer-events-none">
-                <div className="absolute -left-1.5 size-3 bg-cyber-magenta shadow-[0_0_10px_#ff0055] rotate-45"></div>
-                <div className="h-[1px] w-full bg-cyber-magenta shadow-[0_0_8px_#ff0055]"></div>
+                <div className="absolute -left-1.5 size-3 bg-cyber-magenta shadow-[0_0_10px_#ff71ce] rotate-45"></div>
+                <div className="h-[1px] w-full bg-cyber-magenta shadow-[0_0_8px_#ff71ce]"></div>
                 <div className="absolute right-0 bg-cyber-magenta text-black text-[10px] font-bold px-1 font-mono">NOW</div>
               </div>
 
