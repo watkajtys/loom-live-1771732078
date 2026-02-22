@@ -1,640 +1,781 @@
-diff --git a/index.html b/index.html
-index 0d50b75..1d4ed8e 100644
---- a/index.html
-+++ b/index.html
-@@ -4,10 +4,10 @@
-     <meta charset="UTF-8" />
-     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
--    <title>Chronos: The Fractal Lore Mapper</title>
-+    <title>Loominal Cyber Ribbon Loom</title>
-     <link rel="preconnect" href="https://fonts.googleapis.com" />
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
--    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
-     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-   </head>
-   <body>
+diff --git a/package-lock.json b/package-lock.json
+index 95e5755..451ac75 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -8,9 +8,14 @@
+       "name": "app",
+       "version": "0.0.0",
+       "dependencies": {
++        "@dnd-kit/core": "^6.3.1",
++        "@dnd-kit/modifiers": "^9.0.0",
++        "@dnd-kit/sortable": "^10.0.0",
++        "@dnd-kit/utilities": "^3.2.2",
+         "@tailwindcss/postcss": "^4.2.0",
+         "react": "^19.2.0",
+-        "react-dom": "^19.2.0"
++        "react-dom": "^19.2.0",
++        "zustand": "^5.0.11"
+       },
+       "devDependencies": {
+         "@eslint/js": "^9.39.1",
+@@ -324,6 +329,73 @@
+         "node": ">=6.9.0"
+       }
+     },
++    "node_modules/@dnd-kit/accessibility": {
++      "version": "3.1.1",
++      "resolved": "https://registry.npmjs.org/@dnd-kit/accessibility/-/accessibility-3.1.1.tgz",
++      "integrity": "sha512-2P+YgaXF+gRsIihwwY1gCsQSYnu9Zyj2py8kY5fFvUM1qm2WA2u639R6YNVfU4GWr+ZM5mqEsfHZZLoRONbemw==",
++      "license": "MIT",
++      "dependencies": {
++        "tslib": "^2.0.0"
++      },
++      "peerDependencies": {
++        "react": ">=16.8.0"
++      }
++    },
++    "node_modules/@dnd-kit/core": {
++      "version": "6.3.1",
++      "resolved": "https://registry.npmjs.org/@dnd-kit/core/-/core-6.3.1.tgz",
++      "integrity": "sha512-xkGBRQQab4RLwgXxoqETICr6S5JlogafbhNsidmrkVv2YRs5MLwpjoF2qpiGjQt8S9AoxtIV603s0GIUpY5eYQ==",
++      "license": "MIT",
++      "dependencies": {
++        "@dnd-kit/accessibility": "^3.1.1",
++        "@dnd-kit/utilities": "^3.2.2",
++        "tslib": "^2.0.0"
++      },
++      "peerDependencies": {
++        "react": ">=16.8.0",
++        "react-dom": ">=16.8.0"
++      }
++    },
++    "node_modules/@dnd-kit/modifiers": {
++      "version": "9.0.0",
++      "resolved": "https://registry.npmjs.org/@dnd-kit/modifiers/-/modifiers-9.0.0.tgz",
++      "integrity": "sha512-ybiLc66qRGuZoC20wdSSG6pDXFikui/dCNGthxv4Ndy8ylErY0N3KVxY2bgo7AWwIbxDmXDg3ylAFmnrjcbVvw==",
++      "license": "MIT",
++      "dependencies": {
++        "@dnd-kit/utilities": "^3.2.2",
++        "tslib": "^2.0.0"
++      },
++      "peerDependencies": {
++        "@dnd-kit/core": "^6.3.0",
++        "react": ">=16.8.0"
++      }
++    },
++    "node_modules/@dnd-kit/sortable": {
++      "version": "10.0.0",
++      "resolved": "https://registry.npmjs.org/@dnd-kit/sortable/-/sortable-10.0.0.tgz",
++      "integrity": "sha512-+xqhmIIzvAYMGfBYYnbKuNicfSsk4RksY2XdmJhT+HAC01nix6fHCztU68jooFiMUB01Ky3F0FyOvhG/BZrWkg==",
++      "license": "MIT",
++      "dependencies": {
++        "@dnd-kit/utilities": "^3.2.2",
++        "tslib": "^2.0.0"
++      },
++      "peerDependencies": {
++        "@dnd-kit/core": "^6.3.0",
++        "react": ">=16.8.0"
++      }
++    },
++    "node_modules/@dnd-kit/utilities": {
++      "version": "3.2.2",
++      "resolved": "https://registry.npmjs.org/@dnd-kit/utilities/-/utilities-3.2.2.tgz",
++      "integrity": "sha512-+MKAJEOfaBe5SmV6t34p80MMKhjvUz0vRrvVJbPT0WElzaOJ/1xs+D+KDv+tD/NE5ujfrChEcshd4fLn0wpiqg==",
++      "license": "MIT",
++      "dependencies": {
++        "tslib": "^2.0.0"
++      },
++      "peerDependencies": {
++        "react": ">=16.8.0"
++      }
++    },
+     "node_modules/@emnapi/core": {
+       "version": "1.8.1",
+       "resolved": "https://registry.npmjs.org/@emnapi/core/-/core-1.8.1.tgz",
+@@ -1212,7 +1284,7 @@
+       "version": "19.2.14",
+       "resolved": "https://registry.npmjs.org/@types/react/-/react-19.2.14.tgz",
+       "integrity": "sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==",
+-      "dev": true,
++      "devOptional": true,
+       "license": "MIT",
+       "dependencies": {
+         "csstype": "^3.2.2"
+@@ -1797,7 +1869,7 @@
+       "version": "3.2.3",
+       "resolved": "https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz",
+       "integrity": "sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ==",
+-      "dev": true,
++      "devOptional": true,
+       "license": "MIT"
+     },
+     "node_modules/debug": {
+@@ -3123,8 +3195,7 @@
+       "version": "2.8.1",
+       "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz",
+       "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==",
+-      "license": "0BSD",
+-      "optional": true
++      "license": "0BSD"
+     },
+     "node_modules/type-check": {
+       "version": "0.4.0",
+@@ -3372,6 +3443,35 @@
+       "peerDependencies": {
+         "zod": "^3.25.0 || ^4.0.0"
+       }
++    },
++    "node_modules/zustand": {
++      "version": "5.0.11",
++      "resolved": "https://registry.npmjs.org/zustand/-/zustand-5.0.11.tgz",
++      "integrity": "sha512-fdZY+dk7zn/vbWNCYmzZULHRrss0jx5pPFiOuMZ/5HJN6Yv3u+1Wswy/4MpZEkEGhtNH+pwxZB8OKgUBPzYAGg==",
++      "license": "MIT",
++      "engines": {
++        "node": ">=12.20.0"
++      },
++      "peerDependencies": {
++        "@types/react": ">=18.0.0",
++        "immer": ">=9.0.6",
++        "react": ">=18.0.0",
++        "use-sync-external-store": ">=1.2.0"
++      },
++      "peerDependenciesMeta": {
++        "@types/react": {
++          "optional": true
++        },
++        "immer": {
++          "optional": true
++        },
++        "react": {
++          "optional": true
++        },
++        "use-sync-external-store": {
++          "optional": true
++        }
++      }
+     }
+   }
+ }
+diff --git a/package.json b/package.json
+index fbd48f5..56065ff 100644
+--- a/package.json
++++ b/package.json
+@@ -10,9 +10,14 @@
+     "preview": "vite preview"
+   },
+   "dependencies": {
++    "@dnd-kit/core": "^6.3.1",
++    "@dnd-kit/modifiers": "^9.0.0",
++    "@dnd-kit/sortable": "^10.0.0",
++    "@dnd-kit/utilities": "^3.2.2",
+     "@tailwindcss/postcss": "^4.2.0",
+     "react": "^19.2.0",
+-    "react-dom": "^19.2.0"
++    "react-dom": "^19.2.0",
++    "zustand": "^5.0.11"
+   },
+   "devDependencies": {
+     "@eslint/js": "^9.39.1",
 diff --git a/src/App.tsx b/src/App.tsx
-index 1fc01b5..4037865 100644
+index 4037865..ae8efd9 100644
 --- a/src/App.tsx
 +++ b/src/App.tsx
-@@ -1,214 +1,11 @@
+@@ -1,12 +1,87 @@
+-import ThreadSpool from './components/ThreadSpool';
++import { DndContext, type DragEndEvent, useSensor, useSensors, PointerSensor } from '@dnd-kit/core';
+ import LoomBoard from './components/LoomBoard';
 +import ThreadSpool from './components/ThreadSpool';
-+import LoomBoard from './components/LoomBoard';
-+
++import { useStore } from './store';
++import './App.css';
+ 
  function App() {
++  const setThreadTime = useStore((state) => state.setThreadTime);
++  const threads = useStore((state) => state.threads);
++
++  const sensors = useSensors(
++    useSensor(PointerSensor, {
++      activationConstraint: {
++        distance: 8,
++      },
++    })
++  );
++
++  const handleDragEnd = (event: DragEndEvent) => {
++    const { active, over } = event;
++
++    if (!over) return;
++
++    // If dropped over the LoomBoard (id: loom-board)
++    if (over.id === 'loom-board') {
++      const threadId = active.id as string;
++      const thread = threads.find((t) => t.id === threadId);
++      if (!thread) return;
++
++      // Get the timeline container rect
++      const timelineContainer = document.getElementById('timeline-container');
++      if (!timelineContainer) return;
++      
++      const timelineRect = timelineContainer.getBoundingClientRect();
++      
++      // Calculate drop Y relative to the timeline container
++      // active.rect.current.translated is the final position of the dragged item
++      const activeRect = active.rect.current?.translated;
++      if (!activeRect) return;
++
++      const relativeY = activeRect.top - timelineRect.top;
++      
++      // Convert to minutes (1px = 1min)
++      // Add scroll offset if container is scrolled
++      // Actually timelineContainer.getBoundingClientRect().top accounts for scroll of its parent if it's visible
++      // Wait, if the container is scrolled, rect.top moves up.
++      // relativeY = activeRect.top - timelineRect.top.
++      // If I scrolled down 100px, timelineRect.top is smaller (higher up).
++      // So relativeY becomes larger. This seems correct.
++      // However, if the dragged item is in a fixed position overlay, activeRect.top is viewport relative.
++      // timelineRect.top is viewport relative.
++      // So relativeY is the visual distance from the top of the container.
++      // But if the container is scrolled, the content inside is shifted.
++      // Wait, LoomBoard structure:
++      // <div class="flex-1 overflow-y-auto ... relative">
++      //   <div class="flex min-h-[1440px] ...">
++      //     <div id="timeline-container" ...>
++      // The scroll happens on the wrapper div.
++      // The timeline container is inside the scrollable area.
++      // If I scroll down, timelineContainer moves up.
++      // So timelineRect.top decreases.
++      // activeRect.top is where I dropped it on screen.
++      // relativeY = activeRect.top - timelineRect.top increases.
++      // This maps correctly to the Y coordinate *inside* the timeline container.
++      
++      let newStartTime = Math.round(relativeY);
++      
++      // Clamp to valid range (0 to 1440 - duration)
++      newStartTime = Math.max(0, Math.min(1440 - thread.duration, newStartTime));
++      
++      // Snap to 15 minutes
++      newStartTime = Math.round(newStartTime / 15) * 15;
++
++      setThreadTime(threadId, newStartTime);
++    }
++  };
++
    return (
-     <>
--      <main className="absolute inset-0 w-full h-full overflow-hidden z-0 bg-[#08080a]">
--        {/* Background Grid */}
--        <div 
--          className="absolute inset-0 opacity-[0.08]" 
--          style={{
--            backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)',
--            backgroundSize: '40px 40px'
--          }}
--        ></div>
--
--        {/* Semantic Zoom Container */}
--        <div className="absolute inset-0 transform -translate-x-[20%] transition-transform duration-700 ease-out">
--          
--          {/* Connection Layer */}
--          <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">
--            <path className="connector-line opacity-40" d="M380,450 C480,450 450,280 580,280" fill="none" stroke="#666"></path>
--            <path className="drag-thread opacity-100" d="M1250,820 C1000,820 500,600 380,520" fill="none" stroke="#eab308" strokeLinecap="butt"></path>
--            <rect className="animate-pulse" fill="#eab308" height="8" width="8" x="376" y="516"></rect>
--          </svg>
--
--          {/* Node: Obsidian Spire */}
--          <div className="absolute top-[480px] left-[200px] w-64 bg-[#111] border-2 border-[#444] p-0 shadow-none">
--            <div className="h-8 bg-[#222] border-b-2 border-[#444] flex items-center justify-between px-2">
--              <span className="text-[10px] font-bold uppercase tracking-widest text-[#888]">LOC-01</span>
--              <div className="w-2 h-2 bg-red-500 rounded-none"></div>
--            </div>
--            <div className="p-4">
--              <h3 className="text-white font-bold text-lg leading-none mb-2 uppercase">Obsidian Spire</h3>
--              <div className="h-20 w-full bg-[#000] border border-[#333] relative grayscale">
--                <img 
--                  alt="Dark gothic spire" 
--                  className="w-full h-full object-cover opacity-60" 
--                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAByVTR-yxgCClyixotMUZlPor2O-lqoFPHuXmgVjWa4bFIy_XOXtFuDFgEpSxw9jT2LbYlAUdQ6_jrnu2IC7WYOEozccyXXobBTeyyixE_B9_SnkRIGd1IXmMVOVLZhrGxZMDqisvQxGzBcYenfCND1earVxqjOC5rYdJ96dVnhzBlMHchYwLidtYINofq5wxl9RBCCETqyug6U5ioV2hLz-xhcfr1b-_6WXJvMU-9P5k20l5aAECVQpD1NoTgoSqzCsTve9ON1cA"
--                />
--              </div>
--            </div>
--          </div>
--
--          {/* Node: Active Node (Whispering Woods) */}
--          <div className="absolute top-[200px] left-[580px] w-72 bg-[#111] border-2 border-white shadow-[8px_8px_0px_rgba(0,0,0,1)] z-10">
--            <div className="bg-white text-black text-xs font-bold px-3 py-1 uppercase tracking-wider border-b-2 border-white flex justify-between items-center">
--              <span>Active Node</span>
--              <span className="w-2 h-2 bg-black"></span>
--            </div>
--            <div className="h-32 w-full bg-[#000] border-b-2 border-white overflow-hidden relative">
--              <img 
--                alt="Mystical forest" 
--                className="w-full h-full object-cover" 
--                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAByVTR-yxgCClyixotMUZlPor2O-lqoFPHuXmgVjWa4bFIy_XOXtFuDFgEpSxw9jT2LbYlAUdQ6_jrnu2IC7WYOEozccyXXobBTeyyixE_B9_SnkRIGd1IXmMVOVLZhrGxZMDqisvQxGzBcYenfCND1earVxqjOC5rYdJ96dVnhzBlMHchYwLidtYINofq5wxl9RBCCETqyug6U5ioV2hLz-xhcfr1b-_6WXJvMU-9P5k20l5aAECVQpD1NoTgoSqzCsTve9ON1cA"
--              />
--              <div className="absolute inset-0 bg-black/20"></div>
--            </div>
--            <div className="p-4 bg-[#111]">
--              <h3 className="text-white font-black text-2xl mb-2 uppercase tracking-tight leading-none">Whispering<br/>Woods</h3>
--              <p className="text-xs text-[#888] font-mono border-t border-[#333] pt-2 mt-2">ID: 8X-992 // SECTOR 4</p>
--            </div>
--          </div>
--
--          {/* Node: Small Draft */}
--          <div className="absolute top-[150px] left-[250px] w-40 border-2 border-[#333] bg-[#0a0a0a] p-2 opacity-50">
--            <div className="h-2 w-full bg-[#222] mb-2"></div>
--            <div className="h-12 w-full border border-[#222] bg-[#111]"></div>
--          </div>
--
--        </div>
--      </main>
--
--      {/* Sidebar (Codex) */}
--      <aside className="absolute top-0 right-0 bottom-0 w-[600px] bg-[#111] z-50 flex flex-col border-l-2 border-[#333] shadow-none">
--        
--        {/* Header */}
--        <header className="h-14 flex items-center justify-between px-6 border-b-2 border-[#333] bg-[#0a0a0a] shrink-0">
--          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wide">
--            <span className="text-[#666]">ROOT</span>
--            <span className="text-[#444]">/</span>
--            <span className="text-[#888]">FRACTURED LANDS</span>
--            <span className="text-[#444]">/</span>
--            <span className="bg-white text-black px-1">WHISPERING WOODS</span>
--          </div>
--          <div className="flex gap-[-2px]"> 
--            <button className="w-8 h-8 flex items-center justify-center border-2 border-[#333] bg-[#111] text-white hover:bg-white hover:text-black transition-colors -ml-[2px]">
--              <span className="material-symbols-outlined text-lg">more_horiz</span>
--            </button>
--            <button className="w-8 h-8 flex items-center justify-center border-2 border-[#333] bg-[#111] text-white hover:bg-red-600 hover:text-white transition-colors -ml-[2px]">
--              <span className="material-symbols-outlined text-lg">close</span>
--            </button>
--          </div>
--        </header>
--
--        {/* Relational Matrix */}
--        <div className="border-b-2 border-[#333] bg-[#16161a] p-6 shrink-0">
--          <div className="flex items-center justify-between mb-4">
--            <h4 className="text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
--              <span className="w-3 h-3 bg-yellow-500 inline-block"></span>
--              Relational Matrix
--            </h4>
--            <button className="text-[10px] font-bold bg-transparent hover:bg-white hover:text-black text-white border border-[#444] px-3 py-1 uppercase transition-colors">
--              Expand Graph
--            </button>
--          </div>
--          <div className="grid grid-cols-2 gap-3">
--            <div className="flex items-center justify-between bg-[#0a0a0a] border border-[#333] p-3 group hover:border-white transition-colors cursor-pointer">
--              <div className="flex items-center gap-3">
--                <span className="material-symbols-outlined text-base text-[#666]">water_drop</span>
--                <span className="text-sm font-bold text-[#ccc]">Sunken Grotto</span>
--              </div>
--              <span className="text-[10px] font-mono font-bold text-[#444] border border-[#333] px-1 bg-[#111] group-hover:bg-white group-hover:text-black">NEAR</span>
--            </div>
--            <div className="flex items-center justify-between bg-[#1a1a10] border border-yellow-500/50 p-3 relative overflow-hidden">
--              <div className="flex items-center gap-3 z-10">
--                <div className="w-2 h-2 bg-yellow-500 animate-pulse"></div>
--                <span className="text-sm font-bold text-yellow-500 italic">Linking...</span>
--              </div>
--              <div className="absolute right-0 top-0 bottom-0 w-8 bg-yellow-500 flex items-center justify-center">
--                <span className="material-symbols-outlined text-sm text-black font-bold">link</span>
--              </div>
--            </div>
--            <button className="col-span-2 flex items-center justify-center py-2 border border-dashed border-[#444] text-[#444] hover:text-white hover:border-white transition-colors text-xs font-bold uppercase tracking-widest">
--              + Add Connection
--            </button>
--          </div>
--        </div>
--
--        {/* Scrollable Content */}
--        <div className="flex-1 overflow-y-auto overflow-x-hidden relative no-scrollbar bg-[#0a0a0a]">
--          <div className="h-48 w-full relative border-b-2 border-[#333]">
--            <img 
--              className="w-full h-full object-cover opacity-40 grayscale contrast-125" 
--              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAByVTR-yxgCClyixotMUZlPor2O-lqoFPHuXmgVjWa4bFIy_XOXtFuDFgEpSxw9jT2LbYlAUdQ6_jrnu2IC7WYOEozccyXXobBTeyyixE_B9_SnkRIGd1IXmMVOVLZhrGxZMDqisvQxGzBcYenfCND1earVxqjOC5rYdJ96dVnhzBlMHchYwLidtYINofq5wxl9RBCCETqyug6U5ioV2hLz-xhcfr1b-_6WXJvMU-9P5k20l5aAECVQpD1NoTgoSqzCsTve9ON1cA"
--              alt="Whispering Woods Detail"
--            />
--            <div className="absolute inset-0 bg-[#0a0a0a] mix-blend-multiply"></div>
--            <div className="absolute bottom-0 left-0 bg-black text-white px-4 py-1 text-xs font-mono border-t border-r border-[#333]">IMG_REF_992</div>
--            <button className="absolute top-4 right-4 bg-black border border-white text-white px-3 py-1 text-xs font-bold hover:bg-white hover:text-black transition-colors uppercase">
--              Replace
--            </button>
--          </div>
--
--          <div className="p-8 pb-32">
--            <div className="flex items-start gap-4 mb-8">
--              <div className="w-16 h-16 bg-[#111] border-2 border-[#333] flex items-center justify-center shrink-0">
--                <span className="material-symbols-outlined text-3xl text-white">forest</span>
--              </div>
--              <div>
--                <h1 className="font-black text-5xl text-white leading-[0.9] uppercase tracking-tighter mb-2">Whispering<br/>Woods</h1>
--                <div className="text-[#666] font-mono text-xs">LAST EDITED: TODAY 14:02</div>
--              </div>
--            </div>
--
--            <div className="grid grid-cols-3 gap-px bg-[#333] border-2 border-[#333] mb-10">
--              <div className="bg-[#111] p-3 hover:bg-[#161616] transition-colors">
--                <span className="text-[9px] uppercase tracking-widest text-[#666] font-bold block mb-1">Type</span>
--                <div className="flex items-center gap-1 text-xs font-bold text-white">
--                  <span className="material-symbols-outlined text-xs">terrain</span>
--                  Territory
--                </div>
--              </div>
--              <div className="bg-[#111] p-3 hover:bg-[#161616] transition-colors">
--                <span className="text-[9px] uppercase tracking-widest text-[#666] font-bold block mb-1">Status</span>
--                <div className="flex items-center gap-1 text-xs font-bold text-white">
--                  <span className="w-2 h-2 bg-green-500"></span>
--                  Active
--                </div>
--              </div>
--              <div className="bg-[#111] p-3 hover:bg-[#161616] transition-colors">
--                <span className="text-[9px] uppercase tracking-widest text-[#666] font-bold block mb-1">Owner</span>
--                <div className="flex items-center gap-1 text-xs font-bold text-white">
--                  <span className="text-indigo-400 font-black">GM</span>
--                  System
--                </div>
--              </div>
--            </div>
--
--            <div className="tiptap-editor outline-none max-w-none">
--              <p>The Whispering Woods is not merely a forest, but a sentient organism of vast proportions. Travelers report that the trees themselves seem to shift positions when not directly observed, creating a labyrinth that defies traditional cartography.</p>
--              <blockquote>
--                "The leaves don't rustle with the wind; they rustle with intent. Watch your periphery, for that is where the Unseen Fae dwell."
--                <footer className="mt-2 text-sm text-[#666] not-italic font-mono uppercase">— Elder Kaelen's Journal, Entry 402</footer>
--              </blockquote>
--              <h2>Flora &amp; Fauna</h2>
--              <p>Notable species include the <span className="bg-emerald-900/30 text-emerald-400 border-b border-emerald-500 font-medium px-1">Silver-Barked Oak</span> and the luminous <span className="bg-purple-900/30 text-purple-400 border-b border-purple-500 font-medium px-1">Ghost Ferns</span>, which glow faintly in the presence of latent magic.</p>
--              <p>Recent scouting expeditions have uncovered ruins near the northern edge, suggesting a civilization pre-dating the Age of Dust.</p>
--              <div className="my-8 border-l-4 border-yellow-600 bg-[#161610] p-4 flex gap-4">
--                <span className="material-symbols-outlined text-yellow-600">lightbulb</span>
--                <div className="text-sm text-[#ccc]">
--                  <strong className="text-yellow-600 uppercase block text-xs tracking-wider mb-1">GM Note</strong>
--                  Players with Perception &gt; 15 may notice the subtle hum of the leylines converging here.
--                </div>
--              </div>
--            </div>
--          </div>
--        </div>
--
--        {/* Footer */}
--        <div className="bg-[#0a0a0a] border-t-2 border-[#333] p-4 flex justify-between items-center shrink-0">
--          <div className="text-[10px] font-mono text-[#444] uppercase">
--            v3.0.2 // BRUTAL_MOD
--          </div>
--          <div className="flex gap-2">
--            <button className="bg-[#111] border border-[#333] text-[#888] px-3 py-1.5 text-xs font-bold uppercase hover:bg-white hover:text-black transition-colors">
--              Discard
--            </button>
--            <button className="bg-white text-black border border-white px-3 py-1.5 text-xs font-bold uppercase hover:bg-[#ccc] transition-colors">
--              Save Changes
--            </button>
--          </div>
--        </div>
--      </aside>
-+      <ThreadSpool />
-+      <LoomBoard />
-     </>
+-    <>
+-      <ThreadSpool />
+-      <LoomBoard />
+-    </>
++    <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
++      <div className="flex flex-col md:flex-row h-screen w-screen overflow-hidden bg-deep-void">
++        <ThreadSpool />
++        <LoomBoard />
++      </div>
++    </DndContext>
    );
  }
+ 
 diff --git a/src/components/LoomBoard.tsx b/src/components/LoomBoard.tsx
-new file mode 100644
-index 0000000..d9281be
---- /dev/null
+index d9281be..c54005b 100644
+--- a/src/components/LoomBoard.tsx
 +++ b/src/components/LoomBoard.tsx
-@@ -0,0 +1,119 @@
-+export default function LoomBoard() {
+@@ -1,4 +1,97 @@
++import { useStore, type Thread } from '../store';
++import { useDroppable } from '@dnd-kit/core';
++
++// Helper to format time
++const formatTime = (minutes: number) => {
++  const h = Math.floor(minutes / 60);
++  const m = minutes % 60;
++  return `${h.toString().padStart(2, '0')}${m.toString().padStart(2, '0')}`;
++};
++
++function BoardThread({ thread }: { thread: Thread }) {
++  // Styles based on category
++   const colors = {
++    'cyber-cyan': { bg: 'bg-cyber-cyan/10', border: 'border-cyber-cyan', text: 'text-cyber-cyan' },
++    'cyber-magenta': { bg: 'bg-cyber-magenta/10', border: 'border-cyber-magenta', text: 'text-cyber-magenta' },
++    'cyber-yellow': { bg: 'bg-cyber-yellow/10', border: 'border-cyber-yellow', text: 'text-cyber-yellow' },
++  }[thread.category];
++
 +  return (
-+    <main className="flex-1 flex flex-col h-full bg-deep-void relative overflow-hidden">
-+        <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
-+        <div className="absolute inset-0 bg-gradient-to-t from-deep-void via-transparent to-deep-void pointer-events-none"></div>
-+        <header className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-deep-void/90 backdrop-blur-md z-30 sticky top-0">
-+          <div className="flex items-center gap-6">
-+            <div className="flex gap-1">
-+              <button className="size-8 flex items-center justify-center border border-white/10 text-white/60 hover:text-cyber-cyan hover:border-cyber-cyan transition-all">
-+                <span className="material-symbols-outlined text-sm">chevron_left</span>
-+              </button>
-+              <button className="size-8 flex items-center justify-center border border-white/10 text-white/60 hover:text-cyber-cyan hover:border-cyber-cyan transition-all">
-+                <span className="material-symbols-outlined text-sm">chevron_right</span>
-+              </button>
-+            </div>
++    <div
++      style={{
++        top: `${thread.startTime}px`,
++        height: `${thread.duration}px`,
++      }}
++      className="absolute left-4 right-12 group cursor-pointer hover:z-30 transition-all cyber-ribbon"
++    >
++        <div className={`absolute inset-0 ${colors.bg} border-l-4 ${colors.border} backdrop-blur-sm transition-all group-hover:bg-opacity-30`}></div>
++        {/* Pattern overlay */}
++        <div className="absolute inset-0 opacity-20" style={{backgroundImage: "linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.05) 75%, transparent 75%, transparent)", backgroundSize: "4px 4px"}}></div>
++
++        <div className="relative p-2 h-full flex flex-col justify-between pl-4 overflow-hidden">
 +            <div>
-+              <h2 className="text-xl font-bold text-white uppercase tracking-widest font-display">Cycle: Today</h2>
-+              <p className="text-[10px] text-cyber-cyan font-mono">TUE 24 OCT // 14:35:22</p>
++                <h3 className="text-white font-bold text-sm uppercase tracking-wider font-display drop-shadow-md truncate">{thread.title}</h3>
++                <p className={`${colors.text} text-[10px] mt-0.5 font-mono tracking-tight truncate`}>{thread.description || 'ACTIVE_THREAD'}</p>
 +            </div>
-+          </div>
-+          <div className="flex items-center gap-6">
-+            <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-black/50 border border-white/10 skew-x-[-12deg]">
-+              <span className="material-symbols-outlined text-white/40 text-sm skew-x-[12deg]">search</span>
-+              <input className="bg-transparent border-none text-sm text-white placeholder:text-white/30 focus:ring-0 w-48 p-0 font-mono skew-x-[12deg]" placeholder="SCAN_THREADS..." type="text" />
++             <div className="flex items-center justify-between mt-auto">
++                <span className="bg-black/60 text-white/50 text-[10px] px-1 font-mono">
++                    {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
++                </span>
 +            </div>
-+            <button className="relative px-6 py-2 bg-transparent text-cyber-yellow text-sm font-bold font-mono tracking-widest uppercase border border-cyber-yellow/30 hover:bg-cyber-yellow/10 hover:border-cyber-yellow hover:shadow-[0_0_15px_rgba(252,238,10,0.4)] transition-all group overflow-hidden">
-+              <span className="relative z-10 flex items-center gap-2">
-+                <span className="material-symbols-outlined text-lg">content_cut</span>
-+                Sever Threads
-+              </span>
-+              <div className="absolute inset-0 bg-cyber-yellow/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-+            </button>
-+          </div>
-+        </header>
-+        <div className="flex-1 overflow-y-auto cyber-scrollbar relative">
-+          <div className="flex min-h-[1440px] relative pb-20">
-+            <div className="w-20 flex-shrink-0 border-r border-white/10 bg-panel-bg z-10">
-+              <div className="relative h-full text-xs font-mono text-white/40 text-right pr-4 pt-2">
-+                <div className="absolute top-[480px]">0800</div>
-+                <div className="absolute top-[540px]">0900</div>
-+                <div className="absolute top-[600px] text-cyber-cyan font-bold">1000</div>
-+                <div className="absolute top-[660px]">1100</div>
-+                <div className="absolute top-[720px]">1200</div>
-+                <div className="absolute top-[780px]">1300</div>
-+                <div className="absolute top-[840px]">1400</div>
-+                <div className="absolute top-[900px]">1500</div>
-+                <div className="absolute top-[960px]">1600</div>
-+                <div className="absolute top-[1020px]">1700</div>
-+              </div>
-+            </div>
-+            <div className="flex-1 relative">
-+              <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)", backgroundSize: "100% 60px" }}></div>
-+              <div className="absolute top-[615px] left-0 w-full flex items-center z-40 pointer-events-none">
-+                <div className="absolute -left-1.5 size-3 bg-cyber-magenta shadow-[0_0_10px_#ff0055] rotate-45"></div>
-+                <div className="h-[1px] w-full bg-cyber-magenta shadow-[0_0_8px_#ff0055]"></div>
-+                <div className="absolute right-0 bg-cyber-magenta text-black text-[10px] font-bold px-1 font-mono">NOW</div>
-+              </div>
-+              <div className="absolute top-[540px] left-4 right-12 h-[120px] group cursor-pointer hover:z-30 transition-all cyber-ribbon">
-+                <div className="absolute inset-0 bg-cyber-magenta/10 border-l-4 border-cyber-magenta backdrop-blur-sm transition-all group-hover:bg-cyber-magenta/20"></div>
-+                <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')]"></div>
-+                <div className="relative p-4 h-full flex flex-col justify-between pl-8">
-+                  <div>
-+                    <h3 className="text-white font-bold text-xl uppercase tracking-wider font-display drop-shadow-md">Project Alpha: Deep Work</h3>
-+                    <p className="text-cyber-magenta text-sm mt-1 font-mono tracking-tight">&lt;MODE: FOCUS_LOCK /&gt;</p>
-+                  </div>
-+                  <div className="flex items-center gap-4">
-+                    <span className="bg-black/60 text-cyber-magenta text-xs px-2 py-0.5 border border-cyber-magenta/30 font-mono">0900 - 1100</span>
-+                    <div className="flex -space-x-3">
-+                      <div className="size-8 border-2 border-black bg-slate-700 bg-center bg-cover grayscale group-hover:grayscale-0 transition-all" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHkkUmEf5zaPERwUWT8VHLpf9k0Q5xGOxYLvQrqcWiWEQ7QqdIrugSUrhvAF0GQHujf-P26M91ZuSoNPKMX0uadGHNywX6cWZuqgav1jmO7Wvp9Pm82_vUk-5z8djgN3QITCNJOIT91CCjADPAxwxCqmRMulsoTdfNt-C-kTBXxkwSoF0jrmVzj0V7y4qft9P63ihcuJfwLJYy2sTnUu4xmPU7ihVls-qdnKoEZ0kPV9TC8Eq4SUlK71CuweR3fIZcR_spRY28rD4')", clipPath: "polygon(20% 0, 100% 0, 80% 100%, 0% 100%)" }}></div>
-+                    </div>
-+                  </div>
-+                </div>
-+              </div>
-+              <div className="absolute top-[690px] left-8 right-1/2 mr-4 h-[60px] group cursor-pointer hover:z-30 cyber-ribbon-reverse transition-transform hover:-translate-y-1">
-+                <div className="absolute inset-0 bg-cyber-cyan/10 border-r-4 border-cyber-cyan backdrop-blur-sm group-hover:bg-cyber-cyan/20"></div>
-+                <div className="relative px-6 py-2 h-full flex flex-col justify-center text-right pr-8">
-+                  <h3 className="text-white font-bold text-sm uppercase tracking-wide font-display">Weekly Design Sync</h3>
-+                  <p className="text-cyber-cyan/70 text-xs font-mono">NET_ID: ZOOM_882</p>
-+                </div>
-+              </div>
-+              <div className="absolute top-[720px] left-1/2 right-4 ml-[-20px] h-[60px] group cursor-pointer hover:z-30 cyber-ribbon transition-transform hover:-translate-y-1 z-20">
-+                <div className="absolute inset-0 bg-cyber-yellow/10 border-l-4 border-cyber-yellow backdrop-blur-sm group-hover:bg-cyber-yellow/20"></div>
-+                <div className="relative px-6 py-2 h-full flex flex-col justify-center pl-8">
-+                  <h3 className="text-white font-bold text-sm uppercase tracking-wide font-display">Lunch with Client</h3>
-+                  <p className="text-cyber-yellow/70 text-xs font-mono">LOC: DOWNTOWN_SECTOR</p>
-+                </div>
-+              </div>
-+              <div className="absolute top-[840px] left-6 right-10 h-[150px] group cursor-pointer hover:z-30 cyber-ribbon transition-all hover:scale-[1.01]">
-+                <div className="absolute inset-0 bg-gradient-to-r from-cyber-cyan/20 to-blue-900/40 border-l-4 border-cyber-cyan backdrop-blur-md"></div>
-+                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, rgba(0,240,255,1) 1px, transparent 0)", backgroundSize: "20px 20px" }}></div>
-+                <div className="relative p-5 h-full flex flex-col justify-between pl-10">
-+                  <div>
-+                    <div className="flex justify-between items-start">
-+                      <h3 className="text-white font-bold text-xl uppercase tracking-wider font-display">Frontend Impl.</h3>
-+                      <span className="text-cyber-cyan text-[10px] font-mono border border-cyber-cyan px-1 animate-pulse">RUNNING</span>
-+                    </div>
-+                    <p className="text-cyan-200/60 text-sm mt-1 font-mono">SYS.VER: 2.0 // RIBBON_UI</p>
-+                  </div>
-+                  <div className="w-full bg-black/50 h-1 mt-4 mb-auto relative overflow-hidden">
-+                    <div className="absolute top-0 left-0 h-full w-[65%] bg-cyber-cyan shadow-[0_0_10px_#00f0ff]"></div>
-+                  </div>
-+                  <div className="flex items-center gap-3 mt-2">
-+                    <div className="flex -space-x-2">
-+                      <div className="size-6 border border-cyber-cyan bg-slate-800 bg-center bg-cover grayscale group-hover:grayscale-0" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYcrXwUFdeiewT9s5Kvnqqd6alj_zNs-eg8kBL98eTl7fJDgbZFU5c3rmS5McE-vsiq_hWWNv1fYgKlYE2oRLzFJI4-5H1WNJAho_LZt26G_11KIYzMKsc82Svc1Vb9LfKJczyqp1A71czgwlZ_1g4L_mXe_nHiuYCULcq9bkuLS3E85_EfsjPDZ2er7rwfAvD3ryLGZjfBnVkpwe5KHmzjN8MZI37kZg2LJBj6pcKvv7EJFFjpl3RbOhfcASeuL3-YyJdhkUGim8')", transform: "skewX(-15deg)" }}></div>
-+                      <div className="size-6 border border-cyber-cyan bg-slate-800 bg-center bg-cover grayscale group-hover:grayscale-0" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrPe6pUPkfZYi2EAsikd2c3ghaxamxnjRnCIi9lLNQ3sffHMz7Po4kK185EPr8E-RmRF4KsNBmhdN97C_XtcB60ivAvtBrRmAJHScEKKu34ml-A9A-93bvbBygKOdAmchMcqkBDx0kXikv10tS69vk18Owl8c-6lKktU8AT2LxufdNtlXs3CWnisr9jATJoam42f5KEO7SXlsT6UuvkyRrDMAYIRJUUcM-zvMovt1RuykJtkSz72aPpTgEwyJV0t_zW7GT2YwNdfs')", transform: "skewX(-15deg)" }}></div>
-+                    </div>
-+                    <div className="text-[10px] text-cyber-cyan font-mono">STATUS: COMPILING...</div>
-+                  </div>
-+                </div>
-+              </div>
-+              <div className="absolute top-[1020px] left-4 right-8 h-[60px] border border-dashed border-white/20 bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none skew-x-[-10deg]">
-+                <span className="text-white/30 text-xs font-mono tracking-widest">[ SLOT AVAILABLE: 1700 ]</span>
-+              </div>
-+            </div>
-+          </div>
 +        </div>
-+      </main>
++    </div>
 +  );
 +}
++
+ export default function LoomBoard() {
++  const threads = useStore((state) => state.threads);
++  const activeThreads = threads.filter((t) => t.startTime !== null);
++  const { setNodeRef } = useDroppable({
++    id: 'loom-board',
++  });
++
++  const generateMarkers = () => {
++    const markers = [];
++    for (let i = 0; i < 24; i++) {
++      markers.push(
++        <div key={i} className={`absolute w-full text-right pr-4 text-xs font-mono ${i >= 8 && i <= 17 ? 'text-white/40' : 'text-white/10'}`} style={{ top: `${i * 60}px` }}>
++          {i.toString().padStart(2, '0')}00
++        </div>
++      );
++    }
++    return markers;
++  };
++
++    const handleSeverThreads = () => {
++        const svgContent = `
++            <svg xmlns="http://www.w3.org/2000/svg" width="800" height="1440" viewBox="0 0 800 1440" style="background-color: #05050a; font-family: monospace;">
++                <defs>
++                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
++                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(0, 240, 255, 0.1)" stroke-width="1"/>
++                    </pattern>
++                </defs>
++                <rect width="100%" height="100%" fill="url(#grid)" />
++                ${activeThreads.map(t => {
++                    const color = t.category === 'cyber-cyan' ? '#00f0ff' : t.category === 'cyber-magenta' ? '#ff0055' : '#fcee0a';
++                    return `
++                        <g transform="translate(100, ${t.startTime})">
++                            <rect width="600" height="${t.duration}" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="2" />
++                            <text x="10" y="20" fill="white" font-size="14" font-weight="bold">${t.title}</text>
++                            <text x="10" y="40" fill="${color}" font-size="10">${formatTime(t.startTime!)} - ${formatTime(t.startTime! + t.duration)}</text>
++                        </g>
++                    `;
++                }).join('')}
++            </svg>
++        `;
++        const blob = new Blob([svgContent], { type: 'image/svg+xml' });
++        const url = URL.createObjectURL(blob);
++        const a = document.createElement('a');
++        a.href = url;
++        a.download = `loominal-export-${new Date().toISOString().split('T')[0]}.svg`;
++        a.click();
++        URL.revokeObjectURL(url);
++    };
++
+   return (
+     <main className="flex-1 flex flex-col h-full bg-deep-void relative overflow-hidden">
+         <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
+@@ -23,7 +116,10 @@ export default function LoomBoard() {
+               <span className="material-symbols-outlined text-white/40 text-sm skew-x-[12deg]">search</span>
+               <input className="bg-transparent border-none text-sm text-white placeholder:text-white/30 focus:ring-0 w-48 p-0 font-mono skew-x-[12deg]" placeholder="SCAN_THREADS..." type="text" />
+             </div>
+-            <button className="relative px-6 py-2 bg-transparent text-cyber-yellow text-sm font-bold font-mono tracking-widest uppercase border border-cyber-yellow/30 hover:bg-cyber-yellow/10 hover:border-cyber-yellow hover:shadow-[0_0_15px_rgba(252,238,10,0.4)] transition-all group overflow-hidden">
++            <button 
++                onClick={handleSeverThreads}
++                className="relative px-6 py-2 bg-transparent text-cyber-yellow text-sm font-bold font-mono tracking-widest uppercase border border-cyber-yellow/30 hover:bg-cyber-yellow/10 hover:border-cyber-yellow hover:shadow-[0_0_15px_rgba(252,238,10,0.4)] transition-all group overflow-hidden"
++            >
+               <span className="relative z-10 flex items-center gap-2">
+                 <span className="material-symbols-outlined text-lg">content_cut</span>
+                 Sever Threads
+@@ -35,82 +131,24 @@ export default function LoomBoard() {
+         <div className="flex-1 overflow-y-auto cyber-scrollbar relative">
+           <div className="flex min-h-[1440px] relative pb-20">
+             <div className="w-20 flex-shrink-0 border-r border-white/10 bg-panel-bg z-10">
+-              <div className="relative h-full text-xs font-mono text-white/40 text-right pr-4 pt-2">
+-                <div className="absolute top-[480px]">0800</div>
+-                <div className="absolute top-[540px]">0900</div>
+-                <div className="absolute top-[600px] text-cyber-cyan font-bold">1000</div>
+-                <div className="absolute top-[660px]">1100</div>
+-                <div className="absolute top-[720px]">1200</div>
+-                <div className="absolute top-[780px]">1300</div>
+-                <div className="absolute top-[840px]">1400</div>
+-                <div className="absolute top-[900px]">1500</div>
+-                <div className="absolute top-[960px]">1600</div>
+-                <div className="absolute top-[1020px]">1700</div>
++              <div className="relative h-full pt-2">
++                {generateMarkers()}
+               </div>
+             </div>
+-            <div className="flex-1 relative">
++            <div ref={setNodeRef} id="timeline-container" className="flex-1 relative">
+               <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)", backgroundSize: "100% 60px" }}></div>
++              
++              {/* NOW Indicator (Hardcoded for visual, could be dynamic) */}
+               <div className="absolute top-[615px] left-0 w-full flex items-center z-40 pointer-events-none">
+                 <div className="absolute -left-1.5 size-3 bg-cyber-magenta shadow-[0_0_10px_#ff0055] rotate-45"></div>
+                 <div className="h-[1px] w-full bg-cyber-magenta shadow-[0_0_8px_#ff0055]"></div>
+                 <div className="absolute right-0 bg-cyber-magenta text-black text-[10px] font-bold px-1 font-mono">NOW</div>
+               </div>
+-              <div className="absolute top-[540px] left-4 right-12 h-[120px] group cursor-pointer hover:z-30 transition-all cyber-ribbon">
+-                <div className="absolute inset-0 bg-cyber-magenta/10 border-l-4 border-cyber-magenta backdrop-blur-sm transition-all group-hover:bg-cyber-magenta/20"></div>
+-                <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')]"></div>
+-                <div className="relative p-4 h-full flex flex-col justify-between pl-8">
+-                  <div>
+-                    <h3 className="text-white font-bold text-xl uppercase tracking-wider font-display drop-shadow-md">Project Alpha: Deep Work</h3>
+-                    <p className="text-cyber-magenta text-sm mt-1 font-mono tracking-tight">&lt;MODE: FOCUS_LOCK /&gt;</p>
+-                  </div>
+-                  <div className="flex items-center gap-4">
+-                    <span className="bg-black/60 text-cyber-magenta text-xs px-2 py-0.5 border border-cyber-magenta/30 font-mono">0900 - 1100</span>
+-                    <div className="flex -space-x-3">
+-                      <div className="size-8 border-2 border-black bg-slate-700 bg-center bg-cover grayscale group-hover:grayscale-0 transition-all" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHkkUmEf5zaPERwUWT8VHLpf9k0Q5xGOxYLvQrqcWiWEQ7QqdIrugSUrhvAF0GQHujf-P26M91ZuSoNPKMX0uadGHNywX6cWZuqgav1jmO7Wvp9Pm82_vUk-5z8djgN3QITCNJOIT91CCjADPAxwxCqmRMulsoTdfNt-C-kTBXxkwSoF0jrmVzj0V7y4qft9P63ihcuJfwLJYy2sTnUu4xmPU7ihVls-qdnKoEZ0kPV9TC8Eq4SUlK71CuweR3fIZcR_spRY28rD4')", clipPath: "polygon(20% 0, 100% 0, 80% 100%, 0% 100%)" }}></div>
+-                    </div>
+-                  </div>
+-                </div>
+-              </div>
+-              <div className="absolute top-[690px] left-8 right-1/2 mr-4 h-[60px] group cursor-pointer hover:z-30 cyber-ribbon-reverse transition-transform hover:-translate-y-1">
+-                <div className="absolute inset-0 bg-cyber-cyan/10 border-r-4 border-cyber-cyan backdrop-blur-sm group-hover:bg-cyber-cyan/20"></div>
+-                <div className="relative px-6 py-2 h-full flex flex-col justify-center text-right pr-8">
+-                  <h3 className="text-white font-bold text-sm uppercase tracking-wide font-display">Weekly Design Sync</h3>
+-                  <p className="text-cyber-cyan/70 text-xs font-mono">NET_ID: ZOOM_882</p>
+-                </div>
+-              </div>
+-              <div className="absolute top-[720px] left-1/2 right-4 ml-[-20px] h-[60px] group cursor-pointer hover:z-30 cyber-ribbon transition-transform hover:-translate-y-1 z-20">
+-                <div className="absolute inset-0 bg-cyber-yellow/10 border-l-4 border-cyber-yellow backdrop-blur-sm group-hover:bg-cyber-yellow/20"></div>
+-                <div className="relative px-6 py-2 h-full flex flex-col justify-center pl-8">
+-                  <h3 className="text-white font-bold text-sm uppercase tracking-wide font-display">Lunch with Client</h3>
+-                  <p className="text-cyber-yellow/70 text-xs font-mono">LOC: DOWNTOWN_SECTOR</p>
+-                </div>
+-              </div>
+-              <div className="absolute top-[840px] left-6 right-10 h-[150px] group cursor-pointer hover:z-30 cyber-ribbon transition-all hover:scale-[1.01]">
+-                <div className="absolute inset-0 bg-gradient-to-r from-cyber-cyan/20 to-blue-900/40 border-l-4 border-cyber-cyan backdrop-blur-md"></div>
+-                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, rgba(0,240,255,1) 1px, transparent 0)", backgroundSize: "20px 20px" }}></div>
+-                <div className="relative p-5 h-full flex flex-col justify-between pl-10">
+-                  <div>
+-                    <div className="flex justify-between items-start">
+-                      <h3 className="text-white font-bold text-xl uppercase tracking-wider font-display">Frontend Impl.</h3>
+-                      <span className="text-cyber-cyan text-[10px] font-mono border border-cyber-cyan px-1 animate-pulse">RUNNING</span>
+-                    </div>
+-                    <p className="text-cyan-200/60 text-sm mt-1 font-mono">SYS.VER: 2.0 // RIBBON_UI</p>
+-                  </div>
+-                  <div className="w-full bg-black/50 h-1 mt-4 mb-auto relative overflow-hidden">
+-                    <div className="absolute top-0 left-0 h-full w-[65%] bg-cyber-cyan shadow-[0_0_10px_#00f0ff]"></div>
+-                  </div>
+-                  <div className="flex items-center gap-3 mt-2">
+-                    <div className="flex -space-x-2">
+-                      <div className="size-6 border border-cyber-cyan bg-slate-800 bg-center bg-cover grayscale group-hover:grayscale-0" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYcrXwUFdeiewT9s5Kvnqqd6alj_zNs-eg8kBL98eTl7fJDgbZFU5c3rmS5McE-vsiq_hWWNv1fYgKlYE2oRLzFJI4-5H1WNJAho_LZt26G_11KIYzMKsc82Svc1Vb9LfKJczyqp1A71czgwlZ_1g4L_mXe_nHiuYCULcq9bkuLS3E85_EfsjPDZ2er7rwfAvD3ryLGZjfBnVkpwe5KHmzjN8MZI37kZg2LJBj6pcKvv7EJFFjpl3RbOhfcASeuL3-YyJdhkUGim8')", transform: "skewX(-15deg)" }}></div>
+-                      <div className="size-6 border border-cyber-cyan bg-slate-800 bg-center bg-cover grayscale group-hover:grayscale-0" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrPe6pUPkfZYi2EAsikd2c3ghaxamxnjRnCIi9lLNQ3sffHMz7Po4kK185EPr8E-RmRF4KsNBmhdN97C_XtcB60ivAvtBrRmAJHScEKKu34ml-A9A-93bvbBygKOdAmchMcqkBDx0kXikv10tS69vk18Owl8c-6lKktU8AT2LxufdNtlXs3CWnisr9jATJoam42f5KEO7SXlsT6UuvkyRrDMAYIRJUUcM-zvMovt1RuykJtkSz72aPpTgEwyJV0t_zW7GT2YwNdfs')", transform: "skewX(-15deg)" }}></div>
+-                    </div>
+-                    <div className="text-[10px] text-cyber-cyan font-mono">STATUS: COMPILING...</div>
+-                  </div>
+-                </div>
+-              </div>
+-              <div className="absolute top-[1020px] left-4 right-8 h-[60px] border border-dashed border-white/20 bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none skew-x-[-10deg]">
+-                <span className="text-white/30 text-xs font-mono tracking-widest">[ SLOT AVAILABLE: 1700 ]</span>
+-              </div>
++
++              {activeThreads.map(thread => (
++                  <BoardThread key={thread.id} thread={thread} />
++              ))}
++              
+             </div>
+           </div>
+         </div>
 diff --git a/src/components/ThreadSpool.tsx b/src/components/ThreadSpool.tsx
-new file mode 100644
-index 0000000..452879f
---- /dev/null
+index 452879f..3796ede 100644
+--- a/src/components/ThreadSpool.tsx
 +++ b/src/components/ThreadSpool.tsx
-@@ -0,0 +1,78 @@
-+export default function ThreadSpool() {
+@@ -1,22 +1,95 @@
++import { useState } from 'react';
++import { useStore, type Thread } from '../store';
++import { useDraggable } from '@dnd-kit/core';
++
++function DraggableThread({ thread }: { thread: Thread }) {
++  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
++    id: thread.id,
++    data: { thread },
++  });
++
++  const style = transform ? {
++    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
++    zIndex: 1000,
++    opacity: isDragging ? 0.8 : 1,
++  } : undefined;
++
++  const borderColor = {
++    'cyber-cyan': 'border-cyber-cyan',
++    'cyber-magenta': 'border-cyber-magenta',
++    'cyber-yellow': 'border-cyber-yellow',
++  }[thread.category];
++
++  const groupHoverColor = {
++    'cyber-cyan': 'group-hover:text-cyber-cyan',
++    'cyber-magenta': 'group-hover:text-cyber-magenta',
++    'cyber-yellow': 'group-hover:text-cyber-yellow',
++  }[thread.category];
++
 +  return (
-+    <aside className="thread-spool h-full bg-panel-bg border-r border-panel-border flex flex-col z-50 shadow-[4px_0_24px_rgba(0,0,0,0.5)] absolute md:relative">
-+      <div className="w-16 flex flex-col items-center py-6 gap-8 bg-panel-bg/50 backdrop-blur-sm z-20 absolute top-0 bottom-0 left-0 border-r border-white/5">
-+        <div className="size-10 flex items-center justify-center text-cyber-cyan">
-+          <span className="material-symbols-outlined text-3xl">all_inclusive</span>
-+        </div>
-+        <div className="flex flex-col gap-6 mt-4 w-full items-center">
-+          <button className="size-10 flex items-center justify-center hover:text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors rounded-none border border-transparent hover:border-cyber-cyan/30">
-+            <span className="material-symbols-outlined">add</span>
-+          </button>
-+          <div className="w-8 h-px bg-white/10"></div>
-+          <button className="size-10 flex items-center justify-center text-cyber-magenta hover:text-white hover:bg-cyber-magenta/20 transition-colors">
-+            <span className="material-symbols-outlined">work</span>
-+          </button>
-+          <button className="size-10 flex items-center justify-center text-cyber-cyan hover:text-white hover:bg-cyber-cyan/20 transition-colors">
-+            <span className="material-symbols-outlined">groups</span>
-+          </button>
-+          <button className="size-10 flex items-center justify-center text-cyber-yellow hover:text-white hover:bg-cyber-yellow/20 transition-colors">
-+            <span className="material-symbols-outlined">fitness_center</span>
-+          </button>
-+        </div>
-+        <div className="mt-auto mb-4">
-+          <button className="size-10 flex items-center justify-center hover:text-cyber-cyan transition-colors">
-+            <span className="material-symbols-outlined">settings</span>
-+          </button>
-+        </div>
++    <div
++      ref={setNodeRef}
++      style={style}
++      {...listeners}
++      {...attributes}
++      className={`group relative p-3 bg-white/5 border-l-2 ${borderColor} hover:bg-white/10 cursor-grab active:cursor-grabbing transition-all flex gap-3 items-center`}
++    >
++      <div className="flex-1">
++        <h4 className="text-sm font-bold text-white font-display uppercase tracking-wide">{thread.title}</h4>
++        <p className="text-xs text-white/40 font-mono mt-1">{thread.duration} MIN // {thread.description || 'TASK'}</p>
 +      </div>
-+      <div className="pl-16 w-[320px] h-full flex flex-col bg-panel-bg border-r border-cyber-cyan/20">
-+        <div className="spool-content h-full flex flex-col p-6">
-+          <div className="mb-8 border-b border-white/10 pb-4">
-+            <h1 className="text-white text-2xl font-bold uppercase tracking-widest font-display glitch-text cursor-default">Loominal</h1>
-+            <p className="text-cyber-cyan text-xs font-mono tracking-tighter">SYS.THREAD_SPOOL.V2</p>
-+          </div>
-+          <div className="flex flex-col gap-4 mb-8">
-+            <label className="text-cyber-cyan text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2">
-+              <span className="w-2 h-2 bg-cyber-cyan"></span> Initialize Thread
-+            </label>
-+            <div className="relative">
-+              <textarea className="w-full bg-black/40 border border-white/20 p-3 text-sm font-mono text-white placeholder:text-white/20 focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-all resize-none h-24 rounded-none corner-cut" placeholder="INPUT_TASK_DATA..."></textarea>
-+              <div className="absolute -right-1 -bottom-1 w-3 h-3 border-r border-b border-cyber-cyan"></div>
-+            </div>
-+            <button className="w-full py-2 bg-cyber-cyan/10 border border-cyber-cyan/50 text-cyber-cyan font-mono text-xs hover:bg-cyber-cyan hover:text-black transition-all uppercase tracking-widest font-bold flex items-center justify-center gap-2 group">
-+              Execute <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
-+            </button>
-+          </div>
-+          <div className="flex flex-col gap-4 flex-1 overflow-y-auto cyber-scrollbar pr-2">
-+            <div className="flex items-center justify-between border-b border-white/10 pb-2">
-+              <span className="text-white/50 text-xs font-mono uppercase">Buffer Zone</span>
-+              <span className="text-cyber-cyan text-xs font-mono">[3]</span>
-+            </div>
-+            <div className="group relative p-3 bg-white/5 border-l-2 border-cyber-magenta hover:bg-white/10 cursor-grab active:cursor-grabbing transition-all flex gap-3 items-center clip-path-polygon">
-+              <div className="flex-1">
-+                <h4 className="text-sm font-bold text-white font-display uppercase tracking-wide">Q3 Strategy Review</h4>
-+                <p className="text-xs text-white/40 font-mono mt-1">90 MIN // DEEP_WORK</p>
-+              </div>
-+              <span className="material-symbols-outlined text-white/20 group-hover:text-cyber-magenta">drag_indicator</span>
-+            </div>
-+            <div className="group relative p-3 bg-white/5 border-l-2 border-cyber-cyan hover:bg-white/10 cursor-grab active:cursor-grabbing transition-all flex gap-3 items-center">
-+              <div className="flex-1">
-+                <h4 className="text-sm font-bold text-white font-display uppercase tracking-wide">Client Sync: Alpha</h4>
-+                <p className="text-xs text-white/40 font-mono mt-1">30 MIN // COMMS</p>
-+              </div>
-+              <span className="material-symbols-outlined text-white/20 group-hover:text-cyber-cyan">drag_indicator</span>
-+            </div>
-+            <div className="group relative p-3 bg-white/5 border-l-2 border-cyber-yellow hover:bg-white/10 cursor-grab active:cursor-grabbing transition-all flex gap-3 items-center">
-+              <div className="flex-1">
-+                <h4 className="text-sm font-bold text-white font-display uppercase tracking-wide">Gym Session</h4>
-+                <p className="text-xs text-white/40 font-mono mt-1">60 MIN // BIO_MAINTENANCE</p>
-+              </div>
-+              <span className="material-symbols-outlined text-white/20 group-hover:text-cyber-yellow">drag_indicator</span>
-+            </div>
-+          </div>
-+        </div>
-+      </div>
-+    </aside>
++      <span className={`material-symbols-outlined text-white/20 ${groupHoverColor}`}>drag_indicator</span>
++    </div>
 +  );
 +}
-diff --git a/src/index.css b/src/index.css
-index 350ad27..ab2ad72 100644
---- a/src/index.css
-+++ b/src/index.css
-@@ -1,104 +1,97 @@
- @import "tailwindcss";
- 
--@custom-variant dark (&:where(.dark, .dark *));
--
- @theme {
--  --color-brut-bg: #0a0a0f;
--  --color-brut-panel: #111116;
--  --color-brut-border: #333333;
--  --color-brut-accent: #eab308;
--  --color-brut-text: #ffffff;
--  --color-brut-text-muted: #888888;
--  --color-brut-red: #ef4444;
--  --color-brut-blue: #3b82f6;
--
--  --font-sans: "Inter", "Helvetica", "Arial", sans-serif;
--}
--
--/* Custom Utilities */
--@utility no-scrollbar {
--  -ms-overflow-style: none;
--  scrollbar-width: none;
--  &::-webkit-scrollbar {
--    display: none;
--  }
--}
--
--@utility brut-border {
--  border: 2px solid #333;
--}
-+  --color-cyber-cyan: #00f0ff;
-+  --color-cyber-magenta: #ff0055;
-+  --color-cyber-yellow: #fcee0a;
-+  --color-deep-void: #05050a;
-+  --color-grid-line: #00f0ff20;
-+  --color-panel-bg: #0a0a12;
-+  --color-panel-border: #1a1a2e;
- 
--@utility brut-border-r {
--  border-right: 2px solid #333;
--}
-+  --font-display: "Rajdhani", sans-serif;
-+  --font-mono: "Space Mono", monospace;
- 
--@utility brut-border-b {
--  border-bottom: 2px solid #333;
--}
-+  --background-image-cyber-grid: linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
- 
--@utility brut-border-l {
--  border-left: 2px solid #333;
-+  --shadow-neon-cyan: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
-+  --shadow-neon-magenta: 0 0 10px rgba(255, 0, 85, 0.5), 0 0 20px rgba(255, 0, 85, 0.3);
- }
- 
--@utility brut-border-t {
--  border-top: 2px solid #333;
--}
--
--@utility connector-line {
--  stroke-dasharray: 8, 8;
--  stroke-width: 2px;
--}
--
--@utility drag-thread {
--  stroke-dasharray: 10, 10;
--  stroke-width: 4px;
--  animation: flow 20s linear infinite;
--}
--
--@keyframes flow {
--  from { stroke-dashoffset: 200; }
--  to { stroke-dashoffset: 0; }
--}
--
--/* Tiptap Editor Styles */
--.tiptap-editor p {
--  margin-bottom: 1em;
--  line-height: 1.4;
--  color: #d4d4d4;
--  font-weight: 400;
--  font-size: 1.1rem;
--}
-+/* Custom Utilities */
-+@layer utilities {
-+  .cyber-scrollbar::-webkit-scrollbar {
-+    width: 4px;
-+  }
-+  .cyber-scrollbar::-webkit-scrollbar-track {
-+    background: #05050a;
-+  }
-+  .cyber-scrollbar::-webkit-scrollbar-thumb {
-+    background: #00f0ff;
-+    border-radius: 0;
-+  }
- 
--.tiptap-editor h2 {
--  font-weight: 800;
--  font-size: 1.75rem;
--  margin-top: 1.5em;
--  margin-bottom: 0.5em;
--  color: #fff;
--  text-transform: uppercase;
--  letter-spacing: -0.02em;
--  border-bottom: 2px solid #333;
--  padding-bottom: 0.25em;
-+  .cyber-ribbon {
-+    clip-path: polygon(
-+        10px 0%, 100% 0%, 
-+        calc(100% - 10px) 100%, 0% 100%
-+    );
-+  }
-+  .cyber-ribbon-reverse {
-+    clip-path: polygon(
-+        0% 0%, calc(100% - 10px) 0%, 
-+        100% 100%, 10px 100%
-+    );
-+  }
-+  .corner-cut {
-+    clip-path: polygon(
-+        20px 0, 100% 0, 
-+        100% calc(100% - 20px), calc(100% - 20px) 100%, 
-+        0 100%, 0 20px
-+    );
-+  }
-+  .grid-bg {
-+    background-size: 40px 40px;
-+    background-image: 
-+        linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-+        linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
-+  }
-+  .thread-spool {
-+    width: 64px;
-+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-+    overflow: hidden;
-+  }
-+  .thread-spool:hover {
-+    width: 320px;
-+  }
-+  .thread-spool:hover .spool-content {
-+    opacity: 1;
-+    transform: translateX(0);
-+  }
-+  .spool-content {
-+    opacity: 0;
-+    transform: translateX(-20px);
-+    transition: all 0.2s ease 0.1s;
-+    white-space: nowrap;
-+  }
-+  .glitch-text:hover {
-+    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-+    color: #00f0ff;
-+  }
- }
- 
--.tiptap-editor blockquote {
--  border-left: 4px solid #eab308;
--  background: #1a1a1e;
--  padding: 1rem;
--  font-style: italic;
--  color: #fff;
--  margin-bottom: 1.5em;
--  font-weight: 500;
-+@keyframes glitch {
-+  0% { transform: translate(0) }
-+  20% { transform: translate(-2px, 2px) }
-+  40% { transform: translate(-2px, -2px) }
-+  60% { transform: translate(2px, 2px) }
-+  80% { transform: translate(2px, -2px) }
-+  100% { transform: translate(0) }
- }
- 
- /* Base Styles */
- body {
--  font-family: var(--font-sans);
--  background-color: #050508;
--  color: var(--color-brut-text);
--  @apply h-screen w-full overflow-hidden flex relative antialiased selection:bg-yellow-500 selection:text-black;
--}
--
--#root {
--  @apply h-full w-full;
-+  font-family: var(--font-display);
-+  background-color: var(--color-deep-void);
-+  @apply text-slate-300 h-screen overflow-hidden flex flex-row selection:bg-cyber-cyan selection:text-black;
- }
++
+ export default function ThreadSpool() {
++  const threads = useStore((state) => state.threads);
++  const addThread = useStore((state) => state.addThread);
++  const bufferedThreads = threads.filter((t) => t.startTime === null);
++
++  const [newTitle, setNewTitle] = useState('');
++  const [newDuration, setNewDuration] = useState('60');
++  const [newCategory, setNewCategory] = useState<Thread['category']>('cyber-cyan');
++
++  const handleAddThread = () => {
++    if (!newTitle.trim()) return;
++    addThread({
++      title: newTitle,
++      duration: parseInt(newDuration, 10) || 60,
++      category: newCategory,
++      startTime: null,
++      description: 'NEW_THREAD',
++    });
++    setNewTitle('');
++    setNewDuration('60');
++  };
++
++  const indicatorColor = {
++    'cyber-cyan': 'bg-cyber-cyan',
++    'cyber-magenta': 'bg-cyber-magenta',
++    'cyber-yellow': 'bg-cyber-yellow',
++  }[newCategory];
++
+   return (
+     <aside className="thread-spool h-full bg-panel-bg border-r border-panel-border flex flex-col z-50 shadow-[4px_0_24px_rgba(0,0,0,0.5)] absolute md:relative">
++       {/* Left Icon Bar */}
+       <div className="w-16 flex flex-col items-center py-6 gap-8 bg-panel-bg/50 backdrop-blur-sm z-20 absolute top-0 bottom-0 left-0 border-r border-white/5">
+         <div className="size-10 flex items-center justify-center text-cyber-cyan">
+           <span className="material-symbols-outlined text-3xl">all_inclusive</span>
+         </div>
+         <div className="flex flex-col gap-6 mt-4 w-full items-center">
+-          <button className="size-10 flex items-center justify-center hover:text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors rounded-none border border-transparent hover:border-cyber-cyan/30">
++          <button onClick={() => setNewCategory('cyber-cyan')} className={`size-10 flex items-center justify-center transition-colors rounded-none border border-transparent ${newCategory === 'cyber-cyan' ? 'text-cyber-cyan border-cyber-cyan/30 bg-cyber-cyan/10' : 'text-white/40 hover:text-cyber-cyan'}`}>
+             <span className="material-symbols-outlined">add</span>
+           </button>
+           <div className="w-8 h-px bg-white/10"></div>
+-          <button className="size-10 flex items-center justify-center text-cyber-magenta hover:text-white hover:bg-cyber-magenta/20 transition-colors">
++          <button onClick={() => setNewCategory('cyber-magenta')} className={`size-10 flex items-center justify-center transition-colors ${newCategory === 'cyber-magenta' ? 'text-cyber-magenta bg-cyber-magenta/20' : 'text-white/40 hover:text-cyber-magenta'}`}>
+             <span className="material-symbols-outlined">work</span>
+           </button>
+-          <button className="size-10 flex items-center justify-center text-cyber-cyan hover:text-white hover:bg-cyber-cyan/20 transition-colors">
++          <button onClick={() => setNewCategory('cyber-cyan')} className={`size-10 flex items-center justify-center transition-colors ${newCategory === 'cyber-cyan' ? 'text-cyber-cyan bg-cyber-cyan/20' : 'text-white/40 hover:text-cyber-cyan'}`}>
+             <span className="material-symbols-outlined">groups</span>
+           </button>
+-          <button className="size-10 flex items-center justify-center text-cyber-yellow hover:text-white hover:bg-cyber-yellow/20 transition-colors">
++           <button onClick={() => setNewCategory('cyber-yellow')} className={`size-10 flex items-center justify-center transition-colors ${newCategory === 'cyber-yellow' ? 'text-cyber-yellow bg-cyber-yellow/20' : 'text-white/40 hover:text-cyber-yellow'}`}>
+             <span className="material-symbols-outlined">fitness_center</span>
+           </button>
+         </div>
+@@ -26,50 +99,59 @@ export default function ThreadSpool() {
+           </button>
+         </div>
+       </div>
++
++      {/* Main Content */}
+       <div className="pl-16 w-[320px] h-full flex flex-col bg-panel-bg border-r border-cyber-cyan/20">
+         <div className="spool-content h-full flex flex-col p-6">
+           <div className="mb-8 border-b border-white/10 pb-4">
+             <h1 className="text-white text-2xl font-bold uppercase tracking-widest font-display glitch-text cursor-default">Loominal</h1>
+             <p className="text-cyber-cyan text-xs font-mono tracking-tighter">SYS.THREAD_SPOOL.V2</p>
+           </div>
++          
++          {/* Add Thread Form */}
+           <div className="flex flex-col gap-4 mb-8">
+             <label className="text-cyber-cyan text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2">
+-              <span className="w-2 h-2 bg-cyber-cyan"></span> Initialize Thread
++              <span className={`w-2 h-2 ${indicatorColor}`}></span> Initialize Thread
+             </label>
+             <div className="relative">
+-              <textarea className="w-full bg-black/40 border border-white/20 p-3 text-sm font-mono text-white placeholder:text-white/20 focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-all resize-none h-24 rounded-none corner-cut" placeholder="INPUT_TASK_DATA..."></textarea>
++              <input 
++                type="text"
++                value={newTitle}
++                onChange={(e) => setNewTitle(e.target.value)}
++                className="w-full bg-black/40 border border-white/20 p-3 text-sm font-mono text-white placeholder:text-white/20 focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-all rounded-none corner-cut mb-2" 
++                placeholder="TASK_TITLE..." 
++              />
++              <div className="flex gap-2">
++                  <input 
++                    type="number"
++                    value={newDuration}
++                    onChange={(e) => setNewDuration(e.target.value)}
++                    className="w-1/3 bg-black/40 border border-white/20 p-2 text-sm font-mono text-white placeholder:text-white/20 focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-all rounded-none" 
++                    placeholder="MIN" 
++                  />
++                  <div className="flex-1 flex items-center px-2 text-xs text-white/40 font-mono uppercase border border-white/10 bg-white/5">
++                    Mode: {newCategory.split('-')[1].toUpperCase()}
++                  </div>
++              </div>
+               <div className="absolute -right-1 -bottom-1 w-3 h-3 border-r border-b border-cyber-cyan"></div>
+             </div>
+-            <button className="w-full py-2 bg-cyber-cyan/10 border border-cyber-cyan/50 text-cyber-cyan font-mono text-xs hover:bg-cyber-cyan hover:text-black transition-all uppercase tracking-widest font-bold flex items-center justify-center gap-2 group">
++            <button 
++                onClick={handleAddThread}
++                className="w-full py-2 bg-cyber-cyan/10 border border-cyber-cyan/50 text-cyber-cyan font-mono text-xs hover:bg-cyber-cyan hover:text-black transition-all uppercase tracking-widest font-bold flex items-center justify-center gap-2 group"
++            >
+               Execute <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
+             </button>
+           </div>
++
++          {/* Buffered Threads List */}
+           <div className="flex flex-col gap-4 flex-1 overflow-y-auto cyber-scrollbar pr-2">
+             <div className="flex items-center justify-between border-b border-white/10 pb-2">
+               <span className="text-white/50 text-xs font-mono uppercase">Buffer Zone</span>
+-              <span className="text-cyber-cyan text-xs font-mono">[3]</span>
+-            </div>
+-            <div className="group relative p-3 bg-white/5 border-l-2 border-cyber-magenta hover:bg-white/10 cursor-grab active:cursor-grabbing transition-all flex gap-3 items-center clip-path-polygon">
+-              <div className="flex-1">
+-                <h4 className="text-sm font-bold text-white font-display uppercase tracking-wide">Q3 Strategy Review</h4>
+-                <p className="text-xs text-white/40 font-mono mt-1">90 MIN // DEEP_WORK</p>
+-              </div>
+-              <span className="material-symbols-outlined text-white/20 group-hover:text-cyber-magenta">drag_indicator</span>
+-            </div>
+-            <div className="group relative p-3 bg-white/5 border-l-2 border-cyber-cyan hover:bg-white/10 cursor-grab active:cursor-grabbing transition-all flex gap-3 items-center">
+-              <div className="flex-1">
+-                <h4 className="text-sm font-bold text-white font-display uppercase tracking-wide">Client Sync: Alpha</h4>
+-                <p className="text-xs text-white/40 font-mono mt-1">30 MIN // COMMS</p>
+-              </div>
+-              <span className="material-symbols-outlined text-white/20 group-hover:text-cyber-cyan">drag_indicator</span>
+-            </div>
+-            <div className="group relative p-3 bg-white/5 border-l-2 border-cyber-yellow hover:bg-white/10 cursor-grab active:cursor-grabbing transition-all flex gap-3 items-center">
+-              <div className="flex-1">
+-                <h4 className="text-sm font-bold text-white font-display uppercase tracking-wide">Gym Session</h4>
+-                <p className="text-xs text-white/40 font-mono mt-1">60 MIN // BIO_MAINTENANCE</p>
+-              </div>
+-              <span className="material-symbols-outlined text-white/20 group-hover:text-cyber-yellow">drag_indicator</span>
++              <span className="text-cyber-cyan text-xs font-mono">[{bufferedThreads.length}]</span>
+             </div>
++            {bufferedThreads.map(thread => (
++                <DraggableThread key={thread.id} thread={thread} />
++            ))}
+           </div>
+         </div>
+       </div>
+diff --git a/src/store.ts b/src/store.ts
+new file mode 100644
+index 0000000..dad351f
+--- /dev/null
++++ b/src/store.ts
+@@ -0,0 +1,104 @@
++import { create } from 'zustand';
++
++export interface Thread {
++  id: string;
++  title: string;
++  duration: number; // in minutes
++  category: 'cyber-cyan' | 'cyber-magenta' | 'cyber-yellow';
++  startTime: number | null; // minutes from 00:00, or null if in spool
++  description?: string;
++}
++
++interface Store {
++  threads: Thread[];
++  addThread: (thread: Omit<Thread, 'id'>) => void;
++  updateThread: (id: string, updates: Partial<Thread>) => void;
++  removeThread: (id: string) => void;
++  setThreadTime: (id: string, startTime: number | null) => void;
++  clearThreads: () => void;
++}
++
++export const useStore = create<Store>((set) => ({
++  threads: [
++    {
++      id: '1',
++      title: 'Q3 Strategy Review',
++      duration: 90,
++      category: 'cyber-magenta',
++      startTime: null,
++      description: '90 MIN // DEEP_WORK',
++    },
++    {
++      id: '2',
++      title: 'Client Sync: Alpha',
++      duration: 30,
++      category: 'cyber-cyan',
++      startTime: null,
++      description: '30 MIN // COMMS',
++    },
++    {
++      id: '3',
++      title: 'Gym Session',
++      duration: 60,
++      category: 'cyber-yellow',
++      startTime: null,
++      description: '60 MIN // BIO_MAINTENANCE',
++    },
++    {
++      id: '4',
++      title: 'Project Alpha: Deep Work',
++      duration: 120,
++      category: 'cyber-magenta',
++      startTime: 540, // 09:00
++      description: '<MODE: FOCUS_LOCK />',
++    },
++    {
++        id: '5',
++        title: 'Weekly Design Sync',
++        duration: 60,
++        category: 'cyber-cyan',
++        startTime: 690, // 11:30
++        description: 'NET_ID: ZOOM_882',
++    },
++    {
++        id: '6',
++        title: 'Lunch with Client',
++        duration: 60,
++        category: 'cyber-yellow',
++        startTime: 720, // 12:00
++        description: 'LOC: DOWNTOWN_SECTOR',
++    },
++    {
++        id: '7',
++        title: 'Frontend Impl.',
++        duration: 150,
++        category: 'cyber-cyan',
++        startTime: 840, // 14:00
++        description: 'SYS.VER: 2.0 // RIBBON_UI',
++    }
++  ],
++  addThread: (thread) =>
++    set((state) => ({
++      threads: [
++        ...state.threads,
++        { ...thread, id: crypto.randomUUID() },
++      ],
++    })),
++  updateThread: (id, updates) =>
++    set((state) => ({
++      threads: state.threads.map((t) =>
++        t.id === id ? { ...t, ...updates } : t
++      ),
++    })),
++  removeThread: (id) =>
++    set((state) => ({
++      threads: state.threads.filter((t) => t.id !== id),
++    })),
++  setThreadTime: (id, startTime) =>
++    set((state) => ({
++      threads: state.threads.map((t) =>
++        t.id === id ? { ...t, startTime } : t
++      ),
++    })),
++  clearThreads: () => set({ threads: [] }),
++}));
