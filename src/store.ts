@@ -7,6 +7,8 @@ export interface Thread {
   category: 'cyber-cyan' | 'cyber-magenta' | 'cyber-yellow';
   startTime: number | null; // minutes from 00:00, or null if in spool
   description?: string;
+  isCutTop?: boolean;
+  isCutBottom?: boolean;
 }
 
 interface Store {
@@ -15,6 +17,7 @@ interface Store {
   updateThread: (id: string, updates: Partial<Thread>) => void;
   removeThread: (id: string) => void;
   setThreadTime: (id: string, startTime: number | null) => void;
+  splitThread: (originalThreadId: string, splitTime: number) => void;
   clearThreads: () => void;
 }
 
@@ -100,5 +103,42 @@ export const useStore = create<Store>((set) => ({
         t.id === id ? { ...t, startTime } : t
       ),
     })),
+  splitThread: (originalThreadId, splitTime) =>
+    set((state) => {
+      const originalThread = state.threads.find((t) => t.id === originalThreadId);
+      if (!originalThread || originalThread.startTime === null) return state;
+
+      // Validate split time
+      if (splitTime <= originalThread.startTime || splitTime >= originalThread.startTime + originalThread.duration) {
+        return state;
+      }
+
+      const newDuration = splitTime - originalThread.startTime;
+      const remainingDuration = originalThread.duration - newDuration;
+
+      const newThread: Thread = {
+        ...originalThread,
+        id: crypto.randomUUID(),
+        startTime: splitTime,
+        duration: remainingDuration,
+        isCutTop: true,
+        isCutBottom: originalThread.isCutBottom,
+      };
+
+      return {
+        threads: [
+          ...state.threads.map((t) =>
+            t.id === originalThreadId 
+              ? { 
+                  ...t, 
+                  duration: newDuration, 
+                  isCutBottom: true 
+                } 
+              : t
+          ),
+          newThread,
+        ],
+      };
+    }),
   clearThreads: () => set({ threads: [] }),
 }));

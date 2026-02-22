@@ -95,3 +95,41 @@ body {
   background-color: var(--color-deep-void);
   @apply text-slate-300 h-screen overflow-hidden flex flex-row selection:bg-cyber-cyan selection:text-black;
 }
+
+/* Scalpel Mode */
+.cursor-scalpel {
+  cursor: none !important;
+}
+
+/* Animations */
+@keyframes sparkle {
+  0% { transform: scale(0) translate(0, 0); opacity: 1; }
+  100% { transform: scale(1.5) translate(var(--tx), var(--ty)); opacity: 0; }
+}
+
+.spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fffb96;
+  box-shadow: 0 0 8px #fffb96;
+  border-radius: 50%;
+  animation: sparkle 0.8s ease-out forwards;
+}
+
+.melt-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 95%, 85% 90%, 75% 98%, 65% 92%, 55% 98%, 45% 90%, 35% 98%, 25% 90%, 15% 98%, 0 85%);
+}
+
+.melt-top {
+  clip-path: polygon(0 15%, 8% 5%, 15% 10%, 25% 2%, 35% 10%, 45% 2%, 55% 10%, 65% 2%, 75% 10%, 85% 5%, 92% 10%, 100% 0, 100% 100%, 0 100%);
+}
+
+@keyframes beam-pulse {
+  0%, 100% { opacity: 0.8; box-shadow: 0 0 15px #01cdfe, 0 0 30px #b967ff; }
+  50% { opacity: 1; box-shadow: 0 0 25px #01cdfe, 0 0 40px #b967ff; }
+}
+
+.laser-beam {
+  animation: beam-pulse 2s infinite ease-in-out;
+}

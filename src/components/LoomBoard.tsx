@@ -1,6 +1,6 @@
 import { useStore, type Thread } from '../store';
 import { useDroppable } from '@dnd-kit/core';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 
 // Helper to format time
 const formatTime = (minutes: number) => {
@@ -116,8 +116,76 @@ const calculateThreadLayout = (threads: Thread[]): ThreadWithLayout[] => {
   return finalResult;
 };
 
+interface Spark {
+  id: number;
+  x: number;
+  y: number;
+  tx: number;
+  ty: number;
+  color: string;
+}
 
-function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive: boolean }) {
+function SparksContainer({ sparks }: { sparks: Spark[] }) {
+    return (
+        <div className="fixed inset-0 pointer-events-none z-[100]">
+            {sparks.map((spark) => (
+                <div 
+                    key={spark.id} 
+                    className="spark" 
+                    style={{ 
+                        left: spark.x, 
+                        top: spark.y, 
+                        backgroundColor: spark.color,
+                        boxShadow: `0 0 8px ${spark.color}`,
+                        '--tx': `${spark.tx}px`, 
+                        '--ty': `${spark.ty}px` 
+                    } as React.CSSProperties}
+                ></div>
+            ))}
+        </div>
+    );
+}
+
+function ScalpelCursor() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMove = (e: MouseEvent) => {
+        if (ref.current) {
+            ref.current.style.left = `${e.clientX}px`;
+            ref.current.style.top = `${e.clientY}px`;
+        }
+    };
+    window.addEventListener('mousemove', handleMove);
+    return () => window.removeEventListener('mousemove', handleMove);
+  }, []);
+
+  return (
+    <div 
+        ref={ref}
+        className="fixed z-[100] pointer-events-none transform -translate-x-1/2 -translate-y-1/2" 
+        style={{ left: -100, top: -100 }}
+    >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-cyber-magenta/30 blur-xl rounded-full animate-pulse"></div>
+        <svg className="drop-shadow-[0_0_10px_rgba(255,113,206,1)] transform -rotate-12" fill="none" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="36" fill="#050014" r="5" stroke="#ff0055" strokeWidth="3"></circle>
+            <circle cx="34" cy="36" fill="#050014" r="5" stroke="#ff0055" strokeWidth="3"></circle>
+            <path d="M16 32 L34 12" stroke="#00f0ff" strokeLinecap="round" strokeWidth="3"></path>
+            <path d="M32 32 L14 12" stroke="#00f0ff" strokeLinecap="round" strokeWidth="3"></path>
+            <circle className="animate-pulse" cx="24" cy="22" fill="#fcee0a" r="2"></circle>
+            <path className="animate-bounce" d="M24 6 L26 10 L30 12 L26 14 L24 18 L22 14 L18 12 L22 10 Z" fill="#fcee0a" style={{ animationDuration: '2s' }}></path>
+        </svg>
+    </div>
+  );
+}
+
+
+function BoardThread({ thread, isActive, isScalpelMode, onSplit }: { 
+    thread: ThreadWithLayout; 
+    isActive: boolean; 
+    isScalpelMode: boolean;
+    onSplit: (id: string, x: number, y: number) => void;
+}) {
   const colors = {
     'cyber-cyan': { bg: 'bg-cyber-cyan/10', border: 'border-cyber-cyan', text: 'text-cyber-cyan', indicator: 'bg-cyber-cyan' },
     'cyber-magenta': { bg: 'bg-cyber-magenta/10', border: 'border-cyber-magenta', text: 'text-cyber-magenta', indicator: 'bg-cyber-magenta' },
@@ -127,6 +195,32 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
   const isFrontendImpl = thread.title === 'Frontend Impl.';
   const isProjectAlpha = thread.title.includes('Project Alpha'); // Or rely on ID/duration
   const displayActive = isActive || isFrontendImpl;
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Calculate split line position
+  const [splitLineTop, setSplitLineTop] = useState<number | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isScalpelMode) {
+        setSplitLineTop(null);
+        return;
+    }
+
+    const timelineContainer = document.getElementById('timeline-container');
+    if (timelineContainer) {
+        const rect = timelineContainer.getBoundingClientRect();
+        const absoluteMinutes = e.clientY - rect.top;
+        const snappedMinutes = Math.round(absoluteMinutes / 15) * 15;
+        
+        // Check if snap is within this thread
+        if (snappedMinutes > (thread.startTime || 0) && snappedMinutes < ((thread.startTime || 0) + thread.duration)) {
+                setSplitLineTop(snappedMinutes - (thread.startTime || 0));
+        } else {
+            setSplitLineTop(null);
+        }
+    }
+  };
+
 
   const patternStyle = thread.category === 'cyber-cyan' 
     ? { backgroundImage: "radial-gradient(circle at 2px 2px, rgba(0,240,255,1) 1px, transparent 0)", backgroundSize: "20px 20px", opacity: 0.1 }
@@ -137,11 +231,33 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
   return (
     <div
       style={thread.style}
-      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''}`}
+      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''} ${thread.isCutTop ? 'melt-top' : ''} ${thread.isCutBottom ? 'melt-bottom' : ''}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => { setIsHovered(false); setSplitLineTop(null); }}
+      onClick={(e) => {
+          if (isScalpelMode) {
+              e.stopPropagation();
+              e.preventDefault();
+              onSplit(thread.id, e.clientX, e.clientY);
+          }
+      }}
     >
         <div className={`relative w-full h-full overflow-hidden backdrop-blur-sm transition-all group-hover:bg-opacity-30 ${isFrontendImpl ? 'bg-gradient-to-r from-cyber-cyan/20 to-blue-900/40' : colors.bg}`}>
             {/* Border Left/Right handled by ribbon classes or internal border */}
             <div className={`absolute left-0 top-0 bottom-0 w-1 ${colors.indicator}`}></div>
+            
+            {/* Split Line Indicator */}
+            {isScalpelMode && splitLineTop !== null && (
+                <div 
+                    className="absolute w-full h-0.5 border-t-2 border-dashed border-white/80 z-50 pointer-events-none flex items-center justify-end pr-2 drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]"
+                    style={{ top: `${splitLineTop}px` }}
+                >
+                    <span className="text-[9px] font-mono font-bold bg-black/70 text-white px-1 rounded transform -translate-y-1/2">
+                        SPLIT
+                    </span>
+                </div>
+            )}
             
             {/* Background Texture */}
             <div className="absolute inset-0 pointer-events-none" style={patternStyle}></div>
@@ -215,10 +331,66 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
 
 export default function LoomBoard() {
   const threads = useStore((state) => state.threads);
+  const splitThread = useStore((state) => state.splitThread);
   const activeThreads = threads.filter((t) => t.startTime !== null);
   const { setNodeRef } = useDroppable({
     id: 'loom-board',
   });
+
+  const [isScalpelMode, setIsScalpelMode] = useState(false);
+  const [sparks, setSparks] = useState<Spark[]>([]);
+
+  const handleSplit = (threadId: string, clientX: number, clientY: number) => {
+    if (!isScalpelMode) return;
+
+    const timelineContainer = document.getElementById('timeline-container');
+    if (!timelineContainer) return;
+
+    const rect = timelineContainer.getBoundingClientRect();
+    const relativeY = clientY - rect.top; // Relative to timeline container top (which is 00:00 visual start)
+    // Note: timeline-container is the relative parent for absolute positioning of threads.
+    
+    const snappedTime = Math.round(relativeY / 15) * 15;
+    
+    // Add sparks
+    const id = Date.now();
+    const colors = ['#00f0ff', '#ff0055', '#fcee0a', '#ffffff'];
+    const newSparks = Array.from({ length: 8 }).map((_, i) => ({
+        id: id + i,
+        x: clientX,
+        y: clientY,
+        tx: (Math.random() - 0.5) * 100,
+        ty: (Math.random() - 0.5) * 100,
+        color: colors[Math.floor(Math.random() * colors.length)]
+    }));
+    
+    setSparks((prev) => [...prev, ...newSparks]);
+    setTimeout(() => {
+        setSparks((prev) => prev.filter((s) => s.id < id || s.id >= id + 8));
+    }, 800);
+
+    splitThread(threadId, snappedTime);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Alt') {
+        setIsScalpelMode(true);
+      }
+    };
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'Alt') {
+        setIsScalpelMode(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   // Calculate layout
   const layoutThreads = useMemo(() => calculateThreadLayout(activeThreads), [activeThreads]);
@@ -274,7 +446,9 @@ export default function LoomBoard() {
     };
 
   return (
-    <main className="flex-1 flex flex-col h-full bg-deep-void relative overflow-hidden">
+    <main 
+        className={`flex-1 flex flex-col h-full bg-deep-void relative overflow-hidden ${isScalpelMode ? 'cursor-scalpel' : ''}`}
+    >
         <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-deep-void via-transparent to-deep-void pointer-events-none"></div>
         <header className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-deep-void/90 backdrop-blur-md z-30 sticky top-0">
@@ -310,6 +484,8 @@ export default function LoomBoard() {
           </div>
         </header>
         <div className="flex-1 overflow-y-auto cyber-scrollbar relative">
+          {isScalpelMode && <ScalpelCursor />}
+          <SparksContainer sparks={sparks} />
           <div className="flex min-h-[1440px] relative pb-20">
             <div className="w-20 flex-shrink-0 border-r border-white/10 bg-panel-bg z-10">
               <div className="relative h-full pt-2">
@@ -328,7 +504,15 @@ export default function LoomBoard() {
 
               {layoutThreads.map(thread => {
                   const isActive = currentTime >= thread.startTime! && currentTime < (thread.startTime! + thread.duration);
-                  return <BoardThread key={thread.id} thread={thread} isActive={isActive} />;
+                  return (
+                    <BoardThread 
+                        key={thread.id} 
+                        thread={thread} 
+                        isActive={isActive} 
+                        isScalpelMode={isScalpelMode}
+                        onSplit={handleSplit}
+                    />
+                  );
               })}
               
             </div>
