@@ -1,104 +1,97 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
-  --color-brut-bg: #0a0a0f;
-  --color-brut-panel: #111116;
-  --color-brut-border: #333333;
-  --color-brut-accent: #eab308;
-  --color-brut-text: #ffffff;
-  --color-brut-text-muted: #888888;
-  --color-brut-red: #ef4444;
-  --color-brut-blue: #3b82f6;
+  --color-cyber-cyan: #00f0ff;
+  --color-cyber-magenta: #ff0055;
+  --color-cyber-yellow: #fcee0a;
+  --color-deep-void: #05050a;
+  --color-grid-line: #00f0ff20;
+  --color-panel-bg: #0a0a12;
+  --color-panel-border: #1a1a2e;
 
-  --font-sans: "Inter", "Helvetica", "Arial", sans-serif;
+  --font-display: "Rajdhani", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --background-image-cyber-grid: linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+
+  --shadow-neon-cyan: 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
+  --shadow-neon-magenta: 0 0 10px rgba(255, 0, 85, 0.5), 0 0 20px rgba(255, 0, 85, 0.3);
 }
 
 /* Custom Utilities */
-@utility no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
+@layer utilities {
+  .cyber-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .cyber-scrollbar::-webkit-scrollbar-track {
+    background: #05050a;
+  }
+  .cyber-scrollbar::-webkit-scrollbar-thumb {
+    background: #00f0ff;
+    border-radius: 0;
+  }
+
+  .cyber-ribbon {
+    clip-path: polygon(
+        10px 0%, 100% 0%, 
+        calc(100% - 10px) 100%, 0% 100%
+    );
+  }
+  .cyber-ribbon-reverse {
+    clip-path: polygon(
+        0% 0%, calc(100% - 10px) 0%, 
+        100% 100%, 10px 100%
+    );
+  }
+  .corner-cut {
+    clip-path: polygon(
+        20px 0, 100% 0, 
+        100% calc(100% - 20px), calc(100% - 20px) 100%, 
+        0 100%, 0 20px
+    );
+  }
+  .grid-bg {
+    background-size: 40px 40px;
+    background-image: 
+        linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+  }
+  .thread-spool {
+    width: 64px;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+  .thread-spool:hover {
+    width: 320px;
+  }
+  .thread-spool:hover .spool-content {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .spool-content {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.2s ease 0.1s;
+    white-space: nowrap;
+  }
+  .glitch-text:hover {
+    animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+    color: #00f0ff;
   }
 }
 
-@utility brut-border {
-  border: 2px solid #333;
-}
-
-@utility brut-border-r {
-  border-right: 2px solid #333;
-}
-
-@utility brut-border-b {
-  border-bottom: 2px solid #333;
-}
-
-@utility brut-border-l {
-  border-left: 2px solid #333;
-}
-
-@utility brut-border-t {
-  border-top: 2px solid #333;
-}
-
-@utility connector-line {
-  stroke-dasharray: 8, 8;
-  stroke-width: 2px;
-}
-
-@utility drag-thread {
-  stroke-dasharray: 10, 10;
-  stroke-width: 4px;
-  animation: flow 20s linear infinite;
-}
-
-@keyframes flow {
-  from { stroke-dashoffset: 200; }
-  to { stroke-dashoffset: 0; }
-}
-
-/* Tiptap Editor Styles */
-.tiptap-editor p {
-  margin-bottom: 1em;
-  line-height: 1.4;
-  color: #d4d4d4;
-  font-weight: 400;
-  font-size: 1.1rem;
-}
-
-.tiptap-editor h2 {
-  font-weight: 800;
-  font-size: 1.75rem;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  border-bottom: 2px solid #333;
-  padding-bottom: 0.25em;
-}
-
-.tiptap-editor blockquote {
-  border-left: 4px solid #eab308;
-  background: #1a1a1e;
-  padding: 1rem;
-  font-style: italic;
-  color: #fff;
-  margin-bottom: 1.5em;
-  font-weight: 500;
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
 }
 
 /* Base Styles */
 body {
-  font-family: var(--font-sans);
-  background-color: #050508;
-  color: var(--color-brut-text);
-  @apply h-screen w-full overflow-hidden flex relative antialiased selection:bg-yellow-500 selection:text-black;
-}
-
-#root {
-  @apply h-full w-full;
+  font-family: var(--font-display);
+  background-color: var(--color-deep-void);
+  @apply text-slate-300 h-screen overflow-hidden flex flex-row selection:bg-cyber-cyan selection:text-black;
 }
