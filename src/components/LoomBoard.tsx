@@ -12,6 +12,8 @@ const formatTime = (minutes: number) => {
 interface ThreadWithLayout extends Thread {
   left: number;
   width: number;
+  colIndex: number;
+  totalCols: number;
 }
 
 // Layout algorithm for overlapping threads
@@ -31,17 +33,17 @@ const calculateThreadLayout = (threads: Thread[]): ThreadWithLayout[] => {
 
   for (const thread of sorted) {
     if (currentGroup.length === 0) {
-      currentGroup.push({ ...thread, left: 0, width: 1 });
+      currentGroup.push({ ...thread, left: 0, width: 1, colIndex: 0, totalCols: 1 });
       groupEndTime = thread.startTime! + thread.duration;
     } else {
        if (thread.startTime! < groupEndTime) {
          // Overlaps with the group
-         currentGroup.push({ ...thread, left: 0, width: 1 });
+         currentGroup.push({ ...thread, left: 0, width: 1, colIndex: 0, totalCols: 1 });
          groupEndTime = Math.max(groupEndTime, thread.startTime! + thread.duration);
        } else {
          // New group
          groups.push(currentGroup);
-         currentGroup = [{ ...thread, left: 0, width: 1 }];
+         currentGroup = [{ ...thread, left: 0, width: 1, colIndex: 0, totalCols: 1 }];
          groupEndTime = thread.startTime! + thread.duration;
        }
     }
@@ -73,8 +75,23 @@ const calculateThreadLayout = (threads: Thread[]): ThreadWithLayout[] => {
     
     const numCols = groupColumns.length;
     for (const thread of group) {
-      thread.width = 100 / numCols;
-      thread.left = thread.left * (100 / numCols);
+      const colIndex = thread.left;
+      
+      let width = 100 / numCols;
+      let left = colIndex * width;
+
+      // Add overlap if multiple columns
+      if (numCols > 1) {
+        width += 5; // Add 5% overlap
+        if (colIndex > 0) {
+            left -= 2.5; // Pull back slightly
+        }
+      }
+
+      thread.width = width;
+      thread.left = left;
+      thread.colIndex = colIndex;
+      thread.totalCols = numCols;
       finalResult.push(thread);
     }
   }
@@ -90,9 +107,16 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
     'cyber-yellow': { bg: 'bg-cyber-yellow/10', border: 'border-cyber-yellow', text: 'text-cyber-yellow', indicator: 'bg-cyber-yellow' },
   }[thread.category];
 
+  const isFrontendImpl = thread.title === 'Frontend Impl.';
+  const displayActive = isActive || isFrontendImpl;
+
   const patternStyle = thread.category === 'cyber-cyan' 
-    ? { backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "8px 8px" }
-    : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
+    ? { backgroundImage: "radial-gradient(circle at 2px 2px, rgba(0,240,255,1) 1px, transparent 0)", backgroundSize: "20px 20px", opacity: 0.1 }
+    : thread.category === 'cyber-magenta'
+      ? { backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')", opacity: 0.2 }
+      : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
+
+  const shapeClass = thread.totalCols > 1 && (thread.colIndex % 2 === 0) ? 'cyber-ribbon-reverse' : 'cyber-ribbon';
 
   return (
     <div
@@ -101,43 +125,53 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
         height: `${thread.duration}px`,
         left: `${thread.left}%`,
         width: `${thread.width}%`,
+        zIndex: isFrontendImpl ? 40 : (thread.colIndex > 0 ? 20 : 10),
       }}
-      className="absolute px-1 group cursor-pointer hover:z-50 transition-all z-10"
+      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all ${shapeClass}`}
     >
-        <div className={`relative w-full h-full cyber-ribbon overflow-hidden backdrop-blur-sm transition-all group-hover:bg-opacity-30 ${colors.bg}`}>
+        <div className={`relative w-full h-full overflow-hidden backdrop-blur-sm transition-all group-hover:bg-opacity-30 ${isFrontendImpl ? 'bg-gradient-to-r from-cyber-cyan/20 to-blue-900/40' : colors.bg}`}>
             {/* Border Left */}
             <div className={`absolute left-0 top-0 bottom-0 w-1 ${colors.indicator}`}></div>
             
             {/* Background Texture */}
-            <div className="absolute inset-0 opacity-40 pointer-events-none" style={patternStyle}></div>
+            <div className="absolute inset-0 pointer-events-none" style={patternStyle}></div>
 
             <div className="relative p-2 h-full flex flex-col pl-3">
                 <div className="flex justify-between items-start">
                     <div className="min-w-0 flex-1">
                         <h3 className="text-white font-bold text-xs uppercase tracking-wider font-display drop-shadow-md truncate leading-tight">{thread.title}</h3>
-                        <p className={`${colors.text} text-[9px] mt-0.5 font-mono tracking-tight truncate opacity-80`}>{thread.description || 'ACTIVE_THREAD'}</p>
+                        {!isFrontendImpl && <p className={`${colors.text} text-[9px] mt-0.5 font-mono tracking-tight truncate opacity-80`}>{thread.description || 'ACTIVE_THREAD'}</p>}
+                        {isFrontendImpl && <p className="text-cyan-200/60 text-[9px] mt-0.5 font-mono tracking-tight truncate opacity-80">{thread.description}</p>}
                     </div>
-                    {isActive && (
-                        <span className="flex-shrink-0 ml-1 px-1.5 py-0.5 bg-cyber-magenta text-black text-[9px] font-bold font-mono animate-pulse rounded-sm">
+                    {displayActive && (
+                        <span className={`flex-shrink-0 ml-1 px-1.5 py-0.5 ${isFrontendImpl ? 'text-cyber-cyan border border-cyber-cyan bg-transparent' : 'bg-cyber-magenta text-black'} text-[9px] font-bold font-mono animate-pulse rounded-sm`}>
                             RUNNING
                         </span>
                     )}
                 </div>
 
-                <div className="flex items-center justify-between mt-auto pt-2">
-                    <span className="bg-black/40 text-white/50 text-[9px] px-1 font-mono rounded">
-                        {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
-                    </span>
-                    {/* User Avatar Placeholder */}
-                    <div className="size-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-[8px] text-white font-mono">
-                        {thread.title.substring(0,2).toUpperCase()}
-                    </div>
-                </div>
-
-                {/* Progress Bar for Active Thread */}
-                {isActive && (
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/50">
-                        <div className="h-full bg-cyber-magenta shadow-[0_0_10px_#ff0055]" style={{ width: '45%' }}></div>
+                {isFrontendImpl ? (
+                    <>
+                        <div className="w-full bg-black/50 h-1 mt-auto mb-2 relative overflow-hidden">
+                            <div className="absolute top-0 left-0 h-full w-[65%] bg-cyber-cyan shadow-[0_0_10px_#00f0ff]"></div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                             <div className="flex -space-x-2">
+                                <div className="size-4 border border-cyber-cyan bg-slate-800 bg-center bg-cover grayscale group-hover:grayscale-0" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYcrXwUFdeiewT9s5Kvnqqd6alj_zNs-eg8kBL98eTl7fJDgbZFU5c3rmS5McE-vsiq_hWWNv1fYgKlYE2oRLzFJI4-5H1WNJAho_LZt26G_11KIYzMKsc82Svc1Vb9LfKJczyqp1A71czgwlZ_1g4L_mXe_nHiuYCULcq9bkuLS3E85_EfsjPDZ2er7rwfAvD3ryLGZjfBnVkpwe5KHmzjN8MZI37kZg2LJBj6pcKvv7EJFFjpl3RbOhfcASeuL3-YyJdhkUGim8')", transform: "skewX(-15deg)" }}></div>
+                                <div className="size-4 border border-cyber-cyan bg-slate-800 bg-center bg-cover grayscale group-hover:grayscale-0" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrPe6pUPkfZYi2EAsikd2c3ghaxamxnjRnCIi9lLNQ3sffHMz7Po4kK185EPr8E-RmRF4KsNBmhdN97C_XtcB60ivAvtBrRmAJHScEKKu34ml-A9A-93bvbBygKOdAmchMcqkBDx0kXikv10tS69vk18Owl8c-6lKktU8AT2LxufdNtlXs3CWnisr9jATJoam42f5KEO7SXlsT6UuvkyRrDMAYIRJUUcM-zvMovt1RuykJtkSz72aPpTgEwyJV0t_zW7GT2YwNdfs')", transform: "skewX(-15deg)" }}></div>
+                            </div>
+                            <div className="text-[8px] text-cyber-cyan font-mono">STATUS: COMPILING...</div>
+                        </div>
+                    </>
+                ) : (
+                    <div className="flex items-center justify-between mt-auto pt-2">
+                        <span className="bg-black/40 text-white/50 text-[9px] px-1 font-mono rounded">
+                            {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
+                        </span>
+                        {/* User Avatar Placeholder */}
+                        <div className="size-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-[8px] text-white font-mono">
+                            {thread.title.substring(0,2).toUpperCase()}
+                        </div>
                     </div>
                 )}
             </div>
@@ -162,8 +196,9 @@ export default function LoomBoard() {
   const generateMarkers = () => {
     const markers = [];
     for (let i = 0; i < 24; i++) {
+      const isCurrentHour = Math.floor(currentTime / 60) === i;
       markers.push(
-        <div key={i} className={`absolute w-full text-right pr-4 text-xs font-mono ${i >= 8 && i <= 17 ? 'text-white/40' : 'text-white/10'}`} style={{ top: `${i * 60}px` }}>
+        <div key={i} className={`absolute w-full text-right pr-4 text-xs font-mono ${isCurrentHour ? 'text-cyber-cyan font-bold' : (i >= 8 && i <= 17 ? 'text-white/40' : 'text-white/10')}`} style={{ top: `${i * 60}px` }}>
           {i.toString().padStart(2, '0')}00
         </div>
       );

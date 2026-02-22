@@ -83,7 +83,7 @@ export default function ThreadSpool() {
             {/* Cyan / Add */}
             <button 
                 onClick={() => setNewCategory('cyber-cyan')} 
-                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-none border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
             >
                 <span className="material-symbols-outlined">add</span>
             </button>
@@ -93,7 +93,7 @@ export default function ThreadSpool() {
             {/* Magenta / Work */}
             <button 
                 onClick={() => setNewCategory('cyber-magenta')} 
-                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-magenta' ? 'bg-cyber-magenta text-black border-cyber-magenta shadow-[0_0_15px_rgba(255,0,85,0.6)]' : 'border-transparent text-cyber-magenta/50 hover:text-cyber-magenta hover:bg-cyber-magenta/10'}`}
+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-none border ${newCategory === 'cyber-magenta' ? 'bg-cyber-magenta text-black border-cyber-magenta shadow-[0_0_15px_rgba(255,0,85,0.6)]' : 'border-transparent text-cyber-magenta/50 hover:text-cyber-magenta hover:bg-cyber-magenta/10'}`}
             >
                 <span className="material-symbols-outlined">work</span>
             </button>
@@ -101,7 +101,7 @@ export default function ThreadSpool() {
             {/* Cyan / Groups (Reusing Cyan category for now per previous logic, but icon suggests different mode) */}
             <button 
                 onClick={() => setNewCategory('cyber-cyan')} 
-                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-none border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
             >
                 <span className="material-symbols-outlined">groups</span>
             </button>
@@ -109,7 +109,7 @@ export default function ThreadSpool() {
             {/* Yellow / Fitness */}
             <button 
                 onClick={() => setNewCategory('cyber-yellow')} 
-                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-yellow' ? 'bg-cyber-yellow text-black border-cyber-yellow shadow-[0_0_15px_rgba(252,238,10,0.6)]' : 'border-transparent text-cyber-yellow/50 hover:text-cyber-yellow hover:bg-cyber-yellow/10'}`}
+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-none border ${newCategory === 'cyber-yellow' ? 'bg-cyber-yellow text-black border-cyber-yellow shadow-[0_0_15px_rgba(252,238,10,0.6)]' : 'border-transparent text-cyber-yellow/50 hover:text-cyber-yellow hover:bg-cyber-yellow/10'}`}
             >
                 <span className="material-symbols-outlined">fitness_center</span>
             </button>

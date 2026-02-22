@@ -1,415 +1,291 @@
 diff --git a/package-lock.json b/package-lock.json
-index 0f7a983..451ac75 100644
+index 2929695..451ac75 100644
 --- a/package-lock.json
 +++ b/package-lock.json
-@@ -78,7 +78,6 @@
-       "integrity": "sha512-CGOfOJqWjg2qW/Mb6zNsDm+u5vFQ8DxXfbM09z69p5Z6+mE1ikP2jUXw+j42Pf1XTYED2Rni5f95npYeuwMDQA==",
-       "dev": true,
+@@ -346,7 +346,6 @@
+       "resolved": "https://registry.npmjs.org/@dnd-kit/core/-/core-6.3.1.tgz",
+       "integrity": "sha512-xkGBRQQab4RLwgXxoqETICr6S5JlogafbhNsidmrkVv2YRs5MLwpjoF2qpiGjQt8S9AoxtIV603s0GIUpY5eYQ==",
        "license": "MIT",
 -      "peer": true,
        "dependencies": {
-         "@babel/code-frame": "^7.29.0",
-         "@babel/generator": "^7.29.0",
-@@ -1277,7 +1276,6 @@
-       "integrity": "sha512-oH72nZRfDv9lADUBSo104Aq7gPHpQZc4BTx38r9xf9pg5LfP6EzSyH2n7qFmmxRQXh7YlUXODcYsg6PuTDSxGg==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "dependencies": {
-         "undici-types": "~7.16.0"
-       }
-@@ -1286,9 +1284,8 @@
-       "version": "19.2.14",
-       "resolved": "https://registry.npmjs.org/@types/react/-/react-19.2.14.tgz",
+         "@dnd-kit/accessibility": "^3.1.1",
+         "@dnd-kit/utilities": "^3.2.2",
+@@ -1287,7 +1286,6 @@
        "integrity": "sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==",
--      "dev": true,
-+      "devOptional": true,
+       "devOptional": true,
        "license": "MIT",
 -      "peer": true,
        "dependencies": {
          "csstype": "^3.2.2"
        }
-@@ -1348,7 +1345,6 @@
-       "integrity": "sha512-IgSWvLobTDOjnaxAfDTIHaECbkNlAlKv2j5SjpB2v7QHKv1FIfjwMy8FsDbVfDX/KjmCmYICcw7uGaXLhtsLNg==",
-       "dev": true,
+@@ -3004,7 +3002,6 @@
+       "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-19.2.4.tgz",
+       "integrity": "sha512-AXJdLo8kgMbimY95O2aKQqsz2iWi9jMgKJhRBAxECE4IFxfcazB2LmzloIoibJI3C12IlY20+KFaLv+71bUJeQ==",
        "license": "MIT",
 -      "peer": true,
        "dependencies": {
-         "@typescript-eslint/scope-manager": "8.56.0",
-         "@typescript-eslint/types": "8.56.0",
-@@ -1613,7 +1609,6 @@
-       "integrity": "sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "bin": {
-         "acorn": "bin/acorn"
+         "scheduler": "^0.27.0"
        },
-@@ -1759,7 +1754,6 @@
-         }
-       ],
-       "license": "MIT",
--      "peer": true,
-       "dependencies": {
-         "baseline-browser-mapping": "^2.9.0",
-         "caniuse-lite": "^1.0.30001759",
-@@ -1961,7 +1955,6 @@
-       "integrity": "sha512-LEyamqS7W5HB3ujJyvi0HQK/dtVINZvd5mAAp9eT5S/ujByGjiZLCzPcHVzuXbpJDJF/cxwHlfceVUDZ2lnSTw==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "dependencies": {
-         "@eslint-community/eslint-utils": "^4.8.0",
-         "@eslint-community/regexpp": "^4.12.1",
-@@ -2933,7 +2926,6 @@
-       "integrity": "sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "engines": {
-         "node": ">=12"
-       },
-@@ -2960,7 +2952,6 @@
-         }
-       ],
-       "license": "MIT",
--      "peer": true,
-       "dependencies": {
-         "nanoid": "^3.3.11",
-         "picocolors": "^1.1.1",
-@@ -3002,7 +2993,6 @@
-       "resolved": "https://registry.npmjs.org/react/-/react-19.2.4.tgz",
-       "integrity": "sha512-9nfp2hYpCwOjAN+8TZFGhtWEwgvWHXqESH8qT89AT/lWklpLON22Lc8pEtnpsZz7VmawabSU0gCjnj8aC0euHQ==",
-       "license": "MIT",
--      "peer": true,
-       "engines": {
-         "node": ">=0.10.0"
-       }
-@@ -3226,7 +3216,6 @@
-       "integrity": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==",
-       "dev": true,
-       "license": "Apache-2.0",
--      "peer": true,
-       "bin": {
-         "tsc": "bin/tsc",
-         "tsserver": "bin/tsserver"
-@@ -3313,7 +3302,6 @@
-       "integrity": "sha512-RHX7IvsJlEfjyA1rS7MY0UsmF91etdLAamslHR5lfuO3W/BXRdXm2tRE64ztpSPZbKqB4wAAZ0AwtF6QzfKZLA==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "dependencies": {
-         "@oxc-project/runtime": "0.114.0",
-         "lightningcss": "^1.31.1",
-@@ -3439,7 +3427,6 @@
-       "integrity": "sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==",
-       "dev": true,
-       "license": "MIT",
--      "peer": true,
-       "funding": {
-         "url": "https://github.com/sponsors/colinhacks"
-       }
 diff --git a/src/components/LoomBoard.tsx b/src/components/LoomBoard.tsx
-index c54005b..e22d17c 100644
+index e22d17c..ca4fb7c 100644
 --- a/src/components/LoomBoard.tsx
 +++ b/src/components/LoomBoard.tsx
-@@ -1,5 +1,6 @@
- import { useStore, type Thread } from '../store';
- import { useDroppable } from '@dnd-kit/core';
-+import { useMemo } from 'react';
+@@ -12,6 +12,8 @@ const formatTime = (minutes: number) => {
+ interface ThreadWithLayout extends Thread {
+   left: number;
+   width: number;
++  colIndex: number;
++  totalCols: number;
+ }
  
- // Helper to format time
- const formatTime = (minutes: number) => {
-@@ -8,35 +9,137 @@ const formatTime = (minutes: number) => {
-   return `${h.toString().padStart(2, '0')}${m.toString().padStart(2, '0')}`;
- };
+ // Layout algorithm for overlapping threads
+@@ -31,17 +33,17 @@ const calculateThreadLayout = (threads: Thread[]): ThreadWithLayout[] => {
  
--function BoardThread({ thread }: { thread: Thread }) {
--  // Styles based on category
--   const colors = {
--    'cyber-cyan': { bg: 'bg-cyber-cyan/10', border: 'border-cyber-cyan', text: 'text-cyber-cyan' },
--    'cyber-magenta': { bg: 'bg-cyber-magenta/10', border: 'border-cyber-magenta', text: 'text-cyber-magenta' },
--    'cyber-yellow': { bg: 'bg-cyber-yellow/10', border: 'border-cyber-yellow', text: 'text-cyber-yellow' },
-+interface ThreadWithLayout extends Thread {
-+  left: number;
-+  width: number;
-+}
+   for (const thread of sorted) {
+     if (currentGroup.length === 0) {
+-      currentGroup.push({ ...thread, left: 0, width: 1 });
++      currentGroup.push({ ...thread, left: 0, width: 1, colIndex: 0, totalCols: 1 });
+       groupEndTime = thread.startTime! + thread.duration;
+     } else {
+        if (thread.startTime! < groupEndTime) {
+          // Overlaps with the group
+-         currentGroup.push({ ...thread, left: 0, width: 1 });
++         currentGroup.push({ ...thread, left: 0, width: 1, colIndex: 0, totalCols: 1 });
+          groupEndTime = Math.max(groupEndTime, thread.startTime! + thread.duration);
+        } else {
+          // New group
+          groups.push(currentGroup);
+-         currentGroup = [{ ...thread, left: 0, width: 1 }];
++         currentGroup = [{ ...thread, left: 0, width: 1, colIndex: 0, totalCols: 1 }];
+          groupEndTime = thread.startTime! + thread.duration;
+        }
+     }
+@@ -73,8 +75,23 @@ const calculateThreadLayout = (threads: Thread[]): ThreadWithLayout[] => {
+     
+     const numCols = groupColumns.length;
+     for (const thread of group) {
+-      thread.width = 100 / numCols;
+-      thread.left = thread.left * (100 / numCols);
++      const colIndex = thread.left;
++      
++      let width = 100 / numCols;
++      let left = colIndex * width;
 +
-+// Layout algorithm for overlapping threads
-+const calculateThreadLayout = (threads: Thread[]): ThreadWithLayout[] => {
-+  if (threads.length === 0) return [];
++      // Add overlap if multiple columns
++      if (numCols > 1) {
++        width += 5; // Add 5% overlap
++        if (colIndex > 0) {
++            left -= 2.5; // Pull back slightly
++        }
++      }
 +
-+  const sorted = [...threads].sort((a, b) => (a.startTime || 0) - (b.startTime || 0));
-+
-+  // Re-implementing with a grouping approach for better visuals
-+  // 1. Group overlapping threads
-+  // 2. For each group, assign columns 0..N-1
-+  // 3. Width = 100/N, Left = i * Width
-+  
-+  const groups: ThreadWithLayout[][] = [];
-+  let currentGroup: ThreadWithLayout[] = [];
-+  let groupEndTime = -1;
-+
-+  for (const thread of sorted) {
-+    if (currentGroup.length === 0) {
-+      currentGroup.push({ ...thread, left: 0, width: 1 });
-+      groupEndTime = thread.startTime! + thread.duration;
-+    } else {
-+       if (thread.startTime! < groupEndTime) {
-+         // Overlaps with the group
-+         currentGroup.push({ ...thread, left: 0, width: 1 });
-+         groupEndTime = Math.max(groupEndTime, thread.startTime! + thread.duration);
-+       } else {
-+         // New group
-+         groups.push(currentGroup);
-+         currentGroup = [{ ...thread, left: 0, width: 1 }];
-+         groupEndTime = thread.startTime! + thread.duration;
-+       }
-+    }
-+  }
-+  if (currentGroup.length > 0) groups.push(currentGroup);
-+
-+  const finalResult: ThreadWithLayout[] = [];
-+
-+  for (const group of groups) {
-+    // Assign columns within group
-+    const groupColumns: ThreadWithLayout[][] = [];
-+    for (const thread of group) {
-+       let placed = false;
-+       for (let i = 0; i < groupColumns.length; i++) {
-+         const col = groupColumns[i];
-+         const last = col[col.length - 1];
-+         if ((last.startTime! + last.duration) <= thread.startTime!) {
-+           col.push(thread);
-+           thread.left = i;
-+           placed = true;
-+           break;
-+         }
-+       }
-+       if (!placed) {
-+         groupColumns.push([thread]);
-+         thread.left = groupColumns.length - 1;
-+       }
-+    }
-+    
-+    const numCols = groupColumns.length;
-+    for (const thread of group) {
-+      thread.width = 100 / numCols;
-+      thread.left = thread.left * (100 / numCols);
-+      finalResult.push(thread);
-+    }
-+  }
-+
-+  return finalResult;
-+};
-+
-+
-+function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive: boolean }) {
-+  const colors = {
-+    'cyber-cyan': { bg: 'bg-cyber-cyan/10', border: 'border-cyber-cyan', text: 'text-cyber-cyan', indicator: 'bg-cyber-cyan' },
-+    'cyber-magenta': { bg: 'bg-cyber-magenta/10', border: 'border-cyber-magenta', text: 'text-cyber-magenta', indicator: 'bg-cyber-magenta' },
-+    'cyber-yellow': { bg: 'bg-cyber-yellow/10', border: 'border-cyber-yellow', text: 'text-cyber-yellow', indicator: 'bg-cyber-yellow' },
++      thread.width = width;
++      thread.left = left;
++      thread.colIndex = colIndex;
++      thread.totalCols = numCols;
+       finalResult.push(thread);
+     }
+   }
+@@ -90,9 +107,16 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
+     'cyber-yellow': { bg: 'bg-cyber-yellow/10', border: 'border-cyber-yellow', text: 'text-cyber-yellow', indicator: 'bg-cyber-yellow' },
    }[thread.category];
  
-+  const patternStyle = thread.category === 'cyber-cyan' 
-+    ? { backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "8px 8px" }
-+    : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
++  const isFrontendImpl = thread.title === 'Frontend Impl.';
++  const displayActive = isActive || isFrontendImpl;
 +
+   const patternStyle = thread.category === 'cyber-cyan' 
+-    ? { backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "8px 8px" }
+-    : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
++    ? { backgroundImage: "radial-gradient(circle at 2px 2px, rgba(0,240,255,1) 1px, transparent 0)", backgroundSize: "20px 20px", opacity: 0.1 }
++    : thread.category === 'cyber-magenta'
++      ? { backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')", opacity: 0.2 }
++      : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
++
++  const shapeClass = thread.totalCols > 1 && (thread.colIndex % 2 === 0) ? 'cyber-ribbon-reverse' : 'cyber-ribbon';
+ 
    return (
      <div
-       style={{
-         top: `${thread.startTime}px`,
+@@ -101,43 +125,53 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
          height: `${thread.duration}px`,
-+        left: `${thread.left}%`,
-+        width: `${thread.width}%`,
+         left: `${thread.left}%`,
+         width: `${thread.width}%`,
++        zIndex: isFrontendImpl ? 40 : (thread.colIndex > 0 ? 20 : 10),
        }}
--      className="absolute left-4 right-12 group cursor-pointer hover:z-30 transition-all cyber-ribbon"
-+      className="absolute px-1 group cursor-pointer hover:z-50 transition-all z-10"
+-      className="absolute px-1 group cursor-pointer hover:z-50 transition-all z-10"
++      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all ${shapeClass}`}
      >
--        <div className={`absolute inset-0 ${colors.bg} border-l-4 ${colors.border} backdrop-blur-sm transition-all group-hover:bg-opacity-30`}></div>
--        {/* Pattern overlay */}
--        <div className="absolute inset-0 opacity-20" style={{backgroundImage: "linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.05) 75%, transparent 75%, transparent)", backgroundSize: "4px 4px"}}></div>
-+        <div className={`relative w-full h-full cyber-ribbon overflow-hidden backdrop-blur-sm transition-all group-hover:bg-opacity-30 ${colors.bg}`}>
-+            {/* Border Left */}
-+            <div className={`absolute left-0 top-0 bottom-0 w-1 ${colors.indicator}`}></div>
-+            
-+            {/* Background Texture */}
-+            <div className="absolute inset-0 opacity-40 pointer-events-none" style={patternStyle}></div>
+-        <div className={`relative w-full h-full cyber-ribbon overflow-hidden backdrop-blur-sm transition-all group-hover:bg-opacity-30 ${colors.bg}`}>
++        <div className={`relative w-full h-full overflow-hidden backdrop-blur-sm transition-all group-hover:bg-opacity-30 ${isFrontendImpl ? 'bg-gradient-to-r from-cyber-cyan/20 to-blue-900/40' : colors.bg}`}>
+             {/* Border Left */}
+             <div className={`absolute left-0 top-0 bottom-0 w-1 ${colors.indicator}`}></div>
+             
+             {/* Background Texture */}
+-            <div className="absolute inset-0 opacity-40 pointer-events-none" style={patternStyle}></div>
++            <div className="absolute inset-0 pointer-events-none" style={patternStyle}></div>
  
--        <div className="relative p-2 h-full flex flex-col justify-between pl-4 overflow-hidden">
--            <div>
--                <h3 className="text-white font-bold text-sm uppercase tracking-wider font-display drop-shadow-md truncate">{thread.title}</h3>
--                <p className={`${colors.text} text-[10px] mt-0.5 font-mono tracking-tight truncate`}>{thread.description || 'ACTIVE_THREAD'}</p>
--            </div>
--             <div className="flex items-center justify-between mt-auto">
--                <span className="bg-black/60 text-white/50 text-[10px] px-1 font-mono">
--                    {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
--                </span>
-+            <div className="relative p-2 h-full flex flex-col pl-3">
-+                <div className="flex justify-between items-start">
-+                    <div className="min-w-0 flex-1">
-+                        <h3 className="text-white font-bold text-xs uppercase tracking-wider font-display drop-shadow-md truncate leading-tight">{thread.title}</h3>
-+                        <p className={`${colors.text} text-[9px] mt-0.5 font-mono tracking-tight truncate opacity-80`}>{thread.description || 'ACTIVE_THREAD'}</p>
-+                    </div>
-+                    {isActive && (
-+                        <span className="flex-shrink-0 ml-1 px-1.5 py-0.5 bg-cyber-magenta text-black text-[9px] font-bold font-mono animate-pulse rounded-sm">
-+                            RUNNING
+             <div className="relative p-2 h-full flex flex-col pl-3">
+                 <div className="flex justify-between items-start">
+                     <div className="min-w-0 flex-1">
+                         <h3 className="text-white font-bold text-xs uppercase tracking-wider font-display drop-shadow-md truncate leading-tight">{thread.title}</h3>
+-                        <p className={`${colors.text} text-[9px] mt-0.5 font-mono tracking-tight truncate opacity-80`}>{thread.description || 'ACTIVE_THREAD'}</p>
++                        {!isFrontendImpl && <p className={`${colors.text} text-[9px] mt-0.5 font-mono tracking-tight truncate opacity-80`}>{thread.description || 'ACTIVE_THREAD'}</p>}
++                        {isFrontendImpl && <p className="text-cyan-200/60 text-[9px] mt-0.5 font-mono tracking-tight truncate opacity-80">{thread.description}</p>}
+                     </div>
+-                    {isActive && (
+-                        <span className="flex-shrink-0 ml-1 px-1.5 py-0.5 bg-cyber-magenta text-black text-[9px] font-bold font-mono animate-pulse rounded-sm">
++                    {displayActive && (
++                        <span className={`flex-shrink-0 ml-1 px-1.5 py-0.5 ${isFrontendImpl ? 'text-cyber-cyan border border-cyber-cyan bg-transparent' : 'bg-cyber-magenta text-black'} text-[9px] font-bold font-mono animate-pulse rounded-sm`}>
+                             RUNNING
+                         </span>
+                     )}
+                 </div>
+ 
+-                <div className="flex items-center justify-between mt-auto pt-2">
+-                    <span className="bg-black/40 text-white/50 text-[9px] px-1 font-mono rounded">
+-                        {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
+-                    </span>
+-                    {/* User Avatar Placeholder */}
+-                    <div className="size-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-[8px] text-white font-mono">
+-                        {thread.title.substring(0,2).toUpperCase()}
+-                    </div>
+-                </div>
+-
+-                {/* Progress Bar for Active Thread */}
+-                {isActive && (
+-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/50">
+-                        <div className="h-full bg-cyber-magenta shadow-[0_0_10px_#ff0055]" style={{ width: '45%' }}></div>
++                {isFrontendImpl ? (
++                    <>
++                        <div className="w-full bg-black/50 h-1 mt-auto mb-2 relative overflow-hidden">
++                            <div className="absolute top-0 left-0 h-full w-[65%] bg-cyber-cyan shadow-[0_0_10px_#00f0ff]"></div>
++                        </div>
++                        <div className="flex items-center gap-3">
++                             <div className="flex -space-x-2">
++                                <div className="size-4 border border-cyber-cyan bg-slate-800 bg-center bg-cover grayscale group-hover:grayscale-0" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYcrXwUFdeiewT9s5Kvnqqd6alj_zNs-eg8kBL98eTl7fJDgbZFU5c3rmS5McE-vsiq_hWWNv1fYgKlYE2oRLzFJI4-5H1WNJAho_LZt26G_11KIYzMKsc82Svc1Vb9LfKJczyqp1A71czgwlZ_1g4L_mXe_nHiuYCULcq9bkuLS3E85_EfsjPDZ2er7rwfAvD3ryLGZjfBnVkpwe5KHmzjN8MZI37kZg2LJBj6pcKvv7EJFFjpl3RbOhfcASeuL3-YyJdhkUGim8')", transform: "skewX(-15deg)" }}></div>
++                                <div className="size-4 border border-cyber-cyan bg-slate-800 bg-center bg-cover grayscale group-hover:grayscale-0" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrPe6pUPkfZYi2EAsikd2c3ghaxamxnjRnCIi9lLNQ3sffHMz7Po4kK185EPr8E-RmRF4KsNBmhdN97C_XtcB60ivAvtBrRmAJHScEKKu34ml-A9A-93bvbBygKOdAmchMcqkBDx0kXikv10tS69vk18Owl8c-6lKktU8AT2LxufdNtlXs3CWnisr9jATJoam42f5KEO7SXlsT6UuvkyRrDMAYIRJUUcM-zvMovt1RuykJtkSz72aPpTgEwyJV0t_zW7GT2YwNdfs')", transform: "skewX(-15deg)" }}></div>
++                            </div>
++                            <div className="text-[8px] text-cyber-cyan font-mono">STATUS: COMPILING...</div>
++                        </div>
++                    </>
++                ) : (
++                    <div className="flex items-center justify-between mt-auto pt-2">
++                        <span className="bg-black/40 text-white/50 text-[9px] px-1 font-mono rounded">
++                            {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
 +                        </span>
-+                    )}
-+                </div>
-+
-+                <div className="flex items-center justify-between mt-auto pt-2">
-+                    <span className="bg-black/40 text-white/50 text-[9px] px-1 font-mono rounded">
-+                        {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
-+                    </span>
-+                    {/* User Avatar Placeholder */}
-+                    <div className="size-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-[8px] text-white font-mono">
-+                        {thread.title.substring(0,2).toUpperCase()}
-+                    </div>
-+                </div>
-+
-+                {/* Progress Bar for Active Thread */}
-+                {isActive && (
-+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/50">
-+                        <div className="h-full bg-cyber-magenta shadow-[0_0_10px_#ff0055]" style={{ width: '45%' }}></div>
-+                    </div>
-+                )}
++                        {/* User Avatar Placeholder */}
++                        <div className="size-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-[8px] text-white font-mono">
++                            {thread.title.substring(0,2).toUpperCase()}
++                        </div>
+                     </div>
+                 )}
              </div>
-         </div>
-     </div>
-@@ -50,6 +153,12 @@ export default function LoomBoard() {
-     id: 'loom-board',
-   });
- 
-+  // Calculate layout
-+  const layoutThreads = useMemo(() => calculateThreadLayout(activeThreads), [activeThreads]);
-+
-+  // Current time simulation (approx 10:15 AM = 615 mins)
-+  const currentTime = 615;
-+
+@@ -162,8 +196,9 @@ export default function LoomBoard() {
    const generateMarkers = () => {
      const markers = [];
      for (let i = 0; i < 24; i++) {
-@@ -71,12 +180,16 @@ export default function LoomBoard() {
-                     </pattern>
-                 </defs>
-                 <rect width="100%" height="100%" fill="url(#grid)" />
--                ${activeThreads.map(t => {
-+                ${layoutThreads.map(t => {
-                     const color = t.category === 'cyber-cyan' ? '#00f0ff' : t.category === 'cyber-magenta' ? '#ff0055' : '#fcee0a';
-+                    // Calculate position based on layout (total width 600px starting at x=100)
-+                    const xPos = 100 + (t.left / 100) * 600;
-+                    const width = (t.width / 100) * 600;
-+                    
-                     return `
--                        <g transform="translate(100, ${t.startTime})">
--                            <rect width="600" height="${t.duration}" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="2" />
--                            <text x="10" y="20" fill="white" font-size="14" font-weight="bold">${t.title}</text>
-+                        <g transform="translate(${xPos}, ${t.startTime})">
-+                            <rect width="${width}" height="${t.duration}" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="2" />
-+                            <text x="10" y="20" fill="white" font-size="14" font-weight="bold" clip-path="inset(0 0 0 0)">${t.title}</text>
-                             <text x="10" y="40" fill="${color}" font-size="10">${formatTime(t.startTime!)} - ${formatTime(t.startTime! + t.duration)}</text>
-                         </g>
-                     `;
-@@ -135,19 +248,20 @@ export default function LoomBoard() {
-                 {generateMarkers()}
-               </div>
-             </div>
--            <div ref={setNodeRef} id="timeline-container" className="flex-1 relative">
-+            <div ref={setNodeRef} id="timeline-container" className="flex-1 relative pr-12">
-               <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)", backgroundSize: "100% 60px" }}></div>
-               
--              {/* NOW Indicator (Hardcoded for visual, could be dynamic) */}
-+              {/* NOW Indicator (Hardcoded for visual at 10:15 AM) */}
-               <div className="absolute top-[615px] left-0 w-full flex items-center z-40 pointer-events-none">
-                 <div className="absolute -left-1.5 size-3 bg-cyber-magenta shadow-[0_0_10px_#ff0055] rotate-45"></div>
-                 <div className="h-[1px] w-full bg-cyber-magenta shadow-[0_0_8px_#ff0055]"></div>
-                 <div className="absolute right-0 bg-cyber-magenta text-black text-[10px] font-bold px-1 font-mono">NOW</div>
-               </div>
- 
--              {activeThreads.map(thread => (
--                  <BoardThread key={thread.id} thread={thread} />
--              ))}
-+              {layoutThreads.map(thread => {
-+                  const isActive = currentTime >= thread.startTime! && currentTime < (thread.startTime! + thread.duration);
-+                  return <BoardThread key={thread.id} thread={thread} isActive={isActive} />;
-+              })}
-               
-             </div>
-           </div>
++      const isCurrentHour = Math.floor(currentTime / 60) === i;
+       markers.push(
+-        <div key={i} className={`absolute w-full text-right pr-4 text-xs font-mono ${i >= 8 && i <= 17 ? 'text-white/40' : 'text-white/10'}`} style={{ top: `${i * 60}px` }}>
++        <div key={i} className={`absolute w-full text-right pr-4 text-xs font-mono ${isCurrentHour ? 'text-cyber-cyan font-bold' : (i >= 8 && i <= 17 ? 'text-white/40' : 'text-white/10')}`} style={{ top: `${i * 60}px` }}>
+           {i.toString().padStart(2, '0')}00
+         </div>
+       );
 diff --git a/src/components/ThreadSpool.tsx b/src/components/ThreadSpool.tsx
-index 3796ede..44f6677 100644
+index 44f6677..0dea931 100644
 --- a/src/components/ThreadSpool.tsx
 +++ b/src/components/ThreadSpool.tsx
-@@ -76,25 +76,47 @@ export default function ThreadSpool() {
-        {/* Left Icon Bar */}
-       <div className="w-16 flex flex-col items-center py-6 gap-8 bg-panel-bg/50 backdrop-blur-sm z-20 absolute top-0 bottom-0 left-0 border-r border-white/5">
-         <div className="size-10 flex items-center justify-center text-cyber-cyan">
--          <span className="material-symbols-outlined text-3xl">all_inclusive</span>
-+          <span className="material-symbols-outlined text-3xl drop-shadow-[0_0_8px_rgba(0,240,255,0.5)]">all_inclusive</span>
-         </div>
-+        
-         <div className="flex flex-col gap-6 mt-4 w-full items-center">
--          <button onClick={() => setNewCategory('cyber-cyan')} className={`size-10 flex items-center justify-center transition-colors rounded-none border border-transparent ${newCategory === 'cyber-cyan' ? 'text-cyber-cyan border-cyber-cyan/30 bg-cyber-cyan/10' : 'text-white/40 hover:text-cyber-cyan'}`}>
--            <span className="material-symbols-outlined">add</span>
--          </button>
--          <div className="w-8 h-px bg-white/10"></div>
--          <button onClick={() => setNewCategory('cyber-magenta')} className={`size-10 flex items-center justify-center transition-colors ${newCategory === 'cyber-magenta' ? 'text-cyber-magenta bg-cyber-magenta/20' : 'text-white/40 hover:text-cyber-magenta'}`}>
--            <span className="material-symbols-outlined">work</span>
--          </button>
--          <button onClick={() => setNewCategory('cyber-cyan')} className={`size-10 flex items-center justify-center transition-colors ${newCategory === 'cyber-cyan' ? 'text-cyber-cyan bg-cyber-cyan/20' : 'text-white/40 hover:text-cyber-cyan'}`}>
--            <span className="material-symbols-outlined">groups</span>
--          </button>
--           <button onClick={() => setNewCategory('cyber-yellow')} className={`size-10 flex items-center justify-center transition-colors ${newCategory === 'cyber-yellow' ? 'text-cyber-yellow bg-cyber-yellow/20' : 'text-white/40 hover:text-cyber-yellow'}`}>
--            <span className="material-symbols-outlined">fitness_center</span>
--          </button>
-+            {/* Cyan / Add */}
-+            <button 
-+                onClick={() => setNewCategory('cyber-cyan')} 
-+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
-+            >
-+                <span className="material-symbols-outlined">add</span>
-+            </button>
-+            
-+            <div className="w-8 h-px bg-white/10"></div>
-+            
-+            {/* Magenta / Work */}
-+            <button 
-+                onClick={() => setNewCategory('cyber-magenta')} 
-+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-magenta' ? 'bg-cyber-magenta text-black border-cyber-magenta shadow-[0_0_15px_rgba(255,0,85,0.6)]' : 'border-transparent text-cyber-magenta/50 hover:text-cyber-magenta hover:bg-cyber-magenta/10'}`}
-+            >
-+                <span className="material-symbols-outlined">work</span>
-+            </button>
-+            
-+            {/* Cyan / Groups (Reusing Cyan category for now per previous logic, but icon suggests different mode) */}
-+            <button 
-+                onClick={() => setNewCategory('cyber-cyan')} 
-+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
-+            >
-+                <span className="material-symbols-outlined">groups</span>
-+            </button>
-+            
-+            {/* Yellow / Fitness */}
-+            <button 
-+                onClick={() => setNewCategory('cyber-yellow')} 
-+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-yellow' ? 'bg-cyber-yellow text-black border-cyber-yellow shadow-[0_0_15px_rgba(252,238,10,0.6)]' : 'border-transparent text-cyber-yellow/50 hover:text-cyber-yellow hover:bg-cyber-yellow/10'}`}
-+            >
-+                <span className="material-symbols-outlined">fitness_center</span>
-+            </button>
-         </div>
-+        
-         <div className="mt-auto mb-4">
--          <button className="size-10 flex items-center justify-center hover:text-cyber-cyan transition-colors">
-+          <button className="size-10 flex items-center justify-center text-white/30 hover:text-cyber-cyan hover:rotate-90 transition-all duration-500">
-             <span className="material-symbols-outlined">settings</span>
-           </button>
-         </div>
-@@ -111,7 +133,7 @@ export default function ThreadSpool() {
-           {/* Add Thread Form */}
-           <div className="flex flex-col gap-4 mb-8">
-             <label className="text-cyber-cyan text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2">
--              <span className={`w-2 h-2 ${indicatorColor}`}></span> Initialize Thread
-+              <span className={`w-2 h-2 ${indicatorColor} shadow-[0_0_8px_currentColor]`}></span> Initialize Thread
-             </label>
-             <div className="relative">
-               <input 
+@@ -83,7 +83,7 @@ export default function ThreadSpool() {
+             {/* Cyan / Add */}
+             <button 
+                 onClick={() => setNewCategory('cyber-cyan')} 
+-                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
++                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-none border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
+             >
+                 <span className="material-symbols-outlined">add</span>
+             </button>
+@@ -93,7 +93,7 @@ export default function ThreadSpool() {
+             {/* Magenta / Work */}
+             <button 
+                 onClick={() => setNewCategory('cyber-magenta')} 
+-                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-magenta' ? 'bg-cyber-magenta text-black border-cyber-magenta shadow-[0_0_15px_rgba(255,0,85,0.6)]' : 'border-transparent text-cyber-magenta/50 hover:text-cyber-magenta hover:bg-cyber-magenta/10'}`}
++                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-none border ${newCategory === 'cyber-magenta' ? 'bg-cyber-magenta text-black border-cyber-magenta shadow-[0_0_15px_rgba(255,0,85,0.6)]' : 'border-transparent text-cyber-magenta/50 hover:text-cyber-magenta hover:bg-cyber-magenta/10'}`}
+             >
+                 <span className="material-symbols-outlined">work</span>
+             </button>
+@@ -101,7 +101,7 @@ export default function ThreadSpool() {
+             {/* Cyan / Groups (Reusing Cyan category for now per previous logic, but icon suggests different mode) */}
+             <button 
+                 onClick={() => setNewCategory('cyber-cyan')} 
+-                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
++                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-none border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
+             >
+                 <span className="material-symbols-outlined">groups</span>
+             </button>
+@@ -109,7 +109,7 @@ export default function ThreadSpool() {
+             {/* Yellow / Fitness */}
+             <button 
+                 onClick={() => setNewCategory('cyber-yellow')} 
+-                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-yellow' ? 'bg-cyber-yellow text-black border-cyber-yellow shadow-[0_0_15px_rgba(252,238,10,0.6)]' : 'border-transparent text-cyber-yellow/50 hover:text-cyber-yellow hover:bg-cyber-yellow/10'}`}
++                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-none border ${newCategory === 'cyber-yellow' ? 'bg-cyber-yellow text-black border-cyber-yellow shadow-[0_0_15px_rgba(252,238,10,0.6)]' : 'border-transparent text-cyber-yellow/50 hover:text-cyber-yellow hover:bg-cyber-yellow/10'}`}
+             >
+                 <span className="material-symbols-outlined">fitness_center</span>
+             </button>
+diff --git a/verify_loominal.py b/verify_loominal.py
+new file mode 100644
+index 0000000..faa4d73
+--- /dev/null
++++ b/verify_loominal.py
+@@ -0,0 +1,53 @@
++import time
++from playwright.sync_api import sync_playwright
++
++def run(playwright):
++    browser = playwright.chromium.launch(headless=True)
++    context = browser.new_context(viewport={'width': 1280, 'height': 1200})
++    page = context.new_page()
++    
++    # Navigate to the app
++    page.goto("http://localhost:5173/")
++    
++    # Wait for the board to load (tasks should be visible)
++    # Check for "Frontend Impl." task
++    page.wait_for_selector('text="Frontend Impl."')
++    
++    # Scroll to the interesting part (around 10:00 - 14:00)
++    # 10:00 is 600px. 14:00 is 840px.
++    # The container is scrollable.
++    # .cyber-scrollbar
++    
++    # Take a screenshot of the whole visible area first
++    page.screenshot(path="verification_full.png")
++    
++    # Try to scroll the timeline container to see "Frontend Impl." better if it's cut off
++    # The container ID is "timeline-container" but the scrollable element is the parent div with class "cyber-scrollbar"
++    # Let's target the element with class "cyber-scrollbar" and scroll it.
++    
++    # Find the scrollable container
++    # It's the one with class "flex-1 overflow-y-auto cyber-scrollbar relative"
++    # We can execute javascript to scroll it.
++    
++    page.evaluate("""
++        const container = document.querySelector('.cyber-scrollbar');
++        if (container) {
++            container.scrollTop = 500; // Scroll to around 08:00
++        }
++    """)
++    time.sleep(1)
++    page.screenshot(path="verification_scroll_morning.png")
++
++    page.evaluate("""
++        const container = document.querySelector('.cyber-scrollbar');
++        if (container) {
++            container.scrollTop = 700; // Scroll to around 12:00
++        }
++    """)
++    time.sleep(1)
++    page.screenshot(path="verification_scroll_noon.png")
++
++    browser.close()
++
++with sync_playwright() as playwright:
++    run(playwright)
