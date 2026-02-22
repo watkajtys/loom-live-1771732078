@@ -2,8 +2,8 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Loominal Main Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Orbitron:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<title>Loominal - Holographic Scalpel</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -12,283 +12,260 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#2547f4",
-                        "neon-pink": "#ff00cc",
-                        "neon-mint": "#00ff9d",
-                        "neon-gold": "#ffd700",
-                        "background-light": "#f5f6f8",
-                        "background-dark": "#050b14", // Deeper obsidian
-                        "surface-dark": "rgba(2, 6, 23, 0.4)", // Glassy dark
-                        "surface-lighter": "rgba(30, 41, 59, 0.3)", // Glassy lighter
+                        "holo-pink": "#ff00ff",
+                        "holo-purple": "#bd00ff",
+                        "holo-blue": "#00f0ff",
+                        "obsidian": "#050505",
+                        "grid-cyan": "rgba(0, 240, 255, 0.15)",
+                        "glass-border": "rgba(0, 240, 255, 0.3)",
+                        "glass-bg": "rgba(5, 5, 10, 0.7)",
                     },
                     fontFamily: {
                         "display": ["Space Grotesk", "sans-serif"],
-                        "sans": ["Space Grotesk", "sans-serif"],
-                        "mono": ["Orbitron", "monospace"], // Futuristic mono
+                        "body": ["Noto Sans", "sans-serif"],
                     },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
                     boxShadow: {
-                        "neon-pink": "0 0 20px rgba(255, 0, 204, 0.5), 0 0 40px rgba(255, 0, 204, 0.3)",
-                        "neon-blue": "0 0 20px rgba(37, 71, 244, 0.5), 0 0 40px rgba(37, 71, 244, 0.3)",
-                        "neon-mint": "0 0 20px rgba(0, 255, 157, 0.5), 0 0 40px rgba(0, 255, 157, 0.3)",
-                        "neon-gold": "0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3)",
+                        'neon-blue': '0 0 5px #00f0ff, 0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3)',
+                        'neon-purple': '0 0 5px #bd00ff, 0 0 10px rgba(189, 0, 255, 0.5), 0 0 20px rgba(189, 0, 255, 0.3)',
+                        'laser': '0 0 2px #00f0ff, 0 0 4px #00f0ff, 0 0 15px #00f0ff',
+                    },
+                    backgroundImage: {
+                        'holographic-gradient': 'linear-gradient(135deg, rgba(189,0,255,0.2) 0%, rgba(0,240,255,0.2) 100%)',
+                        'task-gradient': 'linear-gradient(90deg, #bd00ff 0%, #ff00ff 100%)'
                     }
                 },
             },
         }
     </script>
 <style>
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: #050b14;
-            background-image: radial-gradient(circle at 50% 50%, #0f172a 0%, #050b14 100%);
-        }.loom-scrollbar::-webkit-scrollbar {
-            width: 6px;
+        .cursor-scalpel {
+            cursor: none; 
         }
-        .loom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.3);
+        .grid-background {
+            background-image: linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
+            background-size: 100% 64px; 
         }
-        .loom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(51, 65, 85, 0.5);
-            border-radius: 4px;
+        .grid-sublines {
+            background-image: linear-gradient(to bottom, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 100% 16px; 
         }
-        .loom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(71, 85, 105, 0.8);
-        }.glass-panel {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        @keyframes sparkle {
+            0% { transform: scale(0) translate(0, 0); opacity: 1; }
+            100% { transform: scale(1) translate(var(--tx), var(--ty)); opacity: 0; }
         }
-        .glass-sidebar {
-            background: rgba(2, 6, 23, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        .spark {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            box-shadow: 0 0 4px #00f0ff;
+            border-radius: 50%;
+            animation: sparkle 0.4s ease-out forwards;
         }
-        .glass-header {
-            background: rgba(5, 11, 20, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        .frayed-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 80% 90%, 70% 100%, 60% 92%, 50% 100%, 40% 90%, 30% 100%, 20% 92%, 10% 100%, 0 85%);
         }
-        .task-card-glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }.glow-text-pink { text-shadow: 0 0 10px rgba(255, 0, 204, 0.7); }
-        .glow-text-blue { text-shadow: 0 0 10px rgba(37, 71, 244, 0.7); }
-        .floating-gold-btn {
-            background: linear-gradient(135deg, #ffd700 0%, #ffaa00 50%, #ffd700 100%);
-            background-size: 200% 200%;
-            animation: liquidGold 4s ease infinite;
-            border: none;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-        @keyframes liquidGold {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .frayed-top {
+            clip-path: polygon(0 15%, 10% 0, 20% 8%, 30% 0, 40% 10%, 50% 0, 60% 8%, 70% 0, 80% 10%, 90% 0, 100% 15%, 100% 100%, 0 100%);
+        }.scanline {
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+            background-size: 100% 4px;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.1;
         }
     </style>
 </head>
-<body class="bg-background-dark text-slate-200 h-screen overflow-hidden flex flex-col md:flex-row selection:bg-neon-pink selection:text-white">
-<aside class="w-full md:w-80 lg:w-96 flex-shrink-0 glass-sidebar flex flex-col h-full z-20 relative overflow-hidden">
-<div class="absolute top-0 left-0 w-full h-64 bg-primary/10 blur-[80px] pointer-events-none"></div>
-<div class="p-6 border-b border-white/5 flex items-center gap-3 relative z-10">
-<div class="size-10 rounded-full bg-gradient-to-tr from-primary to-neon-pink flex items-center justify-center shadow-neon-blue">
-<span class="material-symbols-outlined text-white text-xl">all_inclusive</span>
-</div>
-<div>
-<h1 class="text-white text-2xl font-bold leading-none tracking-tight font-display">Loominal</h1>
-<p class="text-slate-400 text-xs font-medium tracking-widest uppercase mt-1">ThreadSpool</p>
-</div>
-</div>
-<div class="p-6 flex flex-col gap-6 overflow-y-auto loom-scrollbar flex-1 relative z-10">
-<div class="flex flex-col gap-2">
-<label class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">New Thread</label>
-<div class="relative group">
-<textarea class="w-full bg-surface-lighter border border-white/10 rounded-xl p-4 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all resize-none h-24 backdrop-blur-sm" placeholder="What needs weaving?"></textarea>
-<button class="absolute bottom-3 right-3 p-1.5 bg-primary/80 hover:bg-primary rounded-lg text-white transition-all shadow-lg shadow-blue-900/40 border border-white/10 backdrop-blur-md">
-<span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
-</div>
-</div>
-<div class="flex flex-col gap-3">
-<label class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Category &amp; Color</label>
-<div class="flex flex-wrap gap-2">
-<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-lighter border border-white/10 hover:border-neon-pink/50 group transition-all hover:bg-white/5">
-<div class="size-2 rounded-full bg-neon-pink shadow-[0_0_8px_rgba(255,0,204,0.8)]"></div>
-<span class="text-xs font-medium text-slate-300 group-hover:text-white font-mono tracking-tight">Deep Work</span>
-</button>
-<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-lighter border border-white/10 hover:border-primary/50 group transition-all hover:bg-white/5">
-<div class="size-2 rounded-full bg-primary shadow-[0_0_8px_rgba(37,71,244,0.8)]"></div>
-<span class="text-xs font-medium text-slate-300 group-hover:text-white font-mono tracking-tight">Meetings</span>
-</button>
-<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-lighter border border-white/10 hover:border-neon-mint/50 group transition-all hover:bg-white/5">
-<div class="size-2 rounded-full bg-neon-mint shadow-[0_0_8px_rgba(0,255,157,0.8)]"></div>
-<span class="text-xs font-medium text-slate-300 group-hover:text-white font-mono tracking-tight">Personal</span>
-</button>
-</div>
-</div>
-<div class="flex flex-col gap-3">
-<div class="flex justify-between items-center">
-<label class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Est. Duration</label>
-<span class="text-xs font-mono text-primary glow-text-blue">45m</span>
-</div>
-<input class="w-full h-1 bg-slate-700/50 rounded-lg appearance-none cursor-pointer accent-primary hover:accent-blue-400 transition-all" type="range"/>
-</div>
-<div class="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent my-2 opacity-50"></div>
-<div class="flex flex-col gap-3">
-<label class="text-slate-400 text-[10px] font-bold uppercase tracking-widest flex items-center justify-between">
-<span>Unwoven Threads</span>
-<span class="bg-white/5 border border-white/5 text-slate-400 px-1.5 py-0.5 rounded text-[10px] font-mono">3</span>
-</label>
-<div class="group relative p-3 rounded-xl bg-surface-lighter border border-white/5 hover:border-neon-pink/60 cursor-grab active:cursor-grabbing transition-all hover:shadow-[0_0_20px_-5px_rgba(255,0,204,0.3)] flex gap-3 items-center backdrop-blur-sm">
-<div class="w-1 self-stretch rounded-full bg-neon-pink shadow-[0_0_8px_rgba(255,0,204,0.6)]"></div>
-<div class="flex-1">
-<h4 class="text-sm font-medium text-white group-hover:text-neon-pink transition-colors">Q3 Strategy Review</h4>
-<p class="text-[10px] text-slate-500 mt-0.5 flex items-center gap-1 font-mono">
-<span class="material-symbols-outlined text-[10px]">schedule</span> 90m
-                    </p>
-</div>
-<span class="material-symbols-outlined text-slate-600 group-hover:text-neon-pink transition-colors text-lg">drag_indicator</span>
-</div>
-<div class="group relative p-3 rounded-xl bg-surface-lighter border border-white/5 hover:border-primary/60 cursor-grab active:cursor-grabbing transition-all hover:shadow-[0_0_20px_-5px_rgba(37,71,244,0.3)] flex gap-3 items-center backdrop-blur-sm">
-<div class="w-1 self-stretch rounded-full bg-primary shadow-[0_0_8px_rgba(37,71,244,0.6)]"></div>
-<div class="flex-1">
-<h4 class="text-sm font-medium text-white group-hover:text-primary transition-colors">Client Sync: Alpha</h4>
-<p class="text-[10px] text-slate-500 mt-0.5 flex items-center gap-1 font-mono">
-<span class="material-symbols-outlined text-[10px]">schedule</span> 30m
-                    </p>
-</div>
-<span class="material-symbols-outlined text-slate-600 group-hover:text-primary transition-colors text-lg">drag_indicator</span>
-</div>
-<div class="group relative p-3 rounded-xl bg-surface-lighter border border-white/5 hover:border-neon-mint/60 cursor-grab active:cursor-grabbing transition-all hover:shadow-[0_0_20px_-5px_rgba(0,255,157,0.3)] flex gap-3 items-center backdrop-blur-sm">
-<div class="w-1 self-stretch rounded-full bg-neon-mint shadow-[0_0_8px_rgba(0,255,157,0.6)]"></div>
-<div class="flex-1">
-<h4 class="text-sm font-medium text-white group-hover:text-neon-mint transition-colors">Gym Session</h4>
-<p class="text-[10px] text-slate-500 mt-0.5 flex items-center gap-1 font-mono">
-<span class="material-symbols-outlined text-[10px]">schedule</span> 60m
-                    </p>
-</div>
-<span class="material-symbols-outlined text-slate-600 group-hover:text-neon-mint transition-colors text-lg">drag_indicator</span>
-</div>
-</div>
-</div>
-<div class="p-4 border-t border-white/5 relative z-10">
-<button class="flex w-full items-center justify-center gap-2 rounded-lg py-2 text-sm font-medium text-slate-400 hover:text-white hover:bg-white/5 transition-colors">
-<span class="material-symbols-outlined text-lg">settings</span>
-            Preferences
-        </button>
-</div>
-</aside>
-<main class="flex-1 flex flex-col h-full relative overflow-hidden bg-transparent">
-<header class="h-20 glass-header flex items-center justify-between px-8 z-30 sticky top-0">
-<div class="flex items-center gap-6">
-<button class="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors border border-transparent hover:border-white/10">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
+<body class="bg-obsidian text-slate-100 font-display overflow-hidden cursor-scalpel">
+<div class="scanline"></div>
+<div class="flex h-screen w-full relative">
+<div class="relative flex h-full w-[280px] min-w-[280px] flex-col bg-obsidian/30 backdrop-blur-md border-r border-glass-border shadow-[5px_0_30px_rgba(0,240,255,0.05)] z-20">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<div class="flex gap-3 items-center">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-holo-blue shadow-neon-blue" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCfE50nuLv4Z4xtcW__Ok95W9_8pCVc6dz0HnmnG3LdYy05Edc-1gskhcUOPcuHNxMkrIOFTtkXZTuZuuZS6d6JnUzKQ9nwmrEfE1UxsKvg6AAI-HAMLeJ0UEZ2W_Rq1Gk22yijcno35oprlN_Wp9HKPL5ByGMfD5s9IrqCIWeghU4c-1QhWTJdJA_hdjPx3wXI3BrePdMJgfJEmxhggdkA0P5n1WbhoiL3CFdRRuFl3_0zek8GeqLSYSpTQsKBHfFpAlXK2LfwYzg");'></div>
 <div class="flex flex-col">
-<h2 class="text-2xl font-bold text-white tracking-tight drop-shadow-md">Today's Weave</h2>
-<p class="text-xs text-primary font-mono tracking-widest uppercase glow-text-blue">Tuesday, October 24</p>
+<h1 class="text-white text-base font-bold leading-none tracking-widest uppercase text-shadow-neon">Loominal</h1>
+<p class="text-holo-blue/70 text-xs font-mono mt-1">HOLO_WORKSPACE_V1</p>
 </div>
-<button class="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors border border-transparent hover:border-white/10">
-<span class="material-symbols-outlined">chevron_right</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-holo-blue/10 transition-colors cursor-pointer text-holo-blue/60 hover:text-holo-blue group border border-transparent hover:border-holo-blue/30">
+<span class="material-symbols-outlined text-[24px]">space_dashboard</span>
+<p class="text-sm font-medium leading-normal">LoomBoard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-holo-blue/10 border border-holo-blue/50 text-white cursor-pointer shadow-neon-blue">
+<span class="material-symbols-outlined text-[24px] fill-1 text-holo-blue">list_alt</span>
+<p class="text-sm font-medium leading-normal text-holo-blue">ThreadSpool</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-holo-blue/10 transition-colors cursor-pointer text-holo-blue/60 hover:text-holo-blue group border border-transparent hover:border-holo-blue/30">
+<span class="material-symbols-outlined text-[24px]">analytics</span>
+<p class="text-sm font-medium leading-normal">Analytics</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-holo-blue/10 transition-colors cursor-pointer text-holo-blue/60 hover:text-holo-blue group border border-transparent hover:border-holo-blue/30">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4 mt-4 flex-1 overflow-y-auto">
+<div class="flex items-center justify-between border-b border-holo-blue/20 pb-2">
+<h2 class="text-holo-blue/80 text-xs font-bold uppercase tracking-wider font-mono">[UNSCHEDULED_DATA]</h2>
+<button class="bg-holo-blue/10 hover:bg-holo-blue/20 p-1 rounded border border-holo-blue/30 transition-colors">
+<span class="material-symbols-outlined text-holo-blue text-[18px]">add</span>
 </button>
 </div>
-<div class="flex items-center gap-6">
-<div class="hidden md:flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10 focus-within:border-primary/50 focus-within:bg-white/10 transition-all">
-<span class="material-symbols-outlined text-slate-400 text-sm">search</span>
-<input class="bg-transparent border-none text-sm text-white placeholder:text-slate-600 focus:ring-0 w-32 lg:w-48 p-0" placeholder="Search threads..." type="text"/>
+<div class="flex flex-col gap-3">
+<div class="relative group cursor-grab active:cursor-grabbing">
+<div class="absolute -left-1 top-1/2 -translate-y-1/2 w-0.5 h-8 bg-holo-pink shadow-neon-purple"></div>
+<div class="flex items-center gap-3 bg-black/40 backdrop-blur-sm p-3 rounded-sm border border-holo-pink/60 shadow-[0_0_15px_rgba(255,0,255,0.1)] transition-transform hover:scale-[1.02]">
+<div class="text-holo-pink flex items-center justify-center shrink-0 animate-pulse">
+<span class="material-symbols-outlined text-[20px]">warning</span>
 </div>
-<button class="floating-gold-btn flex items-center gap-2 px-6 py-2.5 rounded-full text-black font-bold text-sm tracking-wide transform hover:scale-105 active:scale-95 transition-transform">
-<span class="material-symbols-outlined text-xl">content_cut</span>
-                Snip
-            </button>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-white text-sm font-medium truncate font-mono tracking-tight">Urgent_Bug_Fix</p>
+<p class="text-holo-pink/70 text-xs truncate font-mono">Frontend // Login Flow</p>
 </div>
-</header>
-<div class="flex-1 overflow-y-auto loom-scrollbar relative" style="background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 100% 80px;">
-<div class="flex min-h-[1440px] relative pb-20"> 
-<div class="w-16 md:w-24 flex-shrink-0 border-r border-white/5 bg-background-dark/30 backdrop-blur-sm z-10">
-<div class="relative h-full text-xs font-mono text-slate-500 text-right pr-4 pt-2">
-<div class="absolute top-[480px]">08:00</div>
-<div class="absolute top-[540px] text-white/80 font-bold glow-text-blue">09:00</div>
-<div class="absolute top-[600px]">10:00</div>
-<div class="absolute top-[660px]">11:00</div>
-<div class="absolute top-[720px] text-white/80 font-bold glow-text-blue">12:00</div>
-<div class="absolute top-[780px]">13:00</div>
-<div class="absolute top-[840px]">14:00</div>
-<div class="absolute top-[900px]">15:00</div>
-<div class="absolute top-[960px]">16:00</div>
-<div class="absolute top-[1020px]">17:00</div>
+<div class="shrink-0">
+<span class="text-[10px] font-mono text-holo-pink border border-holo-pink/30 bg-holo-pink/5 px-1.5 py-0.5 rounded-sm">45m</span>
 </div>
 </div>
-<div class="flex-1 relative p-2">
-<div class="absolute top-[615px] left-0 w-full flex items-center z-20 pointer-events-none">
-<div class="h-[1px] w-full bg-gradient-to-r from-neon-pink via-primary to-transparent opacity-100 shadow-[0_0_15px_rgba(255,0,204,0.8)]"></div>
-<div class="absolute -left-1.5 size-3 bg-neon-pink rounded-full shadow-[0_0_15px_rgba(255,0,204,1)] border border-white"></div>
 </div>
-<div class="absolute top-[540px] left-4 right-8 h-[120px] rounded-2xl overflow-hidden group cursor-pointer transition-transform hover:scale-[1.01] hover:z-20 shadow-neon-pink">
-<div class="absolute inset-0 bg-gradient-to-br from-neon-pink/10 to-transparent backdrop-blur-md border border-neon-pink/40 rounded-2xl"></div>
-<div class="absolute left-0 top-0 bottom-0 w-1 bg-neon-pink shadow-[0_0_20px_rgba(255,0,204,1)]"></div>
-<div class="relative p-5 h-full flex flex-col justify-between z-10">
-<div>
-<h3 class="text-white font-bold text-lg leading-tight tracking-tight drop-shadow-sm">Project Alpha: Deep Work</h3>
-<p class="text-pink-100/70 text-sm mt-1 font-light">Focus Mode â¢ No interruptions</p>
+<div class="flex items-center gap-3 bg-black/20 p-3 rounded-sm border border-holo-blue/20 hover:border-holo-blue/50 transition-colors cursor-grab">
+<div class="text-holo-blue/50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">groups</span>
 </div>
-<div class="flex items-center gap-2">
-<span class="bg-black/50 text-pink-200 text-[10px] font-mono px-2 py-1 rounded backdrop-blur-md border border-white/10">09:00 - 11:00</span>
-<div class="flex -space-x-2">
-<div class="size-8 rounded-full border border-black bg-slate-700 bg-center bg-cover ring-2 ring-pink-500/20" data-alt="User avatar 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHkkUmEf5zaPERwUWT8VHLpf9k0Q5xGOxYLvQrqcWiWEQ7QqdIrugSUrhvAF0GQHujf-P26M91ZuSoNPKMX0uadGHNywX6cWZuqgav1jmO7Wvp9Pm82_vUk-5z8djgN3QITCNJOIT91CCjADPAxwxCqmRMulsoTdfNt-C-kTBXxkwSoF0jrmVzj0V7y4qft9P63ihcuJfwLJYy2sTnUu4xmPU7ihVls-qdnKoEZ0kPV9TC8Eq4SUlK71CuweR3fIZcR_spRY28rD4')"></div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-slate-300 text-sm font-medium truncate font-mono">Client_Sync_v2</p>
+<p class="text-holo-blue/40 text-xs truncate font-mono">Weekly Update</p>
+</div>
+<div class="shrink-0">
+<span class="text-[10px] font-mono text-holo-blue/50 border border-holo-blue/20 bg-holo-blue/5 px-1.5 py-0.5 rounded-sm">30m</span>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-black/20 p-3 rounded-sm border border-holo-blue/20 hover:border-holo-blue/50 transition-colors cursor-grab">
+<div class="text-holo-blue/50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-slate-300 text-sm font-medium truncate font-mono">Email_Triage</p>
+<p class="text-holo-blue/40 text-xs truncate font-mono">Inbox Zero</p>
+</div>
+<div class="shrink-0">
+<span class="text-[10px] font-mono text-holo-blue/50 border border-holo-blue/20 bg-holo-blue/5 px-1.5 py-0.5 rounded-sm">15m</span>
 </div>
 </div>
 </div>
 </div>
-<div class="absolute top-[690px] left-4 right-1/2 mr-4 h-[60px] rounded-xl overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02] hover:z-20 shadow-neon-blue">
-<div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent backdrop-blur-md border border-primary/40 rounded-xl"></div>
-<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary shadow-[0_0_20px_rgba(37,71,244,1)]"></div>
-<div class="relative px-4 py-2 h-full flex flex-col justify-center z-10">
-<h3 class="text-white font-semibold text-sm leading-tight truncate">Weekly Design Sync</h3>
-<p class="text-blue-200/70 text-xs truncate font-mono">Team A â¢ Zoom</p>
-</div>
-</div>
-<div class="absolute top-[720px] left-1/2 right-8 ml-4 h-[60px] rounded-xl overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02] hover:z-20 shadow-neon-mint">
-<div class="absolute inset-0 bg-gradient-to-br from-neon-mint/10 to-transparent backdrop-blur-md border border-neon-mint/40 rounded-xl"></div>
-<div class="absolute left-0 top-0 bottom-0 w-1 bg-neon-mint shadow-[0_0_20px_rgba(0,255,157,1)]"></div>
-<div class="relative px-4 py-2 h-full flex flex-col justify-center z-10">
-<h3 class="text-white font-semibold text-sm leading-tight truncate">Lunch with Client</h3>
-<p class="text-emerald-200/70 text-xs truncate font-mono">Downtown Cafe</p>
-</div>
-</div>
-<div class="absolute top-[840px] left-4 right-8 h-[150px] rounded-2xl overflow-hidden group cursor-pointer transition-transform hover:scale-[1.01] hover:z-20 shadow-neon-blue">
-<div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent backdrop-blur-md border border-primary/40 rounded-2xl"></div>
-<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary shadow-[0_0_20px_rgba(37,71,244,1)]"></div>
-<div class="absolute inset-0 opacity-10 pointer-events-none mix-blend-overlay" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPg=='); background-size: cover;"></div>
-<div class="relative p-5 h-full flex flex-col justify-between z-10">
-<div>
-<h3 class="text-white font-bold text-lg leading-tight tracking-tight">Frontend Implementation</h3>
-<p class="text-blue-200/60 text-sm mt-1 font-light">Loominal v2.0</p>
-</div>
-<div class="flex items-center gap-3">
-<div class="flex -space-x-2">
-<div class="size-8 rounded-full border border-black bg-slate-700 bg-center bg-cover ring-2 ring-blue-500/20" data-alt="User avatar 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYcrXwUFdeiewT9s5Kvnqqd6alj_zNs-eg8kBL98eTl7fJDgbZFU5c3rmS5McE-vsiq_hWWNv1fYgKlYE2oRLzFJI4-5H1WNJAho_LZt26G_11KIYzMKsc82Svc1Vb9LfKJczyqp1A71czgwlZ_1g4L_mXe_nHiuYCULcq9bkuLS3E85_EfsjPDZ2er7rwfAvD3ryLGZjfBnVkpwe5KHmzjN8MZI37kZg2LJBj6pcKvv7EJFFjpl3RbOhfcASeuL3-YyJdhkUGim8')"></div>
-<div class="size-8 rounded-full border border-black bg-slate-700 bg-center bg-cover ring-2 ring-blue-500/20" data-alt="User avatar 3" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrPe6pUPkfZYi2EAsikd2c3ghaxamxnjRnCIi9lLNQ3sffHMz7Po4kK185EPr8E-RmRF4KsNBmhdN97C_XtcB60ivAvtBrRmAJHScEKKu34ml-A9A-93bvbBygKOdAmchMcqkBDx0kXikv10tS69vk18Owl8c-6lKktU8AT2LxufdNtlXs3CWnisr9jATJoam42f5KEO7SXlsT6UuvkyRrDMAYIRJUUcM-zvMovt1RuykJtkSz72aPpTgEwyJV0t_zW7GT2YwNdfs')"></div>
-</div>
-<div class="bg-primary/20 border border-primary/40 px-3 py-1 rounded-full text-[10px] text-blue-200 font-bold tracking-wider shadow-[0_0_10px_rgba(37,71,244,0.3)]">IN PROGRESS</div>
-</div>
-</div>
-</div>
-<div class="absolute top-[1020px] left-4 right-8 h-[60px] rounded-xl border-2 border-dashed border-slate-600/50 bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none backdrop-blur-sm">
-<span class="text-slate-400 text-sm font-medium font-mono">Drop to schedule 17:00</span>
-</div>
-</div>
-</div>
-</div>
-<button class="md:hidden absolute bottom-6 right-6 size-16 rounded-full floating-gold-btn flex items-center justify-center z-50">
-<span class="material-symbols-outlined text-2xl text-black">content_cut</span>
+<button class="flex w-full cursor-pointer items-center justify-center rounded-sm h-10 px-4 bg-holo-purple/20 border border-holo-purple hover:bg-holo-purple/30 transition-all text-holo-purple hover:text-white text-sm font-bold mt-4 shadow-neon-purple uppercase tracking-widest font-mono">
+<span>New_Thread</span>
 </button>
-</main>
+</div>
+</div>
+<div class="flex-1 flex flex-col relative bg-obsidian overflow-hidden">
+<div class="h-16 border-b border-holo-blue/20 flex items-center justify-between px-8 bg-obsidian/80 backdrop-blur-md z-30">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold text-white tracking-tight font-display drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">Monday, Oct 24</h2>
+<span class="px-2 py-0.5 rounded-sm text-xs font-mono bg-holo-blue/10 text-holo-blue border border-holo-blue/30 shadow-neon-blue">W43</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-black/40 rounded-sm p-1 border border-holo-blue/20">
+<button class="p-1.5 rounded hover:bg-holo-blue/10 text-holo-blue/50 hover:text-holo-blue transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="px-3 py-1 rounded-sm bg-holo-blue/10 border border-holo-blue/20 text-holo-blue text-sm font-medium font-mono">TODAY</button>
+<button class="p-1.5 rounded hover:bg-holo-blue/10 text-holo-blue/50 hover:text-holo-blue transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+<div class="w-px h-6 bg-holo-blue/20"></div>
+<div class="flex items-center gap-2 border border-holo-pink/50 bg-holo-pink/5 px-2 py-1 rounded-sm">
+<span class="text-xs text-holo-pink font-mono tracking-wider font-bold">MODE: SCALPEL</span>
+<div class="w-1.5 h-1.5 rounded-full bg-holo-pink animate-ping shadow-neon-purple"></div>
+</div>
+</div>
+</div>
+<div class="flex-1 relative overflow-y-auto no-scrollbar">
+<div class="flex h-[200vh] relative">
+<div class="w-16 flex-shrink-0 border-r border-holo-blue/20 bg-obsidian/60 backdrop-blur-[2px] z-10 sticky left-0 h-full shadow-[5px_0_20px_rgba(0,0,0,0.5)]">
+<div class="relative h-full flex flex-col">
+<div class="absolute top-[300px] w-full text-right pr-3 -mt-2"><span class="text-[10px] font-mono text-holo-blue/40">09:00</span></div>
+<div class="absolute top-[364px] w-full text-right pr-3 -mt-2"><span class="text-[10px] font-mono text-holo-blue/40">10:00</span></div>
+<div class="absolute top-[428px] w-full text-right pr-3 -mt-2"><span class="text-[10px] font-mono text-holo-blue/40">11:00</span></div>
+<div class="absolute top-[492px] w-full text-right pr-3 -mt-2"><span class="text-[10px] font-mono text-holo-blue/40">12:00</span></div>
+<div class="absolute top-[556px] w-full text-right pr-3 -mt-2"><span class="text-[10px] font-mono text-holo-blue/40">13:00</span></div>
+<div class="absolute top-[620px] w-full text-right pr-3 -mt-2">
+<span class="text-holo-blue text-xs font-mono font-bold drop-shadow-[0_0_5px_#00f0ff]">14:00</span>
+</div>
+<div class="absolute top-[684px] w-full text-right pr-3 -mt-2"><span class="text-[10px] font-mono text-holo-blue/40">15:00</span></div>
+</div>
+</div>
+<div class="flex-1 relative grid-background grid-sublines">
+<div class="absolute top-[636px] w-full h-px bg-holo-blue shadow-neon-blue z-10 flex items-center opacity-40"></div>
+<div class="absolute top-0 left-0 w-full h-full px-4 flex gap-4">
+<div class="flex-1 relative pt-[300px]">
+<div class="absolute top-[300px] left-0 right-4 h-[128px] bg-black/40 border border-holo-blue/10 rounded-sm p-3 opacity-60">
+<h3 class="text-sm font-mono text-holo-blue/60">Morning_Standup</h3>
+<p class="text-[10px] text-holo-blue/30 font-mono">SYNC // TEAM</p>
+</div>
+<div class="absolute top-[556px] left-0 right-4 w-full group">
+<div class="relative h-[78px] bg-task-gradient rounded-t-sm p-4 border border-holo-purple/50 shadow-neon-purple frayed-bottom z-10 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+<div class="relative z-10 flex justify-between items-start">
+<div>
+<h3 class="text-base font-bold text-white font-mono tracking-tight drop-shadow-md">DEEP_WORK_SESSION</h3>
+<p class="text-[10px] text-white/90 font-mono tracking-wider uppercase">Project Phoenix // Core Arch</p>
+</div>
+<span class="bg-black/30 border border-white/20 px-2 py-0.5 rounded-sm text-[10px] font-mono text-white backdrop-blur-sm">FOCUS_MODE</span>
+</div>
+<div class="absolute bottom-2 right-2 text-[10px] font-mono text-white font-bold bg-black/20 px-1">14:15:00</div>
+</div>
+<div class="relative h-[24px] w-full flex items-center justify-center overflow-visible z-20">
+<div class="fixed left-[280px] right-0 h-[2px] bg-holo-blue shadow-laser z-40 pointer-events-none mix-blend-screen opacity-80" style="top: 633px;"></div>
+<div class="absolute -top-10 left-[60%] bg-obsidian/90 border border-holo-blue text-holo-blue text-xs font-mono px-3 py-1.5 rounded-none shadow-[0_0_15px_rgba(0,240,255,0.4)] backdrop-blur-md z-50 transform -translate-x-1/2">
+<span class="animate-pulse">â¶</span> CUT_TIME: 14:15:00
+                                        </div>
+<div class="spark" style="--tx: 25px; --ty: -25px; left: 60%; animation-duration: 0.3s"></div>
+<div class="spark" style="--tx: -20px; --ty: -30px; left: 62%; animation-duration: 0.4s"></div>
+<div class="spark" style="--tx: 30px; --ty: 15px; left: 58%; animation-duration: 0.5s"></div>
+<div class="spark" style="--tx: -25px; --ty: 10px; left: 61%; animation-duration: 0.3s"></div>
+<div class="spark" style="--tx: 0px; --ty: -40px; left: 60.5%; animation-duration: 0.4s; background: #bd00ff;"></div>
+</div>
+<div class="relative h-[50px] bg-task-gradient rounded-b-sm p-4 border border-holo-purple/50 frayed-top translate-y-2 transition-transform opacity-80">
+<div class="opacity-60 relative z-10">
+<h3 class="text-base font-bold text-white font-mono">DEEP_WORK (CONT.)</h3>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+</div>
+<div class="absolute top-[85px] left-0 right-0 h-[32px] border border-dashed border-holo-blue bg-holo-blue/5 flex items-center justify-center opacity-0 hover:opacity-100 transition-all duration-300">
+<span class="text-xs font-mono text-holo-blue font-bold tracking-widest">[DROP_ZONE: +30m]</span>
+</div>
+</div>
+</div>
+<div class="flex-1 relative hidden md:block pointer-events-none">
+<div class="absolute top-[400px] left-0 right-4 h-[64px] bg-holo-blue/5 rounded-sm border border-holo-blue/10"></div>
+</div>
+</div>
+<div class="absolute top-[633px] left-[60%] z-50 pointer-events-none transform -translate-x-1/2 -translate-y-1/2">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<div class="absolute w-full h-[1px] bg-holo-blue shadow-neon-blue"></div>
+<div class="absolute h-full w-[1px] bg-holo-blue shadow-neon-blue"></div>
+<div class="absolute w-4 h-4 border border-holo-blue rounded-full"></div>
+<div class="absolute top-1 right-1 text-[8px] font-mono text-holo-blue/80 leading-none">
+                                    X: 14<br/>Y: 15
+                                </div>
+<div class="absolute bottom-1 left-1 text-[8px] font-mono text-holo-pink/80 leading-none text-right w-full pr-14">
+                                    TARGET_LOCKED
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 </body></html>

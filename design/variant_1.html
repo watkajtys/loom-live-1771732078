@@ -2,8 +2,8 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Loominal Cyber Ribbon Loom</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Rajdhani:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<title>Loominal Industrial Scalpel Split</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Share+Tech+Mono&amp;family=Rajdhani:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -12,287 +12,277 @@
             theme: {
                 extend: {
                     colors: {
-                        "cyber-cyan": "#00f0ff",
-                        "cyber-magenta": "#ff0055",
-                        "cyber-yellow": "#fcee0a",
-                        "deep-void": "#05050a", 
-                        "grid-line": "#00f0ff20",
-                        "panel-bg": "#0a0a12",
-                        "panel-border": "#1a1a2e",
+                        "amber-electric": "#FFBF00",
+                        "amber-dim": "#b38600",
+                        "charcoal-dark": "#121212",
+                        "charcoal-surface": "#1E1E1E",
+                        "charcoal-light": "#2D2D2D",
+                        "industrial-steel": "#4A4A4A",
+                        "alert-red": "#FF3333",
                     },
                     fontFamily: {
                         "display": ["Rajdhani", "sans-serif"],
-                        "mono": ["Space Mono", "monospace"],
+                        "mono": ["Share Tech Mono", "monospace"],
+                        "body": ["Space Grotesk", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "none": "0",
+                        "sm": "0.125rem",
+                        "md": "0.25rem",
                     },
                     backgroundImage: {
-                        'cyber-grid': "linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px)",
+                        'striped-bg': "repeating-linear-gradient(45deg, #1E1E1E, #1E1E1E 10px, #1a1a1a 10px, #1a1a1a 20px)",
                     },
                     boxShadow: {
-                        'neon-cyan': '0 0 10px rgba(0, 240, 255, 0.5), 0 0 20px rgba(0, 240, 255, 0.3)',
-                        'neon-magenta': '0 0 10px rgba(255, 0, 85, 0.5), 0 0 20px rgba(255, 0, 85, 0.3)',
+                        'amber-glow': '0 0 10px rgba(255, 191, 0, 0.4), 0 0 20px rgba(255, 191, 0, 0.1)',
+                        'arc-flash': '0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 191, 0, 0.6)',
                     }
                 },
             },
         }
     </script>
 <style>
-        body {
-            font-family: 'Rajdhani', sans-serif;
-            background-color: #05050a;
-        }.cyber-scrollbar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .cyber-scrollbar::-webkit-scrollbar-track {
-            background: #05050a;
-        }
-        .cyber-scrollbar::-webkit-scrollbar-thumb {
-            background: #00f0ff;
-            border-radius: 0;
-        }.cyber-ribbon {
-            clip-path: polygon(
-                10px 0%, 100% 0%, 
-                calc(100% - 10px) 100%, 0% 100%
-            );
-        }
-        .cyber-ribbon-reverse {
-            clip-path: polygon(
-                0% 0%, calc(100% - 10px) 0%, 
-                100% 100%, 10px 100%
-            );
-        }
-        .corner-cut {
-            clip-path: polygon(
-                20px 0, 100% 0, 
-                100% calc(100% - 20px), calc(100% - 20px) 100%, 
-                0 100%, 0 20px
-            );
-        }
-        .grid-bg {
-            background-size: 40px 40px;
+        .cursor-scalpel {
+            cursor: none;
+        }.circuit-bg {
+            background-color: #121212;
             background-image: 
-                linear-gradient(to right, rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
-        }.thread-spool {
-            width: 64px;
-            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
+                linear-gradient(rgba(255, 191, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 191, 0, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
-        .thread-spool:hover {
-            width: 320px;
+        .timeline-grid {
+            background-image: linear-gradient(to right, #2D2D2D 1px, transparent 1px);
+            background-size: 100% 12px; 
+        }.timeline-ticks {
+            background-image: linear-gradient(to bottom, #4A4A4A 1px, transparent 1px);
+            background-size: 100% 21.33px;}.timeline-hours {
+            background-image: linear-gradient(to bottom, #FFBF00 1px, transparent 1px);
+            background-size: 100% 256px; 
         }
-        .thread-spool:hover .spool-content {
-            opacity: 1;
-            transform: translateX(0);
+        @keyframes electric-arc {
+            0% { opacity: 1; transform: scale(1) translate(0,0); }
+            20% { opacity: 0.8; transform: scale(1.5) translate(-5px, 5px); }
+            40% { opacity: 1; transform: scale(0.8) translate(5px, -5px); }
+            60% { opacity: 0.5; transform: scale(1.2) translate(-2px, 2px); }
+            100% { opacity: 0; transform: scale(0); }
         }
-        .spool-content {
-            opacity: 0;
-            transform: translateX(-20px);
-            transition: all 0.2s ease 0.1s;
-            white-space: nowrap;
+        .arc-spark {
+            position: absolute;
+            background: #fff;
+            box-shadow: 0 0 5px #FFBF00, 0 0 10px #FFBF00;
+            border-radius: 50%;
+            pointer-events: none;
+        }.clip-corner-tr {
+            clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
         }
-        .glitch-text:hover {
-            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-            color: #00f0ff;
+        .clip-corner-bl {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
         }
-        @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 2px) }
-            40% { transform: translate(-2px, -2px) }
-            60% { transform: translate(2px, 2px) }
-            80% { transform: translate(2px, -2px) }
-            100% { transform: translate(0) }
+        .clip-hex {
+            clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0 50%);
+        }
+        .clip-jagged-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 95%, 90% 85%, 85% 95%, 80% 85%, 75% 95%, 70% 85%, 65% 95%, 60% 85%, 55% 95%, 50% 85%, 45% 95%, 40% 85%, 35% 95%, 30% 85%, 25% 95%, 20% 85%, 15% 95%, 10% 85%, 5% 95%, 0 85%);
+        }
+        .clip-jagged-top {
+            clip-path: polygon(0 15%, 5% 5%, 10% 15%, 15% 5%, 20% 15%, 25% 5%, 30% 15%, 35% 5%, 40% 15%, 45% 5%, 50% 15%, 55% 5%, 60% 15%, 65% 5%, 70% 15%, 75% 5%, 80% 15%, 85% 5%, 90% 15%, 95% 5%, 100% 15%, 100% 100%, 0 100%);
+        }::-webkit-scrollbar {
+            width: 6px;
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4A4A4A;
+            border-radius: 0;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFBF00;
         }
     </style>
 </head>
-<body class="bg-deep-void text-slate-300 h-screen overflow-hidden flex flex-row selection:bg-cyber-cyan selection:text-black">
-<aside class="thread-spool h-full bg-panel-bg border-r border-panel-border flex flex-col z-50 shadow-[4px_0_24px_rgba(0,0,0,0.5)] absolute md:relative">
-<div class="w-16 flex flex-col items-center py-6 gap-8 bg-panel-bg/50 backdrop-blur-sm z-20 absolute top-0 bottom-0 left-0 border-r border-white/5">
-<div class="size-10 flex items-center justify-center text-cyber-cyan">
-<span class="material-symbols-outlined text-3xl">all_inclusive</span>
+<body class="bg-charcoal-dark text-gray-300 font-display overflow-hidden cursor-scalpel select-none">
+<div class="flex h-screen w-full border-[6px] border-charcoal-surface">
+<div class="relative flex h-full w-[80px] min-w-[80px] flex-col bg-charcoal-surface border-r-2 border-industrial-steel z-20 items-center py-6 gap-6">
+<div class="w-12 h-12 bg-amber-electric text-charcoal-dark flex items-center justify-center clip-corner-tr font-bold text-xl shadow-amber-glow cursor-pointer hover:bg-white transition-colors">
+                L
+            </div>
+<div class="flex flex-col w-full gap-4 mt-4">
+<div class="relative w-full h-14 flex items-center justify-center group cursor-pointer">
+<div class="absolute right-0 top-0 bottom-0 w-1 bg-amber-electric shadow-amber-glow"></div>
+<div class="w-10 h-10 bg-charcoal-light flex items-center justify-center text-amber-electric border border-amber-dim/30 hover:border-amber-electric transition-colors clip-corner-bl">
+<span class="material-symbols-outlined">space_dashboard</span>
 </div>
-<div class="flex flex-col gap-6 mt-4 w-full items-center">
-<button class="size-10 flex items-center justify-center hover:text-cyber-cyan hover:bg-cyber-cyan/10 transition-colors rounded-none border border-transparent hover:border-cyber-cyan/30">
-<span class="material-symbols-outlined">add</span>
-</button>
-<div class="w-8 h-px bg-white/10"></div>
-<button class="size-10 flex items-center justify-center text-cyber-magenta hover:text-white hover:bg-cyber-magenta/20 transition-colors">
-<span class="material-symbols-outlined">work</span>
-</button>
-<button class="size-10 flex items-center justify-center text-cyber-cyan hover:text-white hover:bg-cyber-cyan/20 transition-colors">
-<span class="material-symbols-outlined">groups</span>
-</button>
-<button class="size-10 flex items-center justify-center text-cyber-yellow hover:text-white hover:bg-cyber-yellow/20 transition-colors">
-<span class="material-symbols-outlined">fitness_center</span>
-</button>
 </div>
-<div class="mt-auto mb-4">
-<button class="size-10 flex items-center justify-center hover:text-cyber-cyan transition-colors">
+<div class="relative w-full h-14 flex items-center justify-center group cursor-pointer opacity-60 hover:opacity-100 transition-opacity">
+<div class="w-10 h-10 bg-charcoal-light flex items-center justify-center text-gray-400 border border-transparent hover:border-gray-500 clip-corner-bl">
+<span class="material-symbols-outlined">list_alt</span>
+</div>
+</div>
+<div class="relative w-full h-14 flex items-center justify-center group cursor-pointer opacity-60 hover:opacity-100 transition-opacity">
+<div class="w-10 h-10 bg-charcoal-light flex items-center justify-center text-gray-400 border border-transparent hover:border-gray-500 clip-corner-bl">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+</div>
+</div>
+<div class="mt-auto mb-4 flex flex-col items-center gap-4">
+<div class="w-10 h-10 rounded-none border border-industrial-steel bg-center bg-cover grayscale hover:grayscale-0 transition-all cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCfE50nuLv4Z4xtcW__Ok95W9_8pCVc6dz0HnmnG3LdYy05Edc-1gskhcUOPcuHNxMkrIOFTtkXZTuZuuZS6d6JnUzKQ9nwmrEfE1UxsKvg6AAI-HAMLeJ0UEZ2W_Rq1Gk22yijcno35oprlN_Wp9HKPL5ByGMfD5s9IrqCIWeghU4c-1QhWTJdJA_hdjPx3wXI3BrePdMJgfJEmxhggdkA0P5n1WbhoiL3CFdRRuFl3_0zek8GeqLSYSpTQsKBHfFpAlXK2LfwYzg");'></div>
+<div class="w-8 h-8 flex items-center justify-center text-industrial-steel hover:text-amber-electric cursor-pointer">
 <span class="material-symbols-outlined">settings</span>
-</button>
-</div>
-</div>
-<div class="pl-16 w-[320px] h-full flex flex-col bg-panel-bg border-r border-cyber-cyan/20">
-<div class="spool-content h-full flex flex-col p-6">
-<div class="mb-8 border-b border-white/10 pb-4">
-<h1 class="text-white text-2xl font-bold uppercase tracking-widest font-display glitch-text cursor-default">Loominal</h1>
-<p class="text-cyber-cyan text-xs font-mono tracking-tighter">SYS.THREAD_SPOOL.V2</p>
-</div>
-<div class="flex flex-col gap-4 mb-8">
-<label class="text-cyber-cyan text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2">
-<span class="w-2 h-2 bg-cyber-cyan"></span> Initialize Thread
-                    </label>
-<div class="relative">
-<textarea class="w-full bg-black/40 border border-white/20 p-3 text-sm font-mono text-white placeholder:text-white/20 focus:outline-none focus:border-cyber-cyan focus:ring-1 focus:ring-cyber-cyan transition-all resize-none h-24 rounded-none corner-cut" placeholder="INPUT_TASK_DATA..."></textarea>
-<div class="absolute -right-1 -bottom-1 w-3 h-3 border-r border-b border-cyber-cyan"></div>
-</div>
-<button class="w-full py-2 bg-cyber-cyan/10 border border-cyber-cyan/50 text-cyber-cyan font-mono text-xs hover:bg-cyber-cyan hover:text-black transition-all uppercase tracking-widest font-bold flex items-center justify-center gap-2 group">
-                        Execute <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward_ios</span>
-</button>
-</div>
-<div class="flex flex-col gap-4 flex-1 overflow-y-auto cyber-scrollbar pr-2">
-<div class="flex items-center justify-between border-b border-white/10 pb-2">
-<span class="text-white/50 text-xs font-mono uppercase">Buffer Zone</span>
-<span class="text-cyber-cyan text-xs font-mono">[3]</span>
-</div>
-<div class="group relative p-3 bg-white/5 border-l-2 border-cyber-magenta hover:bg-white/10 cursor-grab active:cursor-grabbing transition-all flex gap-3 items-center clip-path-polygon">
-<div class="flex-1">
-<h4 class="text-sm font-bold text-white font-display uppercase tracking-wide">Q3 Strategy Review</h4>
-<p class="text-xs text-white/40 font-mono mt-1">90 MIN // DEEP_WORK</p>
-</div>
-<span class="material-symbols-outlined text-white/20 group-hover:text-cyber-magenta">drag_indicator</span>
-</div>
-<div class="group relative p-3 bg-white/5 border-l-2 border-cyber-cyan hover:bg-white/10 cursor-grab active:cursor-grabbing transition-all flex gap-3 items-center">
-<div class="flex-1">
-<h4 class="text-sm font-bold text-white font-display uppercase tracking-wide">Client Sync: Alpha</h4>
-<p class="text-xs text-white/40 font-mono mt-1">30 MIN // COMMS</p>
-</div>
-<span class="material-symbols-outlined text-white/20 group-hover:text-cyber-cyan">drag_indicator</span>
-</div>
-<div class="group relative p-3 bg-white/5 border-l-2 border-cyber-yellow hover:bg-white/10 cursor-grab active:cursor-grabbing transition-all flex gap-3 items-center">
-<div class="flex-1">
-<h4 class="text-sm font-bold text-white font-display uppercase tracking-wide">Gym Session</h4>
-<p class="text-xs text-white/40 font-mono mt-1">60 MIN // BIO_MAINTENANCE</p>
-</div>
-<span class="material-symbols-outlined text-white/20 group-hover:text-cyber-yellow">drag_indicator</span>
 </div>
 </div>
 </div>
+<div class="w-[280px] bg-charcoal-surface/95 border-r border-industrial-steel flex flex-col p-0 relative backdrop-blur-sm">
+<div class="h-16 bg-striped-bg border-b-2 border-industrial-steel flex items-center px-5 justify-between">
+<h2 class="font-mono text-amber-electric tracking-widest text-sm font-bold uppercase">Thread_Spool</h2>
+<div class="w-2 h-2 bg-amber-electric rounded-full animate-pulse shadow-amber-glow"></div>
 </div>
-</aside>
-<main class="flex-1 flex flex-col h-full bg-deep-void relative overflow-hidden">
-<div class="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
-<div class="absolute inset-0 bg-gradient-to-t from-deep-void via-transparent to-deep-void pointer-events-none"></div>
-<header class="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-deep-void/90 backdrop-blur-md z-30 sticky top-0">
+<div class="p-4 flex flex-col gap-4 overflow-y-auto">
+<div class="group cursor-grab active:cursor-grabbing">
+<div class="bg-charcoal-light border-l-4 border-amber-electric p-3 clip-corner-tr relative shadow-md hover:translate-x-1 transition-transform">
+<div class="flex justify-between items-start mb-1">
+<span class="text-amber-electric text-xs font-mono border border-amber-electric/30 px-1">URGENT</span>
+<span class="text-gray-500 text-xs font-mono">ID:8842</span>
+</div>
+<h3 class="text-white font-bold leading-tight">System Failure</h3>
+<p class="text-gray-400 text-xs mt-1 font-mono">Core/Auth/Login</p>
+<div class="absolute -right-1 -bottom-1 w-3 h-3 border-r border-b border-amber-electric"></div>
+</div>
+</div>
+<div class="group cursor-grab opacity-70 hover:opacity-100">
+<div class="bg-charcoal-light border border-industrial-steel p-3 relative hover:border-gray-400 transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="text-industrial-steel text-xs font-mono px-1">PENDING</span>
+<span class="text-gray-500 text-xs font-mono">ID:9102</span>
+</div>
+<h3 class="text-gray-200 font-medium leading-tight">Client Sync</h3>
+<p class="text-gray-500 text-xs mt-1 font-mono">External/Weekly</p>
+</div>
+</div>
+<div class="group cursor-grab opacity-70 hover:opacity-100">
+<div class="bg-charcoal-light border border-industrial-steel p-3 relative hover:border-gray-400 transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="text-industrial-steel text-xs font-mono px-1">ROUTINE</span>
+<span class="text-gray-500 text-xs font-mono">ID:9105</span>
+</div>
+<h3 class="text-gray-200 font-medium leading-tight">Log Analysis</h3>
+<p class="text-gray-500 text-xs mt-1 font-mono">Maintenance/Daily</p>
+</div>
+</div>
+</div>
+<div class="mt-auto p-4 border-t border-industrial-steel bg-charcoal-surface">
+<button class="w-full bg-industrial-steel/20 border border-amber-electric/50 text-amber-electric py-2 font-mono text-sm hover:bg-amber-electric hover:text-black transition-colors uppercase tracking-wider flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Initialize Thread
+                </button>
+</div>
+</div>
+<div class="flex-1 flex flex-col relative circuit-bg overflow-hidden">
+<div class="h-16 border-b-2 border-industrial-steel bg-charcoal-dark/90 backdrop-blur-md z-30 flex items-center justify-between px-6">
 <div class="flex items-center gap-6">
-<div class="flex gap-1">
-<button class="size-8 flex items-center justify-center border border-white/10 text-white/60 hover:text-cyber-cyan hover:border-cyber-cyan transition-all">
-<span class="material-symbols-outlined text-sm">chevron_left</span>
-</button>
-<button class="size-8 flex items-center justify-center border border-white/10 text-white/60 hover:text-cyber-cyan hover:border-cyber-cyan transition-all">
-<span class="material-symbols-outlined text-sm">chevron_right</span>
-</button>
+<div class="flex flex-col">
+<h2 class="text-2xl font-bold text-white font-display tracking-wide">OCT.24</h2>
+<span class="text-xs font-mono text-amber-dim">SECTOR_W43 // MON</span>
 </div>
-<div>
-<h2 class="text-xl font-bold text-white uppercase tracking-widest font-display">Cycle: Today</h2>
-<p class="text-[10px] text-cyber-cyan font-mono">TUE 24 OCT // 14:35:22</p>
+<div class="h-8 w-px bg-industrial-steel"></div>
+<div class="flex items-center gap-2 border border-industrial-steel bg-charcoal-light px-2 py-1">
+<span class="material-symbols-outlined text-gray-400 text-sm">chevron_left</span>
+<span class="font-mono text-xs text-gray-300">TODAY</span>
+<span class="material-symbols-outlined text-gray-400 text-sm">chevron_right</span>
 </div>
 </div>
-<div class="flex items-center gap-6">
-<div class="hidden md:flex items-center gap-2 px-3 py-1 bg-black/50 border border-white/10 skew-x-[-12deg]">
-<span class="material-symbols-outlined text-white/40 text-sm skew-x-[12deg]">search</span>
-<input class="bg-transparent border-none text-sm text-white placeholder:text-white/30 focus:ring-0 w-48 p-0 font-mono skew-x-[12deg]" placeholder="SCAN_THREADS..." type="text"/>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-amber-electric/10 border border-amber-electric/30 px-3 py-1 clip-corner-bl">
+<span class="text-xs text-amber-electric font-mono animate-pulse">MODE: SCALPEL_ACTIVE</span>
+<span class="material-symbols-outlined text-amber-electric text-sm">content_cut</span>
 </div>
-<button class="relative px-6 py-2 bg-transparent text-cyber-yellow text-sm font-bold font-mono tracking-widest uppercase border border-cyber-yellow/30 hover:bg-cyber-yellow/10 hover:border-cyber-yellow hover:shadow-[0_0_15px_rgba(252,238,10,0.4)] transition-all group overflow-hidden">
-<span class="relative z-10 flex items-center gap-2">
-<span class="material-symbols-outlined text-lg">content_cut</span>
-                        Sever Threads
-                    </span>
-<div class="absolute inset-0 bg-cyber-yellow/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-</button>
 </div>
-</header>
-<div class="flex-1 overflow-y-auto cyber-scrollbar relative">
-<div class="flex min-h-[1440px] relative pb-20"> 
-<div class="w-20 flex-shrink-0 border-r border-white/10 bg-panel-bg z-10">
-<div class="relative h-full text-xs font-mono text-white/40 text-right pr-4 pt-2">
-<div class="absolute top-[480px]">0800</div>
-<div class="absolute top-[540px]">0900</div>
-<div class="absolute top-[600px] text-cyber-cyan font-bold">1000</div>
-<div class="absolute top-[660px]">1100</div>
-<div class="absolute top-[720px]">1200</div>
-<div class="absolute top-[780px]">1300</div>
-<div class="absolute top-[840px]">1400</div>
-<div class="absolute top-[900px]">1500</div>
-<div class="absolute top-[960px]">1600</div>
-<div class="absolute top-[1020px]">1700</div>
+</div>
+<div class="flex-1 relative overflow-y-auto no-scrollbar" style="scroll-behavior: smooth;">
+<div class="flex h-[200vh] relative">
+<div class="w-20 flex-shrink-0 border-r-2 border-industrial-steel bg-charcoal-surface z-10 sticky left-0 h-full timeline-ticks timeline-hours">
+<div class="relative h-full w-full">
+<div class="absolute top-[300px] right-2 -mt-2.5 font-mono text-xs text-gray-500">0900</div>
+<div class="absolute top-[364px] right-2 -mt-2.5 font-mono text-xs text-gray-600">1000</div>
+<div class="absolute top-[428px] right-2 -mt-2.5 font-mono text-xs text-gray-600">1100</div>
+<div class="absolute top-[492px] right-2 -mt-2.5 font-mono text-xs text-gray-600">1200</div>
+<div class="absolute top-[556px] right-2 -mt-2.5 font-mono text-xs text-gray-600">1300</div>
+<div class="absolute top-[620px] right-2 -mt-2.5 font-mono text-sm font-bold text-amber-electric bg-charcoal-dark px-1 border border-amber-electric">1400</div>
+<div class="absolute top-[684px] right-2 -mt-2.5 font-mono text-xs text-gray-600">1500</div>
 </div>
 </div>
 <div class="flex-1 relative">
-<div class="absolute inset-0" style="background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 100% 60px;"></div>
-<div class="absolute top-[615px] left-0 w-full flex items-center z-40 pointer-events-none">
-<div class="absolute -left-1.5 size-3 bg-cyber-magenta shadow-[0_0_10px_#ff0055] rotate-45"></div>
-<div class="h-[1px] w-full bg-cyber-magenta shadow-[0_0_8px_#ff0055]"></div>
-<div class="absolute right-0 bg-cyber-magenta text-black text-[10px] font-bold px-1 font-mono">NOW</div>
+<div class="absolute inset-0 pointer-events-none timeline-ticks opacity-20"></div>
+<div class="absolute inset-0 pointer-events-none timeline-hours opacity-30"></div>
+<div class="absolute top-[636px] w-full h-px bg-amber-electric z-10 flex items-center shadow-amber-glow">
+<div class="absolute -left-1 w-0 h-0 border-l-[8px] border-r-[0px] border-t-[6px] border-b-[6px] border-l-amber-electric border-t-transparent border-b-transparent"></div>
+<div class="absolute right-0 text-[10px] font-mono bg-amber-electric text-black px-1 font-bold">14:15</div>
 </div>
-<div class="absolute top-[540px] left-4 right-12 h-[120px] group cursor-pointer hover:z-30 transition-all cyber-ribbon">
-<div class="absolute inset-0 bg-cyber-magenta/10 border-l-4 border-cyber-magenta backdrop-blur-sm transition-all group-hover:bg-cyber-magenta/20"></div>
-<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')]"></div>
-<div class="relative p-4 h-full flex flex-col justify-between pl-8">
-<div>
-<h3 class="text-white font-bold text-xl uppercase tracking-wider font-display drop-shadow-md">Project Alpha: Deep Work</h3>
-<p class="text-cyber-magenta text-sm mt-1 font-mono tracking-tight">&lt;MODE: FOCUS_LOCK /&gt;</p>
+<div class="absolute top-0 left-0 w-full h-full px-6 flex gap-6">
+<div class="flex-1 relative pt-[300px]">
+<div class="absolute top-[300px] left-0 right-8 h-[128px] bg-charcoal-light border border-industrial-steel p-3 opacity-40">
+<div class="flex justify-between">
+<h3 class="text-sm font-mono text-gray-400">SYNC_ROUTINE</h3>
+<span class="text-[10px] border border-gray-600 px-1 text-gray-500">CMPL</span>
 </div>
-<div class="flex items-center gap-4">
-<span class="bg-black/60 text-cyber-magenta text-xs px-2 py-0.5 border border-cyber-magenta/30 font-mono">0900 - 1100</span>
-<div class="flex -space-x-3">
-<div class="size-8 border-2 border-black bg-slate-700 bg-center bg-cover grayscale group-hover:grayscale-0 transition-all" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHkkUmEf5zaPERwUWT8VHLpf9k0Q5xGOxYLvQrqcWiWEQ7QqdIrugSUrhvAF0GQHujf-P26M91ZuSoNPKMX0uadGHNywX6cWZuqgav1jmO7Wvp9Pm82_vUk-5z8djgN3QITCNJOIT91CCjADPAxwxCqmRMulsoTdfNt-C-kTBXxkwSoF0jrmVzj0V7y4qft9P63ihcuJfwLJYy2sTnUu4xmPU7ihVls-qdnKoEZ0kPV9TC8Eq4SUlK71CuweR3fIZcR_spRY28rD4'); clip-path: polygon(20% 0, 100% 0, 80% 100%, 0% 100%);"></div>
+<p class="text-xs text-gray-600 font-mono mt-1">// Team Update</p>
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0tMSwxIGwyLC0yIE0wLDQgbDQsLTQgTTMsNSBsMiwtMiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjEiLz48L3N2Zz4=')] opacity-20"></div>
 </div>
-</div>
-</div>
-</div>
-<div class="absolute top-[690px] left-8 right-1/2 mr-4 h-[60px] group cursor-pointer hover:z-30 cyber-ribbon-reverse transition-transform hover:-translate-y-1">
-<div class="absolute inset-0 bg-cyber-cyan/10 border-r-4 border-cyber-cyan backdrop-blur-sm group-hover:bg-cyber-cyan/20"></div>
-<div class="relative px-6 py-2 h-full flex flex-col justify-center text-right pr-8">
-<h3 class="text-white font-bold text-sm uppercase tracking-wide font-display">Weekly Design Sync</h3>
-<p class="text-cyber-cyan/70 text-xs font-mono">NET_ID: ZOOM_882</p>
-</div>
-</div>
-<div class="absolute top-[720px] left-1/2 right-4 ml-[-20px] h-[60px] group cursor-pointer hover:z-30 cyber-ribbon transition-transform hover:-translate-y-1 z-20">
-<div class="absolute inset-0 bg-cyber-yellow/10 border-l-4 border-cyber-yellow backdrop-blur-sm group-hover:bg-cyber-yellow/20"></div>
-<div class="relative px-6 py-2 h-full flex flex-col justify-center pl-8">
-<h3 class="text-white font-bold text-sm uppercase tracking-wide font-display">Lunch with Client</h3>
-<p class="text-cyber-yellow/70 text-xs font-mono">LOC: DOWNTOWN_SECTOR</p>
-</div>
-</div>
-<div class="absolute top-[840px] left-6 right-10 h-[150px] group cursor-pointer hover:z-30 cyber-ribbon transition-all hover:scale-[1.01]">
-<div class="absolute inset-0 bg-gradient-to-r from-cyber-cyan/20 to-blue-900/40 border-l-4 border-cyber-cyan backdrop-blur-md"></div>
-<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, rgba(0,240,255,1) 1px, transparent 0); background-size: 20px 20px;"></div>
-<div class="relative p-5 h-full flex flex-col justify-between pl-10">
-<div>
+<div class="absolute top-[556px] left-0 right-8 w-full group">
+<div class="relative h-[78px] bg-gradient-to-r from-charcoal-light to-charcoal-surface border-l-[3px] border-amber-electric border-r border-t border-b border-industrial-steel p-4 clip-jagged-bottom z-10 shadow-lg">
 <div class="flex justify-between items-start">
-<h3 class="text-white font-bold text-xl uppercase tracking-wider font-display">Frontend Impl.</h3>
-<span class="text-cyber-cyan text-[10px] font-mono border border-cyber-cyan px-1 animate-pulse">RUNNING</span>
+<div>
+<h3 class="text-lg font-bold text-white font-display uppercase tracking-wide">Deep_Focus_Protocol</h3>
+<p class="text-xs text-amber-electric font-mono mt-0.5">&lt;Project: Phoenix&gt;</p>
 </div>
-<p class="text-cyan-200/60 text-sm mt-1 font-mono">SYS.VER: 2.0 // RIBBON_UI</p>
+<span class="bg-amber-electric/20 border border-amber-electric/50 px-2 py-0.5 text-[10px] font-mono text-amber-electric">ACTIVE</span>
 </div>
-<div class="w-full bg-black/50 h-1 mt-4 mb-auto relative overflow-hidden">
-<div class="absolute top-0 left-0 h-full w-[65%] bg-cyber-cyan shadow-[0_0_10px_#00f0ff]"></div>
+<div class="absolute bottom-2 right-4 text-xs font-mono text-gray-500">T-MINUS 14:15</div>
 </div>
-<div class="flex items-center gap-3 mt-2">
-<div class="flex -space-x-2">
-<div class="size-6 border border-cyber-cyan bg-slate-800 bg-center bg-cover grayscale group-hover:grayscale-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYcrXwUFdeiewT9s5Kvnqqd6alj_zNs-eg8kBL98eTl7fJDgbZFU5c3rmS5McE-vsiq_hWWNv1fYgKlYE2oRLzFJI4-5H1WNJAho_LZt26G_11KIYzMKsc82Svc1Vb9LfKJczyqp1A71czgwlZ_1g4L_mXe_nHiuYCULcq9bkuLS3E85_EfsjPDZ2er7rwfAvD3ryLGZjfBnVkpwe5KHmzjN8MZI37kZg2LJBj6pcKvv7EJFFjpl3RbOhfcASeuL3-YyJdhkUGim8'); transform: skewX(-15deg);"></div>
-<div class="size-6 border border-cyber-cyan bg-slate-800 bg-center bg-cover grayscale group-hover:grayscale-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrPe6pUPkfZYi2EAsikd2c3ghaxamxnjRnCIi9lLNQ3sffHMz7Po4kK185EPr8E-RmRF4KsNBmhdN97C_XtcB60ivAvtBrRmAJHScEKKu34ml-A9A-93bvbBygKOdAmchMcqkBDx0kXikv10tS69vk18Owl8c-6lKktU8AT2LxufdNtlXs3CWnisr9jATJoam42f5KEO7SXlsT6UuvkyRrDMAYIRJUUcM-zvMovt1RuykJtkSz72aPpTgEwyJV0t_zW7GT2YwNdfs'); transform: skewX(-15deg);"></div>
-</div>
-<div class="text-[10px] text-cyber-cyan font-mono">STATUS: COMPILING...</div>
-</div>
-</div>
-</div>
-<div class="absolute top-[1020px] left-4 right-8 h-[60px] border border-dashed border-white/20 bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none skew-x-[-10deg]">
-<span class="text-white/30 text-xs font-mono tracking-widest">[ SLOT AVAILABLE: 1700 ]</span>
-</div>
+<div class="relative h-[24px] w-full flex items-center justify-center overflow-visible z-20">
+<div class="absolute w-[105%] h-[2px] bg-white shadow-arc-flash animate-pulse"></div>
+<div class="absolute w-[105%] h-[6px] bg-amber-electric/20 blur-sm"></div>
+<div class="absolute -top-10 left-[62%] bg-black border border-amber-electric text-amber-electric text-xs font-mono px-2 py-1 shadow-amber-glow clip-hex z-50 whitespace-nowrap">
+                                            &gt; SPLIT_SEQUENCE_INIT [14:15]
+                                        </div>
+<div class="absolute left-[60%] top-1/2">
+<div class="arc-spark w-1 h-1" style="animation: electric-arc 0.4s ease-out infinite;"></div>
+<div class="arc-spark w-2 h-2" style="animation: electric-arc 0.3s ease-out 0.1s infinite reverse;"></div>
+<div class="arc-spark w-1 h-3" style="animation: electric-arc 0.5s ease-out 0.2s infinite;"></div>
 </div>
 </div>
+<div class="relative h-[50px] bg-gradient-to-r from-charcoal-light/90 to-charcoal-surface/90 border-l-[3px] border-amber-dim border-r border-t border-b border-industrial-steel p-4 clip-jagged-top translate-y-3 transition-transform opacity-80 grayscale-[0.5]">
+<div class="opacity-60 flex justify-between">
+<h3 class="text-lg font-bold text-white font-display uppercase tracking-wide">Deep_Focus_Protocol</h3>
+<span class="text-[10px] font-mono text-gray-400">SEGMENT_02</span>
 </div>
-</main>
+</div>
+<div class="absolute top-[85px] left-0 right-0 h-[32px] border border-dashed border-amber-electric/60 bg-amber-electric/5 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity z-0">
+<div class="flex items-center gap-2 text-amber-electric font-mono text-xs">
+<span class="material-symbols-outlined text-sm animate-spin">settings</span>
+                                            INSERT_THREAD [+30m]
+                                        </div>
+</div>
+</div>
+</div>
+<div class="flex-1 relative hidden lg:block opacity-30 pointer-events-none">
+<div class="absolute top-[400px] left-0 right-4 h-[64px] border border-dashed border-industrial-steel bg-striped-bg"></div>
+</div>
+</div>
+<div class="absolute top-[633px] left-[60%] z-50 pointer-events-none transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+<div class="absolute w-16 h-16 border border-amber-electric/30 rounded-full animate-[spin_4s_linear_infinite]"></div>
+<div class="absolute w-12 h-12 border border-dashed border-amber-electric/60 rounded-full animate-[spin_8s_linear_infinite_reverse]"></div>
+<svg class="drop-shadow-amber-glow transform rotate-[-45deg]" fill="none" height="64" viewBox="0 0 64 64" width="64" xmlns="http://www.w3.org/2000/svg">
+<path d="M28 28 L48 8 L56 16 L36 36 L28 28 Z" fill="#333" stroke="#FFBF00" stroke-width="1.5"></path>
+<path class="animate-pulse" d="M48 8 L56 16" stroke="white" stroke-linecap="square" stroke-width="2"></path>
+<path d="M28 28 L12 44 L16 48 L32 32" stroke="#555" stroke-width="2"></path>
+<rect fill="#FFBF00" height="4" width="4" x="14" y="42"></rect>
+</svg>
+<div class="absolute w-full h-[1px] bg-amber-electric/40 top-1/2 left-0 -translate-y-1/2 w-[200px] -left-[68px]"></div>
+<div class="absolute h-full w-[1px] bg-amber-electric/40 left-1/2 top-0 -translate-x-1/2 h-[200px] -top-[68px]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 </body></html>

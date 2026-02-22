@@ -2,8 +2,8 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Loominal Zen Minimalist Weave</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<title>Loominal Vaporwave Scalpel Weave</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -12,225 +12,246 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#3b82f6", // Blue
-                        "neon-pink": "#f472b6", // Soft Pink
-                        "neon-mint": "#34d399", // Soft Mint
-                        "neon-gold": "#fbbf24", // Amber
-                        "zen-black": "#000000",
-                        "zen-gray": "#171717",
-                        "text-main": "#ffffff",
-                        "text-muted": "#a3a3a3",
+                        "vapor-pink": "#ff71ce",
+                        "vapor-blue": "#01cdfe",
+                        "vapor-purple": "#b967ff",
+                        "vapor-yellow": "#fffb96",
+                        "vapor-dark": "#050014", 
+                        "vapor-navy": "#12042e",
+                        "surface-dark": "#1a0b38",
                     },
                     fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                        "sans": ["Inter", "sans-serif"],
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
                     },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
                     boxShadow: {
-                        'glow-head': '0 0 15px currentColor',
+                        'neon-pink': '0 0 10px rgba(255, 113, 206, 0.6), 0 0 20px rgba(255, 113, 206, 0.3)',
+                        'neon-blue': '0 0 10px rgba(1, 205, 254, 0.6), 0 0 20px rgba(1, 205, 254, 0.3)',
+                        'neon-purple': '0 0 15px rgba(185, 103, 255, 0.5), 0 0 30px rgba(185, 103, 255, 0.2)',
                     }
                 },
             },
         }
     </script>
 <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000000;
-        }.loom-scrollbar::-webkit-scrollbar {
-            width: 4px;
+        .cursor-scalpel {
+            cursor: none;
+        }.grid-background {
+            background-image: radial-gradient(#b967ff 1px, transparent 1px);
+            background-size: 32px 32px;}
+        .bg-gradient-vapor {
+            background: linear-gradient(180deg, #050014 0%, #12042e 100%);
+        }@keyframes sparkle {
+            0% { transform: scale(0) translate(0, 0); opacity: 1; }
+            100% { transform: scale(1.5) translate(var(--tx), var(--ty)); opacity: 0; }
         }
-        .loom-scrollbar::-webkit-scrollbar-track {
-            background: #000000;
-        }
-        .loom-scrollbar::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
-        }
-        .loom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        .timeline-thread {
+        .spark {
             position: absolute;
-            left: 80px;top: 0;
-            bottom: 0;
-            width: 1px;
-            background: linear-gradient(to bottom, transparent, #333 10%, #333 90%, transparent);
-            z-index: 0;
+            width: 6px;
+            height: 6px;
+            background: #fffb96;
+            box-shadow: 0 0 8px #fffb96;
+            border-radius: 50%;
+            animation: sparkle 0.8s ease-out forwards;
+        }.melt-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 95%, 85% 90%, 75% 98%, 65% 92%, 55% 98%, 45% 90%, 35% 98%, 25% 90%, 15% 98%, 0 85%);
         }
-        .current-time-line {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.2);
-            z-index: 10;
+        .melt-top {
+            clip-path: polygon(0 15%, 8% 5%, 15% 10%, 25% 2%, 35% 10%, 45% 2%, 55% 10%, 65% 2%, 75% 10%, 85% 5%, 92% 10%, 100% 0, 100% 100%, 0 100%);
+        }@keyframes beam-pulse {
+            0%, 100% { opacity: 0.8; box-shadow: 0 0 15px #01cdfe, 0 0 30px #b967ff; }
+            50% { opacity: 1; box-shadow: 0 0 25px #01cdfe, 0 0 40px #b967ff; }
         }
-        .task-line-container:hover .task-content {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .task-content {
-            transition: all 0.3s ease;
+        .laser-beam {
+            animation: beam-pulse 2s infinite ease-in-out;
         }
     </style>
 </head>
-<body class="bg-zen-black text-text-main h-screen overflow-hidden flex flex-col">
-<header class="w-full bg-zen-black border-b border-white/10 z-40 flex flex-col transition-all duration-300 ease-in-out group hover:bg-zen-gray/30">
-<div class="h-16 flex items-center justify-between px-8">
-<div class="flex items-center gap-6">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-white/90 text-2xl font-light">all_inclusive</span>
-<h1 class="text-white text-lg font-light tracking-wide">LOOMINAL</h1>
+<body class="bg-gradient-vapor text-slate-100 font-display overflow-hidden cursor-scalpel">
+<div class="flex h-screen w-full">
+<div class="relative flex h-full w-[260px] min-w-[260px] flex-col bg-vapor-navy/50 backdrop-blur-md border-r border-vapor-purple/20 z-20">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<div class="flex gap-3 items-center">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 border-2 border-vapor-pink shadow-neon-pink" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCfE50nuLv4Z4xtcW__Ok95W9_8pCVc6dz0HnmnG3LdYy05Edc-1gskhcUOPcuHNxMkrIOFTtkXZTuZuuZS6d6JnUzKQ9nwmrEfE1UxsKvg6AAI-HAMLeJ0UEZ2W_Rq1Gk22yijcno35oprlN_Wp9HKPL5ByGMfD5s9IrqCIWeghU4c-1QhWTJdJA_hdjPx3wXI3BrePdMJgfJEmxhggdkA0P5n1WbhoiL3CFdRRuFl3_0zek8GeqLSYSpTQsKBHfFpAlXK2LfwYzg");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold tracking-widest uppercase" style="text-shadow: 2px 2px 0px #b967ff;">Loominal</h1>
+<p class="text-vapor-blue text-xs font-medium mt-0.5">Vapor Space</p>
 </div>
-<div class="h-4 w-px bg-white/10 mx-2"></div>
-<div class="text-sm font-light text-text-muted">
-                    Tuesday, Oct 24
-                </div>
 </div>
-<div class="flex items-center gap-6">
-<div class="hidden md:flex items-center group/input focus-within:bg-white/5 rounded-full px-4 py-1.5 transition-colors border border-transparent focus-within:border-white/10">
-<span class="material-symbols-outlined text-text-muted text-lg mr-2">add</span>
-<input class="bg-transparent border-none text-sm text-white placeholder:text-neutral-600 focus:ring-0 w-64 p-0 font-light" placeholder="Weave a new thread..." type="text"/>
-<div class="flex gap-1 ml-2 opacity-50 group-focus-within/input:opacity-100 transition-opacity">
-<div class="w-2 h-2 rounded-full bg-neon-pink"></div>
-<div class="w-2 h-2 rounded-full bg-primary"></div>
-<div class="w-2 h-2 rounded-full bg-neon-mint"></div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-full hover:bg-vapor-purple/20 transition-all cursor-pointer text-vapor-purple hover:text-vapor-pink group hover:shadow-neon-purple border border-transparent hover:border-vapor-purple/30">
+<span class="material-symbols-outlined text-[20px]">space_dashboard</span>
+<p class="text-sm font-medium leading-normal">LoomBoard</p>
 </div>
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-full bg-gradient-to-r from-vapor-purple/20 to-vapor-blue/20 border border-vapor-blue/30 text-white cursor-pointer shadow-neon-blue">
+<span class="material-symbols-outlined text-[20px] text-vapor-blue">list_alt</span>
+<p class="text-sm font-medium leading-normal">ThreadSpool</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-full hover:bg-vapor-purple/20 transition-all cursor-pointer text-vapor-purple hover:text-vapor-pink group hover:shadow-neon-purple border border-transparent hover:border-vapor-purple/30">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+<p class="text-sm font-medium leading-normal">Analytics</p>
+</div>
+<div class="flex items-center gap-3 px-4 py-2.5 rounded-full hover:bg-vapor-purple/20 transition-all cursor-pointer text-vapor-purple hover:text-vapor-pink group hover:shadow-neon-purple border border-transparent hover:border-vapor-purple/30">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4 mt-6 flex-1 overflow-y-auto pr-1 custom-scrollbar">
+<div class="flex items-center justify-between px-1">
+<h2 class="text-vapor-blue text-xs font-bold uppercase tracking-widest shadow-black drop-shadow-sm">Unscheduled</h2>
+<button class="bg-vapor-pink/20 hover:bg-vapor-pink/40 p-1.5 rounded-full transition-colors border border-vapor-pink/50">
+<span class="material-symbols-outlined text-vapor-pink text-[16px]">add</span>
+</button>
+</div>
+<div class="flex flex-col gap-3">
+<div class="relative group cursor-grab active:cursor-grabbing">
+<div class="absolute -left-1.5 top-1/2 -translate-y-1/2 w-1.5 h-6 bg-vapor-pink rounded-full shadow-neon-pink blur-[2px]"></div>
+<div class="flex items-center gap-3 bg-surface-dark/80 p-3 rounded-full border border-vapor-pink/40 shadow-neon-pink transition-transform hover:scale-[1.02] backdrop-blur-sm">
+<div class="text-vapor-pink flex items-center justify-center shrink-0 pl-1">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-white text-sm font-bold truncate">Urgent Bug Fix</p>
+<p class="text-vapor-purple text-[10px] uppercase tracking-wide truncate">Frontend / Login</p>
+</div>
+<div class="shrink-0 pr-1">
+<span class="text-[10px] font-bold text-vapor-dark bg-vapor-pink px-2 py-0.5 rounded-full">45m</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-surface-dark/40 p-3 rounded-full border border-vapor-purple/20 hover:border-vapor-blue/40 transition-colors cursor-grab hover:shadow-neon-blue">
+<div class="text-vapor-purple flex items-center justify-center shrink-0 pl-1">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-slate-200 text-sm font-medium truncate">Client Sync</p>
+<p class="text-slate-400 text-[10px] truncate">Weekly Update</p>
+</div>
+<div class="shrink-0 pr-1">
+<span class="text-[10px] font-mono text-vapor-blue border border-vapor-blue/30 px-2 py-0.5 rounded-full">30m</span>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-surface-dark/40 p-3 rounded-full border border-vapor-purple/20 hover:border-vapor-blue/40 transition-colors cursor-grab hover:shadow-neon-blue">
+<div class="text-vapor-purple flex items-center justify-center shrink-0 pl-1">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<p class="text-slate-200 text-sm font-medium truncate">Email Triage</p>
+<p class="text-slate-400 text-[10px] truncate">Inbox Zero</p>
+</div>
+<div class="shrink-0 pr-1">
+<span class="text-[10px] font-mono text-vapor-blue border border-vapor-blue/30 px-2 py-0.5 rounded-full">15m</span>
+</div>
+</div>
+</div>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center rounded-full h-10 px-4 bg-gradient-to-r from-vapor-pink to-vapor-purple hover:from-vapor-pink hover:to-vapor-pink transition-all text-white text-sm font-bold mt-4 shadow-neon-pink uppercase tracking-wider">
+<span>New Thread</span>
+</button>
+</div>
+</div>
+<div class="flex-1 flex flex-col relative bg-transparent overflow-hidden">
+<div class="h-16 border-b border-vapor-purple/20 flex items-center justify-between px-8 bg-vapor-navy/30 backdrop-blur-md z-30">
+<div class="flex items-center gap-4">
+<h2 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-vapor-blue to-vapor-pink tracking-tight" style="filter: drop-shadow(0 0 5px rgba(1, 205, 254, 0.5));">Monday, Oct 24</h2>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-vapor-purple/20 text-vapor-purple border border-vapor-purple/40">W43</span>
 </div>
 <div class="flex items-center gap-4">
-<button class="p-2 text-text-muted hover:text-white transition-colors relative">
-<span class="material-symbols-outlined font-light">search</span>
+<div class="flex items-center gap-2 bg-surface-dark/50 rounded-full p-1 border border-vapor-purple/20">
+<button class="p-1.5 rounded-full hover:bg-vapor-purple/20 text-vapor-purple hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
 </button>
-<button class="p-2 text-text-muted hover:text-white transition-colors">
-<span class="material-symbols-outlined font-light">notifications</span>
-<span class="absolute top-2 right-2 w-1.5 h-1.5 bg-neon-gold rounded-full"></span>
+<button class="px-4 py-1 rounded-full bg-vapor-purple/20 text-vapor-pink text-xs font-bold uppercase tracking-wider shadow-neon-purple">Today</button>
+<button class="p-1.5 rounded-full hover:bg-vapor-purple/20 text-vapor-purple hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
 </button>
-<div class="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHkkUmEf5zaPERwUWT8VHLpf9k0Q5xGOxYLvQrqcWiWEQ7QqdIrugSUrhvAF0GQHujf-P26M91ZuSoNPKMX0uadGHNywX6cWZuqgav1jmO7Wvp9Pm82_vUk-5z8djgN3QITCNJOIT91CCjADPAxwxCqmRMulsoTdfNt-C-kTBXxkwSoF0jrmVzj0V7y4qft9P63ihcuJfwLJYy2sTnUu4xmPU7ihVls-qdnKoEZ0kPV9TC8Eq4SUlK71CuweR3fIZcR_spRY28rD4')"></div>
+</div>
+<div class="w-px h-6 bg-vapor-purple/20"></div>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-vapor-pink/10 border border-vapor-pink/30">
+<span class="text-[10px] text-vapor-pink font-bold tracking-widest uppercase">SCALPEL MODE</span>
+<div class="w-2 h-2 rounded-full bg-vapor-pink animate-pulse shadow-neon-pink"></div>
 </div>
 </div>
 </div>
-<div class="hidden group-hover:flex w-full px-8 pb-4 gap-6 items-start animate-fade-in border-t border-white/5 pt-4">
-<div class="flex flex-col gap-1 w-64">
-<span class="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-2">Unwoven</span>
-<div class="flex items-center gap-3 p-2 hover:bg-white/5 rounded cursor-pointer group/item">
-<div class="w-1.5 h-1.5 rounded-full bg-neon-pink shadow-[0_0_8px_currentColor]"></div>
-<span class="text-sm font-light text-neutral-300 group-hover/item:text-white">Q3 Strategy Review</span>
-<span class="text-xs text-neutral-600 ml-auto">90m</span>
+<div class="flex-1 relative overflow-y-auto no-scrollbar">
+<div class="flex h-[200vh] relative">
+<div class="w-16 flex-shrink-0 border-r border-vapor-purple/10 bg-vapor-navy/20 backdrop-blur-[2px] z-10 sticky left-0 h-full">
+<div class="relative h-full flex flex-col font-mono">
+<div class="absolute top-[300px] w-full text-right pr-3 -mt-2"><span class="text-xs text-vapor-purple/70">09:00</span></div>
+<div class="absolute top-[364px] w-full text-right pr-3 -mt-2"><span class="text-xs text-vapor-purple/70">10:00</span></div>
+<div class="absolute top-[428px] w-full text-right pr-3 -mt-2"><span class="text-xs text-vapor-purple/70">11:00</span></div>
+<div class="absolute top-[492px] w-full text-right pr-3 -mt-2"><span class="text-xs text-vapor-purple/70">12:00</span></div>
+<div class="absolute top-[556px] w-full text-right pr-3 -mt-2"><span class="text-xs text-vapor-purple/70">13:00</span></div>
+<div class="absolute top-[620px] w-full text-right pr-3 -mt-3">
+<span class="text-vapor-blue text-sm font-bold bg-vapor-dark/50 px-1 rounded shadow-neon-blue">14:00</span>
 </div>
-<div class="flex items-center gap-3 p-2 hover:bg-white/5 rounded cursor-pointer group/item">
-<div class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_currentColor]"></div>
-<span class="text-sm font-light text-neutral-300 group-hover/item:text-white">Client Sync: Alpha</span>
-<span class="text-xs text-neutral-600 ml-auto">30m</span>
-</div>
-</div>
-<div class="w-px bg-white/10 h-20"></div>
-<div class="flex-1 flex flex-col justify-center">
-<p class="text-neutral-500 text-sm font-light italic">Drag threads to the timeline below to weave your day.</p>
+<div class="absolute top-[684px] w-full text-right pr-3 -mt-2"><span class="text-xs text-vapor-purple/70">15:00</span></div>
 </div>
 </div>
-</header>
-<main class="flex-1 flex flex-row h-full relative overflow-hidden">
-<div class="flex-1 overflow-y-auto loom-scrollbar relative bg-zen-black">
-<div class="flex min-h-[1440px] relative pb-20 max-w-5xl mx-auto">
-<div class="absolute left-[100px] top-0 bottom-0 w-px bg-white/5 z-0"></div>
-<div class="w-[100px] flex-shrink-0 z-10 sticky left-0">
-<div class="relative h-full text-xs font-light text-neutral-600 font-mono text-right pr-6 pt-2 select-none">
-<div class="absolute top-[480px]">08:00</div>
-<div class="absolute top-[540px]">09:00</div>
-<div class="absolute top-[600px]">10:00</div>
-<div class="absolute top-[660px]">11:00</div>
-<div class="absolute top-[720px]">12:00</div>
-<div class="absolute top-[780px]">13:00</div>
-<div class="absolute top-[840px]">14:00</div>
-<div class="absolute top-[900px]">15:00</div>
-<div class="absolute top-[960px]">16:00</div>
-<div class="absolute top-[1020px]">17:00</div>
+<div class="flex-1 relative grid-background">
+<div class="absolute top-[636px] w-full h-0.5 bg-gradient-to-r from-vapor-blue to-transparent shadow-neon-blue z-10 flex items-center opacity-70">
+<div class="absolute -left-1 w-2.5 h-2.5 rounded-full bg-vapor-blue shadow-neon-blue"></div>
 </div>
+<div class="absolute top-0 left-0 w-full h-full px-4 flex gap-6">
+<div class="flex-1 relative pt-[300px]">
+<div class="absolute top-[300px] left-0 right-4 h-[128px] bg-surface-dark/40 border border-vapor-purple/20 rounded-2xl p-4 opacity-50 backdrop-blur-sm">
+<h3 class="text-sm font-bold text-vapor-purple/80">Morning Standup</h3>
+<p class="text-xs text-slate-400">Team Sync</p>
 </div>
-<div class="flex-1 relative pl-8 pr-12">
-<div class="absolute top-[615px] -left-10 w-[120vw] flex items-center z-30 pointer-events-none">
-<span class="absolute left-[45px] -top-6 text-neon-pink font-mono text-xs tracking-wider bg-zen-black px-1">10:15</span>
-<div class="h-px w-full bg-gradient-to-r from-transparent via-neon-pink to-transparent opacity-60"></div>
-<div class="absolute left-[132px] size-2 bg-neon-pink rounded-full shadow-[0_0_12px_rgba(244,114,182,1)] z-40"></div>
-</div>
-<div class="absolute top-[540px] left-0 w-full h-[120px] group flex items-start">
-<div class="w-8 h-full border-l border-b border-white/10 rounded-bl-xl absolute left-0 top-0 opacity-20 group-hover:opacity-100 group-hover:border-neon-pink/50 transition-all duration-500"></div>
-<div class="relative w-full h-full flex flex-col ml-10">
-<div class="absolute -left-[45px] top-0 size-3 rounded-full bg-zen-black border border-neon-pink shadow-[0_0_10px_rgba(244,114,182,0.4)] z-20 group-hover:bg-neon-pink group-hover:shadow-[0_0_15px_rgba(244,114,182,0.8)] transition-all duration-300"></div>
-<div class="absolute -left-[39px] top-1.5 bottom-0 w-px bg-neon-pink/30 group-hover:bg-neon-pink/80 transition-colors duration-300"></div>
-<div class="mt-[-4px] pl-4 py-2 pr-4 rounded-lg border border-transparent hover:border-white/5 hover:bg-white/5 transition-all duration-200 cursor-pointer w-full md:w-2/3 lg:w-1/2">
-<div class="flex items-baseline justify-between">
-<h3 class="text-white text-base font-light tracking-wide">Project Alpha: Deep Work</h3>
-<span class="text-neutral-600 text-xs font-mono">09:00 - 11:00</span>
-</div>
-<p class="text-neutral-500 text-xs mt-1 font-light group-hover:text-neon-pink/80 transition-colors">Focus Mode â¢ No interruptions</p>
-</div>
-</div>
-</div>
-<div class="absolute top-[690px] left-0 w-full h-[60px] group flex items-start">
-<div class="w-8 h-full border-l border-b border-white/10 rounded-bl-xl absolute left-0 top-0 opacity-20 group-hover:opacity-100 group-hover:border-primary/50 transition-all duration-500"></div>
-<div class="relative w-full h-full flex flex-col ml-10">
-<div class="absolute -left-[45px] top-0 size-3 rounded-full bg-zen-black border border-primary shadow-[0_0_10px_rgba(59,130,246,0.4)] z-20 group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(59,130,246,0.8)] transition-all duration-300"></div>
-<div class="absolute -left-[39px] top-1.5 bottom-0 w-px bg-primary/30 group-hover:bg-primary/80 transition-colors duration-300"></div>
-<div class="mt-[-4px] pl-4 py-2 pr-4 rounded-lg border border-transparent hover:border-white/5 hover:bg-white/5 transition-all duration-200 cursor-pointer w-full md:w-1/2">
-<div class="flex items-baseline justify-between">
-<h3 class="text-white text-sm font-normal">Weekly Design Sync</h3>
-<span class="text-neutral-600 text-xs font-mono">11:30 - 12:30</span>
-</div>
-<p class="text-neutral-500 text-xs mt-0.5 font-light group-hover:text-blue-300 transition-colors">Team A â¢ Zoom</p>
-</div>
-</div>
-</div>
-<div class="absolute top-[720px] left-0 w-full h-[60px] group flex items-start z-20">
-<div class="absolute left-[300px] md:left-[400px] w-full h-full">
-<div class="absolute -left-[300px] md:-left-[400px] top-[0] w-[300px] md:w-[400px] h-px border-t border-dashed border-neutral-800"></div>
-<div class="relative w-full h-full flex flex-col">
-<div class="absolute -left-[6px] top-0 size-3 rounded-full bg-zen-black border border-neon-mint shadow-[0_0_10px_rgba(52,211,153,0.4)] z-20 group-hover:bg-neon-mint group-hover:shadow-[0_0_15px_rgba(52,211,153,0.8)] transition-all duration-300"></div>
-<div class="absolute left-0 top-1.5 bottom-0 w-px bg-neon-mint/30 group-hover:bg-neon-mint/80 transition-colors duration-300"></div>
-<div class="mt-[-4px] pl-4 py-2 pr-4 rounded-lg border border-transparent hover:border-white/5 hover:bg-white/5 transition-all duration-200 cursor-pointer w-full md:w-1/3">
-<div class="flex items-baseline justify-between">
-<h3 class="text-white text-sm font-normal">Lunch with Client</h3>
-<span class="text-neutral-600 text-xs font-mono">12:00 - 13:00</span>
-</div>
-<p class="text-neutral-500 text-xs mt-0.5 font-light group-hover:text-teal-300 transition-colors">Downtown Cafe</p>
-</div>
-</div>
-</div>
-</div>
-<div class="absolute top-[840px] left-0 w-full h-[150px] group flex items-start">
-<div class="w-8 h-full border-l border-b border-white/10 rounded-bl-xl absolute left-0 top-0 opacity-20 group-hover:opacity-100 group-hover:border-primary/50 transition-all duration-500"></div>
-<div class="relative w-full h-full flex flex-col ml-10">
-<div class="absolute -left-[45px] top-0 size-3 rounded-full bg-zen-black border border-primary shadow-[0_0_10px_rgba(59,130,246,0.4)] z-20 group-hover:bg-primary group-hover:shadow-[0_0_15px_rgba(59,130,246,0.8)] transition-all duration-300"></div>
-<div class="absolute -left-[39px] top-1.5 bottom-0 w-px bg-primary/30 group-hover:bg-primary/80 transition-colors duration-300"></div>
-<div class="mt-[-4px] pl-4 py-4 pr-4 rounded-lg border border-transparent hover:border-white/5 hover:bg-white/5 transition-all duration-200 cursor-pointer w-full md:w-2/3">
-<div class="flex items-center justify-between mb-2">
-<h3 class="text-white text-lg font-light tracking-wide">Frontend Implementation</h3>
-<span class="px-2 py-0.5 rounded border border-primary/30 text-[10px] text-primary tracking-wider uppercase">In Progress</span>
-</div>
-<div class="flex justify-between items-end">
+<div class="absolute top-[556px] left-0 right-4 w-full">
+<div class="relative h-[78px] bg-gradient-to-r from-vapor-purple/80 to-vapor-blue/80 rounded-t-2xl rounded-b-md p-4 border-l-[6px] border-vapor-pink shadow-neon-purple melt-bottom z-10 backdrop-blur-md">
+<div class="flex justify-between items-start">
 <div>
-<p class="text-neutral-500 text-sm font-light">Loominal v2.0</p>
-<div class="flex mt-3 -space-x-2 opacity-60 group-hover:opacity-100 transition-opacity">
-<div class="size-6 rounded-full border border-black bg-neutral-800 bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYcrXwUFdeiewT9s5Kvnqqd6alj_zNs-eg8kBL98eTl7fJDgbZFU5c3rmS5McE-vsiq_hWWNv1fYgKlYE2oRLzFJI4-5H1WNJAho_LZt26G_11KIYzMKsc82Svc1Vb9LfKJczyqp1A71czgwlZ_1g4L_mXe_nHiuYCULcq9bkuLS3E85_EfsjPDZ2er7rwfAvD3ryLGZjfBnVkpwe5KHmzjN8MZI37kZg2LJBj6pcKvv7EJFFjpl3RbOhfcASeuL3-YyJdhkUGim8')"></div>
-<div class="size-6 rounded-full border border-black bg-neutral-800 bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDrPe6pUPkfZYi2EAsikd2c3ghaxamxnjRnCIi9lLNQ3sffHMz7Po4kK185EPr8E-RmRF4KsNBmhdN97C_XtcB60ivAvtBrRmAJHScEKKu34ml-A9A-93bvbBygKOdAmchMcqkBDx0kXikv10tS69vk18Owl8c-6lKktU8AT2LxufdNtlXs3CWnisr9jATJoam42f5KEO7SXlsT6UuvkyRrDMAYIRJUUcM-zvMovt1RuykJtkSz72aPpTgEwyJV0t_zW7GT2YwNdfs')"></div>
+<h3 class="text-base font-bold text-white drop-shadow-md">Deep Work Session</h3>
+<p class="text-xs text-white/90 font-medium">Project Phoenix - Core Architecture</p>
+</div>
+<span class="bg-vapor-dark/30 backdrop-blur-sm px-2 py-0.5 rounded-full text-[10px] font-bold text-vapor-yellow border border-vapor-yellow/30">Focus</span>
+</div>
+<div class="absolute bottom-2 right-4 text-[10px] font-mono text-white/90 bg-black/20 px-1.5 rounded">14:15</div>
+</div>
+<div class="relative h-[24px] w-full flex items-center justify-center overflow-visible z-20">
+<div class="absolute w-[120%] h-1 bg-white laser-beam rounded-full blur-[2px]"></div>
+<div class="absolute w-[120%] h-0.5 bg-white"></div>
+<div class="absolute -top-10 left-[60%] bg-vapor-dark/90 border border-vapor-blue text-vapor-blue text-xs font-bold px-3 py-1.5 rounded-full shadow-[0_0_15px_rgba(1,205,254,0.4)] backdrop-blur-md transform rotate-1">
+<span class="material-symbols-outlined text-[12px] align-middle mr-1">content_cut</span> SPLIT @ 14:15
+                                    </div>
+<div class="spark" style="--tx: 25px; --ty: -25px; left: 58%; background: #ff71ce; box-shadow: 0 0 10px #ff71ce;"></div>
+<div class="spark" style="--tx: -15px; --ty: -30px; left: 61%; background: #01cdfe; box-shadow: 0 0 10px #01cdfe;"></div>
+<div class="spark" style="--tx: 30px; --ty: 15px; left: 56%; background: #fffb96;"></div>
+<div class="spark" style="--tx: -20px; --ty: 10px; left: 63%; background: #b967ff; box-shadow: 0 0 10px #b967ff;"></div>
+</div>
+<div class="relative h-[50px] bg-gradient-to-r from-vapor-purple/70 to-vapor-blue/70 rounded-b-2xl rounded-t-md p-4 border-l-[6px] border-vapor-pink/60 melt-top translate-y-3 transition-transform opacity-90 backdrop-blur-md">
+<div class="opacity-60 flex items-center h-full">
+<h3 class="text-base font-bold text-white drop-shadow-md">Deep Work (Cont.)</h3>
 </div>
 </div>
-<span class="text-neutral-600 text-xs font-mono">14:00 - 16:30</span>
+<div class="absolute top-[88px] left-0 right-0 h-[32px] border-2 border-dashed border-vapor-pink/70 bg-vapor-pink/10 rounded-xl flex items-center justify-center animate-pulse shadow-neon-pink">
+<span class="text-xs font-mono text-vapor-pink font-bold tracking-widest">DROP ZONE: +30m</span>
+</div>
+</div>
+</div>
+<div class="flex-1 relative hidden md:block opacity-30 pointer-events-none">
+<div class="absolute top-[400px] left-0 right-4 h-[64px] bg-vapor-purple/10 rounded-2xl border border-vapor-blue/20"></div>
+</div>
+</div>
+<div class="absolute top-[633px] left-[60%] z-50 pointer-events-none transform -translate-x-1/2 -translate-y-1/2">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-vapor-pink/30 blur-xl rounded-full animate-pulse"></div>
+<svg class="drop-shadow-[0_0_10px_rgba(255,113,206,1)] transform -rotate-12" fill="none" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
+<circle cx="14" cy="36" fill="#12042e" r="5" stroke="#ff71ce" stroke-width="3"></circle>
+<circle cx="34" cy="36" fill="#12042e" r="5" stroke="#ff71ce" stroke-width="3"></circle>
+<path d="M16 32 L34 12" stroke="#01cdfe" stroke-linecap="round" stroke-width="3"></path>
+<path d="M32 32 L14 12" stroke="#01cdfe" stroke-linecap="round" stroke-width="3"></path>
+<circle class="animate-pulse" cx="24" cy="22" fill="#fffb96" r="2"></circle>
+<path class="animate-bounce" d="M24 6 L26 10 L30 12 L26 14 L24 18 L22 14 L18 12 L22 10 Z" fill="#fffb96" style="animation-duration: 2s;"></path>
+</svg>
 </div>
 </div>
 </div>
 </div>
-<div class="absolute top-[1020px] left-0 w-full h-[60px] ml-10 flex items-center group/ghost">
-<div class="absolute -left-[5px] size-1.5 bg-neutral-800 rounded-full group-hover/ghost:bg-neutral-600 transition-colors"></div>
-<div class="h-px w-full border-t border-dashed border-neutral-800 group-hover/ghost:border-neutral-600 transition-colors"></div>
-<span class="absolute left-8 text-xs text-neutral-700 group-hover/ghost:text-neutral-500 transition-colors font-mono">17:00</span>
 </div>
 </div>
-</div>
-</div>
-</main>
-<button class="md:hidden fixed bottom-6 right-6 size-12 rounded-full bg-white text-black shadow-lg shadow-white/10 flex items-center justify-center z-50">
-<span class="material-symbols-outlined text-2xl">add</span>
-</button>
 
 </body></html>
