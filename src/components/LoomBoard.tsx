@@ -10,10 +10,11 @@ const formatTime = (minutes: number) => {
 };
 
 interface ThreadWithLayout extends Thread {
-  left: number;
-  width: number;
+  style: React.CSSProperties;
+  layoutClass: string;
   colIndex: number;
-  totalCols: number;
+  svgLeft: number;
+  svgWidth: number;
 }
 
 // Layout algorithm for overlapping threads
@@ -22,28 +23,21 @@ const calculateThreadLayout = (threads: Thread[]): ThreadWithLayout[] => {
 
   const sorted = [...threads].sort((a, b) => (a.startTime || 0) - (b.startTime || 0));
 
-  // Re-implementing with a grouping approach for better visuals
-  // 1. Group overlapping threads
-  // 2. For each group, assign columns 0..N-1
-  // 3. Width = 100/N, Left = i * Width
-  
   const groups: ThreadWithLayout[][] = [];
   let currentGroup: ThreadWithLayout[] = [];
   let groupEndTime = -1;
 
   for (const thread of sorted) {
     if (currentGroup.length === 0) {
-      currentGroup.push({ ...thread, left: 0, width: 1, colIndex: 0, totalCols: 1 });
+      currentGroup.push({ ...thread, style: {}, layoutClass: '', colIndex: 0 } as ThreadWithLayout);
       groupEndTime = thread.startTime! + thread.duration;
     } else {
        if (thread.startTime! < groupEndTime) {
-         // Overlaps with the group
-         currentGroup.push({ ...thread, left: 0, width: 1, colIndex: 0, totalCols: 1 });
+         currentGroup.push({ ...thread, style: {}, layoutClass: '', colIndex: 0 } as ThreadWithLayout);
          groupEndTime = Math.max(groupEndTime, thread.startTime! + thread.duration);
        } else {
-         // New group
          groups.push(currentGroup);
-         currentGroup = [{ ...thread, left: 0, width: 1, colIndex: 0, totalCols: 1 }];
+         currentGroup = [{ ...thread, style: {}, layoutClass: '', colIndex: 0 } as ThreadWithLayout];
          groupEndTime = thread.startTime! + thread.duration;
        }
     }
@@ -62,36 +56,59 @@ const calculateThreadLayout = (threads: Thread[]): ThreadWithLayout[] => {
          const last = col[col.length - 1];
          if ((last.startTime! + last.duration) <= thread.startTime!) {
            col.push(thread);
-           thread.left = i;
+           thread.colIndex = i;
            placed = true;
            break;
          }
        }
        if (!placed) {
          groupColumns.push([thread]);
-         thread.left = groupColumns.length - 1;
+         thread.colIndex = groupColumns.length - 1;
        }
     }
     
     const numCols = groupColumns.length;
     for (const thread of group) {
-      const colIndex = thread.left;
-      
-      let width = 100 / numCols;
-      let left = colIndex * width;
+      let style: React.CSSProperties = {
+        top: `${thread.startTime}px`,
+        height: `${thread.duration}px`,
+        zIndex: thread.title === 'Frontend Impl.' ? 40 : (thread.colIndex > 0 ? 20 : 10),
+      };
+      let layoutClass = 'cyber-ribbon';
+      let svgLeft = 0;
+      let svgWidth = 100;
 
-      // Add overlap if multiple columns
-      if (numCols > 1) {
-        width += 5; // Add 5% overlap
-        if (colIndex > 0) {
-            left -= 2.5; // Pull back slightly
+      if (numCols === 1) {
+        style = { ...style, left: '1.5rem', right: '2.5rem' }; // Standard margins
+        svgLeft = 0;
+        svgWidth = 100;
+      } else if (numCols === 2) {
+        if (thread.colIndex === 0) {
+          // Left column
+          style = { ...style, left: '2rem', right: '50%', marginRight: '1rem' };
+          layoutClass = 'cyber-ribbon-reverse';
+          svgLeft = 0;
+          svgWidth = 50;
+        } else {
+          // Right column
+          style = { ...style, left: '50%', right: '1rem', marginLeft: '-1.25rem' };
+          layoutClass = 'cyber-ribbon';
+          svgLeft = 50;
+          svgWidth = 50;
         }
+      } else {
+        // Fallback for > 2 columns (simple split)
+        const width = 100 / numCols;
+        const left = thread.colIndex * width;
+        style = { ...style, left: `${left}%`, width: `${width}%` };
+        svgLeft = left;
+        svgWidth = width;
       }
 
-      thread.width = width;
-      thread.left = left;
-      thread.colIndex = colIndex;
-      thread.totalCols = numCols;
+      thread.style = style;
+      thread.layoutClass = layoutClass;
+      thread.svgLeft = svgLeft;
+      thread.svgWidth = svgWidth;
       finalResult.push(thread);
     }
   }
@@ -108,6 +125,7 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
   }[thread.category];
 
   const isFrontendImpl = thread.title === 'Frontend Impl.';
+  const isProjectAlpha = thread.title.includes('Project Alpha'); // Or rely on ID/duration
   const displayActive = isActive || isFrontendImpl;
 
   const patternStyle = thread.category === 'cyber-cyan' 
@@ -118,23 +136,17 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
 
   return (
     <div
-      style={{
-        top: `${thread.startTime}px`,
-        height: `${thread.duration}px`,
-        left: `${thread.left}%`,
-        width: `calc(${thread.width}% - 12px)`,
-        zIndex: isFrontendImpl ? 40 : (thread.colIndex > 0 ? 20 : 10),
-      }}
-      className="absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left skew-x-[-12deg]"
+      style={thread.style}
+      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''}`}
     >
         <div className={`relative w-full h-full overflow-hidden backdrop-blur-sm transition-all group-hover:bg-opacity-30 ${isFrontendImpl ? 'bg-gradient-to-r from-cyber-cyan/20 to-blue-900/40' : colors.bg}`}>
-            {/* Border Left */}
+            {/* Border Left/Right handled by ribbon classes or internal border */}
             <div className={`absolute left-0 top-0 bottom-0 w-1 ${colors.indicator}`}></div>
             
             {/* Background Texture */}
             <div className="absolute inset-0 pointer-events-none" style={patternStyle}></div>
 
-            <div className="relative p-2 h-full flex flex-col pl-4 skew-x-[12deg]">
+            <div className={`relative p-2 h-full flex flex-col ${isProjectAlpha || isFrontendImpl ? 'pl-8' : 'pl-4'}`}>
                 <div className="flex justify-between items-start">
                     <div className="min-w-0 flex-1">
                         <h3 className="text-white font-bold text-xs uppercase tracking-wider font-display drop-shadow-md truncate leading-tight">{thread.title}</h3>
@@ -163,17 +175,36 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
                     </>
                 ) : (
                     <div className="flex items-center justify-between mt-auto pt-2">
-                        <span className="bg-black/40 text-white/50 text-[9px] px-1 font-mono rounded">
-                            {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
-                        </span>
-                        {/* Real Avatar */}
-                        <div className="size-6 rounded-full border border-white/20 overflow-hidden bg-black/50">
-                            <img 
-                                src={`https://i.pravatar.cc/150?u=${thread.id}`} 
-                                alt="U" 
-                                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                            />
-                        </div>
+                         {/* Only show time range for Project Alpha or long tasks */}
+                         {isProjectAlpha ? (
+                            <span className="bg-black/60 text-cyber-magenta text-[9px] px-2 py-0.5 border border-cyber-magenta/30 font-mono">
+                                {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
+                            </span>
+                         ) : (
+                            <span></span>
+                         )}
+                        
+                        {/* Avatar */}
+                        {isProjectAlpha ? (
+                             <div className="flex -space-x-3">
+                                <div 
+                                    className="size-8 border-2 border-black bg-slate-700 bg-center bg-cover grayscale group-hover:grayscale-0 transition-all" 
+                                    style={{ 
+                                        backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBHkkUmEf5zaPERwUWT8VHLpf9k0Q5xGOxYLvQrqcWiWEQ7QqdIrugSUrhvAF0GQHujf-P26M91ZuSoNPKMX0uadGHNywX6cWZuqgav1jmO7Wvp9Pm82_vUk-5z8djgN3QITCNJOIT91CCjADPAxwxCqmRMulsoTdfNt-C-kTBXxkwSoF0jrmVzj0V7y4qft9P63ihcuJfwLJYy2sTnUu4xmPU7ihVls-qdnKoEZ0kPV9TC8Eq4SUlK71CuweR3fIZcR_spRY28rD4')",
+                                        clipPath: "polygon(20% 0, 100% 0, 80% 100%, 0% 100%)"
+                                    }}
+                                ></div>
+                            </div>
+                        ) : (
+                            // Use hidden or different avatar for others if needed, but for now only Project Alpha has explicit design
+                            <div className="size-6 rounded-full border border-white/20 overflow-hidden bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <img 
+                                    src={`https://i.pravatar.cc/150?u=${thread.id}`} 
+                                    alt="U" 
+                                    className="w-full h-full object-cover opacity-80"
+                                />
+                            </div>
+                        )}
                     </div>
                 )}
             </div>
@@ -220,8 +251,8 @@ export default function LoomBoard() {
                 ${layoutThreads.map(t => {
                     const color = t.category === 'cyber-cyan' ? '#00f0ff' : t.category === 'cyber-magenta' ? '#ff0055' : '#fcee0a';
                     // Calculate position based on layout (total width 600px starting at x=100)
-                    const xPos = 100 + (t.left / 100) * 600;
-                    const width = (t.width / 100) * 600;
+                    const xPos = 100 + (t.svgLeft / 100) * 600;
+                    const width = (t.svgWidth / 100) * 600;
                     
                     return `
                         <g transform="translate(${xPos}, ${t.startTime})">
