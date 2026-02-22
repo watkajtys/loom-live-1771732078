@@ -80,10 +80,11 @@ export default function ThreadSpool() {
         </div>
         
         <div className="flex flex-col gap-6 mt-4 w-full items-center">
-            {/* Cyan / Add */}
+            {/* Add / Reset Form */}
             <button 
-                onClick={() => setNewCategory('cyber-cyan')} 
-                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-none border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
+                onClick={() => { setNewTitle(''); setNewDuration('60'); setNewCategory('cyber-cyan'); }} 
+                className="size-10 flex items-center justify-center transition-all duration-300 rounded-none border border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10 hover:border-cyber-cyan/30"
+                title="New Thread"
             >
                 <span className="material-symbols-outlined">add</span>
             </button>
@@ -98,7 +99,7 @@ export default function ThreadSpool() {
                 <span className="material-symbols-outlined">work</span>
             </button>
             
-            {/* Cyan / Groups (Reusing Cyan category for now per previous logic, but icon suggests different mode) */}
+            {/* Cyan / Groups */}
             <button 
                 onClick={() => setNewCategory('cyber-cyan')} 
                 className={`size-10 flex items-center justify-center transition-all duration-300 rounded-none border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}

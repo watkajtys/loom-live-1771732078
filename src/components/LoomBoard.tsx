@@ -116,18 +116,16 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
       ? { backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')", opacity: 0.2 }
       : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
 
-  const shapeClass = thread.totalCols > 1 && (thread.colIndex % 2 === 0) ? 'cyber-ribbon-reverse' : 'cyber-ribbon';
-
   return (
     <div
       style={{
         top: `${thread.startTime}px`,
         height: `${thread.duration}px`,
         left: `${thread.left}%`,
-        width: `${thread.width}%`,
+        width: `calc(${thread.width}% - 12px)`,
         zIndex: isFrontendImpl ? 40 : (thread.colIndex > 0 ? 20 : 10),
       }}
-      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all ${shapeClass}`}
+      className="absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left skew-x-[-12deg]"
     >
         <div className={`relative w-full h-full overflow-hidden backdrop-blur-sm transition-all group-hover:bg-opacity-30 ${isFrontendImpl ? 'bg-gradient-to-r from-cyber-cyan/20 to-blue-900/40' : colors.bg}`}>
             {/* Border Left */}
@@ -136,7 +134,7 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
             {/* Background Texture */}
             <div className="absolute inset-0 pointer-events-none" style={patternStyle}></div>
 
-            <div className="relative p-2 h-full flex flex-col pl-3">
+            <div className="relative p-2 h-full flex flex-col pl-4 skew-x-[12deg]">
                 <div className="flex justify-between items-start">
                     <div className="min-w-0 flex-1">
                         <h3 className="text-white font-bold text-xs uppercase tracking-wider font-display drop-shadow-md truncate leading-tight">{thread.title}</h3>
@@ -168,9 +166,13 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
                         <span className="bg-black/40 text-white/50 text-[9px] px-1 font-mono rounded">
                             {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
                         </span>
-                        {/* User Avatar Placeholder */}
-                        <div className="size-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-[8px] text-white font-mono">
-                            {thread.title.substring(0,2).toUpperCase()}
+                        {/* Real Avatar */}
+                        <div className="size-6 rounded-full border border-white/20 overflow-hidden bg-black/50">
+                            <img 
+                                src={`https://i.pravatar.cc/150?u=${thread.id}`} 
+                                alt="U" 
+                                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                            />
                         </div>
                     </div>
                 )}
