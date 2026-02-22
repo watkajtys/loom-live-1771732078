@@ -76,25 +76,47 @@ export default function ThreadSpool() {
        {/* Left Icon Bar */}
       <div className="w-16 flex flex-col items-center py-6 gap-8 bg-panel-bg/50 backdrop-blur-sm z-20 absolute top-0 bottom-0 left-0 border-r border-white/5">
         <div className="size-10 flex items-center justify-center text-cyber-cyan">
-          <span className="material-symbols-outlined text-3xl">all_inclusive</span>
+          <span className="material-symbols-outlined text-3xl drop-shadow-[0_0_8px_rgba(0,240,255,0.5)]">all_inclusive</span>
         </div>
+        
         <div className="flex flex-col gap-6 mt-4 w-full items-center">
-          <button onClick={() => setNewCategory('cyber-cyan')} className={`size-10 flex items-center justify-center transition-colors rounded-none border border-transparent ${newCategory === 'cyber-cyan' ? 'text-cyber-cyan border-cyber-cyan/30 bg-cyber-cyan/10' : 'text-white/40 hover:text-cyber-cyan'}`}>
-            <span className="material-symbols-outlined">add</span>
-          </button>
-          <div className="w-8 h-px bg-white/10"></div>
-          <button onClick={() => setNewCategory('cyber-magenta')} className={`size-10 flex items-center justify-center transition-colors ${newCategory === 'cyber-magenta' ? 'text-cyber-magenta bg-cyber-magenta/20' : 'text-white/40 hover:text-cyber-magenta'}`}>
-            <span className="material-symbols-outlined">work</span>
-          </button>
-          <button onClick={() => setNewCategory('cyber-cyan')} className={`size-10 flex items-center justify-center transition-colors ${newCategory === 'cyber-cyan' ? 'text-cyber-cyan bg-cyber-cyan/20' : 'text-white/40 hover:text-cyber-cyan'}`}>
-            <span className="material-symbols-outlined">groups</span>
-          </button>
-           <button onClick={() => setNewCategory('cyber-yellow')} className={`size-10 flex items-center justify-center transition-colors ${newCategory === 'cyber-yellow' ? 'text-cyber-yellow bg-cyber-yellow/20' : 'text-white/40 hover:text-cyber-yellow'}`}>
-            <span className="material-symbols-outlined">fitness_center</span>
-          </button>
+            {/* Cyan / Add */}
+            <button 
+                onClick={() => setNewCategory('cyber-cyan')} 
+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
+            >
+                <span className="material-symbols-outlined">add</span>
+            </button>
+            
+            <div className="w-8 h-px bg-white/10"></div>
+            
+            {/* Magenta / Work */}
+            <button 
+                onClick={() => setNewCategory('cyber-magenta')} 
+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-magenta' ? 'bg-cyber-magenta text-black border-cyber-magenta shadow-[0_0_15px_rgba(255,0,85,0.6)]' : 'border-transparent text-cyber-magenta/50 hover:text-cyber-magenta hover:bg-cyber-magenta/10'}`}
+            >
+                <span className="material-symbols-outlined">work</span>
+            </button>
+            
+            {/* Cyan / Groups (Reusing Cyan category for now per previous logic, but icon suggests different mode) */}
+            <button 
+                onClick={() => setNewCategory('cyber-cyan')} 
+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-cyan' ? 'bg-cyber-cyan text-black border-cyber-cyan shadow-[0_0_15px_rgba(0,240,255,0.6)]' : 'border-transparent text-cyber-cyan/50 hover:text-cyber-cyan hover:bg-cyber-cyan/10'}`}
+            >
+                <span className="material-symbols-outlined">groups</span>
+            </button>
+            
+            {/* Yellow / Fitness */}
+            <button 
+                onClick={() => setNewCategory('cyber-yellow')} 
+                className={`size-10 flex items-center justify-center transition-all duration-300 rounded-sm border ${newCategory === 'cyber-yellow' ? 'bg-cyber-yellow text-black border-cyber-yellow shadow-[0_0_15px_rgba(252,238,10,0.6)]' : 'border-transparent text-cyber-yellow/50 hover:text-cyber-yellow hover:bg-cyber-yellow/10'}`}
+            >
+                <span className="material-symbols-outlined">fitness_center</span>
+            </button>
         </div>
+        
         <div className="mt-auto mb-4">
-          <button className="size-10 flex items-center justify-center hover:text-cyber-cyan transition-colors">
+          <button className="size-10 flex items-center justify-center text-white/30 hover:text-cyber-cyan hover:rotate-90 transition-all duration-500">
             <span className="material-symbols-outlined">settings</span>
           </button>
         </div>
@@ -111,7 +133,7 @@ export default function ThreadSpool() {
           {/* Add Thread Form */}
           <div className="flex flex-col gap-4 mb-8">
             <label className="text-cyber-cyan text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2">
-              <span className={`w-2 h-2 ${indicatorColor}`}></span> Initialize Thread
+              <span className={`w-2 h-2 ${indicatorColor} shadow-[0_0_8px_currentColor]`}></span> Initialize Thread
             </label>
             <div className="relative">
               <input 

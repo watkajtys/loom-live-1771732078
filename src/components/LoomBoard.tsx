@@ -1,5 +1,6 @@
 import { useStore, type Thread } from '../store';
 import { useDroppable } from '@dnd-kit/core';
+import { useMemo } from 'react';
 
 // Helper to format time
 const formatTime = (minutes: number) => {
@@ -8,35 +9,137 @@ const formatTime = (minutes: number) => {
   return `${h.toString().padStart(2, '0')}${m.toString().padStart(2, '0')}`;
 };
 
-function BoardThread({ thread }: { thread: Thread }) {
-  // Styles based on category
-   const colors = {
-    'cyber-cyan': { bg: 'bg-cyber-cyan/10', border: 'border-cyber-cyan', text: 'text-cyber-cyan' },
-    'cyber-magenta': { bg: 'bg-cyber-magenta/10', border: 'border-cyber-magenta', text: 'text-cyber-magenta' },
-    'cyber-yellow': { bg: 'bg-cyber-yellow/10', border: 'border-cyber-yellow', text: 'text-cyber-yellow' },
+interface ThreadWithLayout extends Thread {
+  left: number;
+  width: number;
+}
+
+// Layout algorithm for overlapping threads
+const calculateThreadLayout = (threads: Thread[]): ThreadWithLayout[] => {
+  if (threads.length === 0) return [];
+
+  const sorted = [...threads].sort((a, b) => (a.startTime || 0) - (b.startTime || 0));
+
+  // Re-implementing with a grouping approach for better visuals
+  // 1. Group overlapping threads
+  // 2. For each group, assign columns 0..N-1
+  // 3. Width = 100/N, Left = i * Width
+  
+  const groups: ThreadWithLayout[][] = [];
+  let currentGroup: ThreadWithLayout[] = [];
+  let groupEndTime = -1;
+
+  for (const thread of sorted) {
+    if (currentGroup.length === 0) {
+      currentGroup.push({ ...thread, left: 0, width: 1 });
+      groupEndTime = thread.startTime! + thread.duration;
+    } else {
+       if (thread.startTime! < groupEndTime) {
+         // Overlaps with the group
+         currentGroup.push({ ...thread, left: 0, width: 1 });
+         groupEndTime = Math.max(groupEndTime, thread.startTime! + thread.duration);
+       } else {
+         // New group
+         groups.push(currentGroup);
+         currentGroup = [{ ...thread, left: 0, width: 1 }];
+         groupEndTime = thread.startTime! + thread.duration;
+       }
+    }
+  }
+  if (currentGroup.length > 0) groups.push(currentGroup);
+
+  const finalResult: ThreadWithLayout[] = [];
+
+  for (const group of groups) {
+    // Assign columns within group
+    const groupColumns: ThreadWithLayout[][] = [];
+    for (const thread of group) {
+       let placed = false;
+       for (let i = 0; i < groupColumns.length; i++) {
+         const col = groupColumns[i];
+         const last = col[col.length - 1];
+         if ((last.startTime! + last.duration) <= thread.startTime!) {
+           col.push(thread);
+           thread.left = i;
+           placed = true;
+           break;
+         }
+       }
+       if (!placed) {
+         groupColumns.push([thread]);
+         thread.left = groupColumns.length - 1;
+       }
+    }
+    
+    const numCols = groupColumns.length;
+    for (const thread of group) {
+      thread.width = 100 / numCols;
+      thread.left = thread.left * (100 / numCols);
+      finalResult.push(thread);
+    }
+  }
+
+  return finalResult;
+};
+
+
+function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive: boolean }) {
+  const colors = {
+    'cyber-cyan': { bg: 'bg-cyber-cyan/10', border: 'border-cyber-cyan', text: 'text-cyber-cyan', indicator: 'bg-cyber-cyan' },
+    'cyber-magenta': { bg: 'bg-cyber-magenta/10', border: 'border-cyber-magenta', text: 'text-cyber-magenta', indicator: 'bg-cyber-magenta' },
+    'cyber-yellow': { bg: 'bg-cyber-yellow/10', border: 'border-cyber-yellow', text: 'text-cyber-yellow', indicator: 'bg-cyber-yellow' },
   }[thread.category];
+
+  const patternStyle = thread.category === 'cyber-cyan' 
+    ? { backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)", backgroundSize: "8px 8px" }
+    : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
 
   return (
     <div
       style={{
         top: `${thread.startTime}px`,
         height: `${thread.duration}px`,
+        left: `${thread.left}%`,
+        width: `${thread.width}%`,
       }}
-      className="absolute left-4 right-12 group cursor-pointer hover:z-30 transition-all cyber-ribbon"
+      className="absolute px-1 group cursor-pointer hover:z-50 transition-all z-10"
     >
-        <div className={`absolute inset-0 ${colors.bg} border-l-4 ${colors.border} backdrop-blur-sm transition-all group-hover:bg-opacity-30`}></div>
-        {/* Pattern overlay */}
-        <div className="absolute inset-0 opacity-20" style={{backgroundImage: "linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.05) 75%, transparent 75%, transparent)", backgroundSize: "4px 4px"}}></div>
+        <div className={`relative w-full h-full cyber-ribbon overflow-hidden backdrop-blur-sm transition-all group-hover:bg-opacity-30 ${colors.bg}`}>
+            {/* Border Left */}
+            <div className={`absolute left-0 top-0 bottom-0 w-1 ${colors.indicator}`}></div>
+            
+            {/* Background Texture */}
+            <div className="absolute inset-0 opacity-40 pointer-events-none" style={patternStyle}></div>
 
-        <div className="relative p-2 h-full flex flex-col justify-between pl-4 overflow-hidden">
-            <div>
-                <h3 className="text-white font-bold text-sm uppercase tracking-wider font-display drop-shadow-md truncate">{thread.title}</h3>
-                <p className={`${colors.text} text-[10px] mt-0.5 font-mono tracking-tight truncate`}>{thread.description || 'ACTIVE_THREAD'}</p>
-            </div>
-             <div className="flex items-center justify-between mt-auto">
-                <span className="bg-black/60 text-white/50 text-[10px] px-1 font-mono">
-                    {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
-                </span>
+            <div className="relative p-2 h-full flex flex-col pl-3">
+                <div className="flex justify-between items-start">
+                    <div className="min-w-0 flex-1">
+                        <h3 className="text-white font-bold text-xs uppercase tracking-wider font-display drop-shadow-md truncate leading-tight">{thread.title}</h3>
+                        <p className={`${colors.text} text-[9px] mt-0.5 font-mono tracking-tight truncate opacity-80`}>{thread.description || 'ACTIVE_THREAD'}</p>
+                    </div>
+                    {isActive && (
+                        <span className="flex-shrink-0 ml-1 px-1.5 py-0.5 bg-cyber-magenta text-black text-[9px] font-bold font-mono animate-pulse rounded-sm">
+                            RUNNING
+                        </span>
+                    )}
+                </div>
+
+                <div className="flex items-center justify-between mt-auto pt-2">
+                    <span className="bg-black/40 text-white/50 text-[9px] px-1 font-mono rounded">
+                        {formatTime(thread.startTime!)} - {formatTime(thread.startTime! + thread.duration)}
+                    </span>
+                    {/* User Avatar Placeholder */}
+                    <div className="size-5 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-[8px] text-white font-mono">
+                        {thread.title.substring(0,2).toUpperCase()}
+                    </div>
+                </div>
+
+                {/* Progress Bar for Active Thread */}
+                {isActive && (
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-black/50">
+                        <div className="h-full bg-cyber-magenta shadow-[0_0_10px_#ff0055]" style={{ width: '45%' }}></div>
+                    </div>
+                )}
             </div>
         </div>
     </div>
@@ -49,6 +152,12 @@ export default function LoomBoard() {
   const { setNodeRef } = useDroppable({
     id: 'loom-board',
   });
+
+  // Calculate layout
+  const layoutThreads = useMemo(() => calculateThreadLayout(activeThreads), [activeThreads]);
+
+  // Current time simulation (approx 10:15 AM = 615 mins)
+  const currentTime = 615;
 
   const generateMarkers = () => {
     const markers = [];
@@ -71,12 +180,16 @@ export default function LoomBoard() {
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#grid)" />
-                ${activeThreads.map(t => {
+                ${layoutThreads.map(t => {
                     const color = t.category === 'cyber-cyan' ? '#00f0ff' : t.category === 'cyber-magenta' ? '#ff0055' : '#fcee0a';
+                    // Calculate position based on layout (total width 600px starting at x=100)
+                    const xPos = 100 + (t.left / 100) * 600;
+                    const width = (t.width / 100) * 600;
+                    
                     return `
-                        <g transform="translate(100, ${t.startTime})">
-                            <rect width="600" height="${t.duration}" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="2" />
-                            <text x="10" y="20" fill="white" font-size="14" font-weight="bold">${t.title}</text>
+                        <g transform="translate(${xPos}, ${t.startTime})">
+                            <rect width="${width}" height="${t.duration}" fill="${color}" fill-opacity="0.2" stroke="${color}" stroke-width="2" />
+                            <text x="10" y="20" fill="white" font-size="14" font-weight="bold" clip-path="inset(0 0 0 0)">${t.title}</text>
                             <text x="10" y="40" fill="${color}" font-size="10">${formatTime(t.startTime!)} - ${formatTime(t.startTime! + t.duration)}</text>
                         </g>
                     `;
@@ -135,19 +248,20 @@ export default function LoomBoard() {
                 {generateMarkers()}
               </div>
             </div>
-            <div ref={setNodeRef} id="timeline-container" className="flex-1 relative">
+            <div ref={setNodeRef} id="timeline-container" className="flex-1 relative pr-12">
               <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)", backgroundSize: "100% 60px" }}></div>
               
-              {/* NOW Indicator (Hardcoded for visual, could be dynamic) */}
+              {/* NOW Indicator (Hardcoded for visual at 10:15 AM) */}
               <div className="absolute top-[615px] left-0 w-full flex items-center z-40 pointer-events-none">
                 <div className="absolute -left-1.5 size-3 bg-cyber-magenta shadow-[0_0_10px_#ff0055] rotate-45"></div>
                 <div className="h-[1px] w-full bg-cyber-magenta shadow-[0_0_8px_#ff0055]"></div>
                 <div className="absolute right-0 bg-cyber-magenta text-black text-[10px] font-bold px-1 font-mono">NOW</div>
               </div>
 
-              {activeThreads.map(thread => (
-                  <BoardThread key={thread.id} thread={thread} />
-              ))}
+              {layoutThreads.map(thread => {
+                  const isActive = currentTime >= thread.startTime! && currentTime < (thread.startTime! + thread.duration);
+                  return <BoardThread key={thread.id} thread={thread} isActive={isActive} />;
+              })}
               
             </div>
           </div>
