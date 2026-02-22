@@ -195,7 +195,6 @@ function BoardThread({ thread, isActive, isScalpelMode, onSplit }: {
   const isFrontendImpl = thread.title === 'Frontend Impl.';
   const isProjectAlpha = thread.title.includes('Project Alpha'); // Or rely on ID/duration
   const displayActive = isActive || isFrontendImpl;
-  const [isHovered, setIsHovered] = useState(false);
 
   // Calculate split line position
   const [splitLineTop, setSplitLineTop] = useState<number | null>(null);
@@ -228,13 +227,20 @@ function BoardThread({ thread, isActive, isScalpelMode, onSplit }: {
       ? { backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')", opacity: 0.2 }
       : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
 
+  const meltClass = thread.isCutTop && thread.isCutBottom 
+    ? 'melt-both' 
+    : thread.isCutTop 
+      ? 'melt-top' 
+      : thread.isCutBottom 
+        ? 'melt-bottom' 
+        : '';
+
   return (
     <div
       style={thread.style}
-      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''} ${thread.isCutTop ? 'melt-top' : ''} ${thread.isCutBottom ? 'melt-bottom' : ''}`}
-      onMouseEnter={() => setIsHovered(true)}
+      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''} ${meltClass}`}
       onMouseMove={handleMouseMove}
-      onMouseLeave={() => { setIsHovered(false); setSplitLineTop(null); }}
+      onMouseLeave={() => { setSplitLineTop(null); }}
       onClick={(e) => {
           if (isScalpelMode) {
               e.stopPropagation();

@@ -1,374 +1,148 @@
+diff --git a/package-lock.json b/package-lock.json
+index 434e175..451ac75 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -78,7 +78,6 @@
+       "integrity": "sha512-CGOfOJqWjg2qW/Mb6zNsDm+u5vFQ8DxXfbM09z69p5Z6+mE1ikP2jUXw+j42Pf1XTYED2Rni5f95npYeuwMDQA==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "@babel/code-frame": "^7.29.0",
+         "@babel/generator": "^7.29.0",
+@@ -1277,7 +1276,6 @@
+       "integrity": "sha512-oH72nZRfDv9lADUBSo104Aq7gPHpQZc4BTx38r9xf9pg5LfP6EzSyH2n7qFmmxRQXh7YlUXODcYsg6PuTDSxGg==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "undici-types": "~7.16.0"
+       }
+@@ -1347,7 +1345,6 @@
+       "integrity": "sha512-IgSWvLobTDOjnaxAfDTIHaECbkNlAlKv2j5SjpB2v7QHKv1FIfjwMy8FsDbVfDX/KjmCmYICcw7uGaXLhtsLNg==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "@typescript-eslint/scope-manager": "8.56.0",
+         "@typescript-eslint/types": "8.56.0",
+@@ -1612,7 +1609,6 @@
+       "integrity": "sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "bin": {
+         "acorn": "bin/acorn"
+       },
+@@ -1758,7 +1754,6 @@
+         }
+       ],
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "baseline-browser-mapping": "^2.9.0",
+         "caniuse-lite": "^1.0.30001759",
+@@ -1960,7 +1955,6 @@
+       "integrity": "sha512-LEyamqS7W5HB3ujJyvi0HQK/dtVINZvd5mAAp9eT5S/ujByGjiZLCzPcHVzuXbpJDJF/cxwHlfceVUDZ2lnSTw==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "@eslint-community/eslint-utils": "^4.8.0",
+         "@eslint-community/regexpp": "^4.12.1",
+@@ -2932,7 +2926,6 @@
+       "integrity": "sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "engines": {
+         "node": ">=12"
+       },
+@@ -2959,7 +2952,6 @@
+         }
+       ],
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "nanoid": "^3.3.11",
+         "picocolors": "^1.1.1",
+@@ -3001,7 +2993,6 @@
+       "resolved": "https://registry.npmjs.org/react/-/react-19.2.4.tgz",
+       "integrity": "sha512-9nfp2hYpCwOjAN+8TZFGhtWEwgvWHXqESH8qT89AT/lWklpLON22Lc8pEtnpsZz7VmawabSU0gCjnj8aC0euHQ==",
+       "license": "MIT",
+-      "peer": true,
+       "engines": {
+         "node": ">=0.10.0"
+       }
+@@ -3225,7 +3216,6 @@
+       "integrity": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==",
+       "dev": true,
+       "license": "Apache-2.0",
+-      "peer": true,
+       "bin": {
+         "tsc": "bin/tsc",
+         "tsserver": "bin/tsserver"
+@@ -3312,7 +3302,6 @@
+       "integrity": "sha512-RHX7IvsJlEfjyA1rS7MY0UsmF91etdLAamslHR5lfuO3W/BXRdXm2tRE64ztpSPZbKqB4wAAZ0AwtF6QzfKZLA==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "dependencies": {
+         "@oxc-project/runtime": "0.114.0",
+         "lightningcss": "^1.31.1",
+@@ -3438,7 +3427,6 @@
+       "integrity": "sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==",
+       "dev": true,
+       "license": "MIT",
+-      "peer": true,
+       "funding": {
+         "url": "https://github.com/sponsors/colinhacks"
+       }
 diff --git a/src/components/LoomBoard.tsx b/src/components/LoomBoard.tsx
-index a4f6fe5..09ea5aa 100644
+index 09ea5aa..965d239 100644
 --- a/src/components/LoomBoard.tsx
 +++ b/src/components/LoomBoard.tsx
-@@ -1,6 +1,6 @@
- import { useStore, type Thread } from '../store';
- import { useDroppable } from '@dnd-kit/core';
--import { useMemo } from 'react';
-+import { useMemo, useState, useEffect, useRef } from 'react';
- 
- // Helper to format time
- const formatTime = (minutes: number) => {
-@@ -116,8 +116,76 @@ const calculateThreadLayout = (threads: Thread[]): ThreadWithLayout[] => {
-   return finalResult;
- };
- 
-+interface Spark {
-+  id: number;
-+  x: number;
-+  y: number;
-+  tx: number;
-+  ty: number;
-+  color: string;
-+}
-+
-+function SparksContainer({ sparks }: { sparks: Spark[] }) {
-+    return (
-+        <div className="fixed inset-0 pointer-events-none z-[100]">
-+            {sparks.map((spark) => (
-+                <div 
-+                    key={spark.id} 
-+                    className="spark" 
-+                    style={{ 
-+                        left: spark.x, 
-+                        top: spark.y, 
-+                        backgroundColor: spark.color,
-+                        boxShadow: `0 0 8px ${spark.color}`,
-+                        '--tx': `${spark.tx}px`, 
-+                        '--ty': `${spark.ty}px` 
-+                    } as React.CSSProperties}
-+                ></div>
-+            ))}
-+        </div>
-+    );
-+}
-+
-+function ScalpelCursor() {
-+  const ref = useRef<HTMLDivElement>(null);
-+
-+  useEffect(() => {
-+    const handleMove = (e: MouseEvent) => {
-+        if (ref.current) {
-+            ref.current.style.left = `${e.clientX}px`;
-+            ref.current.style.top = `${e.clientY}px`;
-+        }
-+    };
-+    window.addEventListener('mousemove', handleMove);
-+    return () => window.removeEventListener('mousemove', handleMove);
-+  }, []);
-+
-+  return (
-+    <div 
-+        ref={ref}
-+        className="fixed z-[100] pointer-events-none transform -translate-x-1/2 -translate-y-1/2" 
-+        style={{ left: -100, top: -100 }}
-+    >
-+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-cyber-magenta/30 blur-xl rounded-full animate-pulse"></div>
-+        <svg className="drop-shadow-[0_0_10px_rgba(255,113,206,1)] transform -rotate-12" fill="none" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg">
-+            <circle cx="14" cy="36" fill="#050014" r="5" stroke="#ff0055" strokeWidth="3"></circle>
-+            <circle cx="34" cy="36" fill="#050014" r="5" stroke="#ff0055" strokeWidth="3"></circle>
-+            <path d="M16 32 L34 12" stroke="#00f0ff" strokeLinecap="round" strokeWidth="3"></path>
-+            <path d="M32 32 L14 12" stroke="#00f0ff" strokeLinecap="round" strokeWidth="3"></path>
-+            <circle className="animate-pulse" cx="24" cy="22" fill="#fcee0a" r="2"></circle>
-+            <path className="animate-bounce" d="M24 6 L26 10 L30 12 L26 14 L24 18 L22 14 L18 12 L22 10 Z" fill="#fcee0a" style={{ animationDuration: '2s' }}></path>
-+        </svg>
-+    </div>
-+  );
-+}
- 
--function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive: boolean }) {
-+
-+function BoardThread({ thread, isActive, isScalpelMode, onSplit }: { 
-+    thread: ThreadWithLayout; 
-+    isActive: boolean; 
-+    isScalpelMode: boolean;
-+    onSplit: (id: string, x: number, y: number) => void;
-+}) {
-   const colors = {
-     'cyber-cyan': { bg: 'bg-cyber-cyan/10', border: 'border-cyber-cyan', text: 'text-cyber-cyan', indicator: 'bg-cyber-cyan' },
-     'cyber-magenta': { bg: 'bg-cyber-magenta/10', border: 'border-cyber-magenta', text: 'text-cyber-magenta', indicator: 'bg-cyber-magenta' },
-@@ -127,6 +195,32 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
+@@ -195,7 +195,6 @@ function BoardThread({ thread, isActive, isScalpelMode, onSplit }: {
    const isFrontendImpl = thread.title === 'Frontend Impl.';
    const isProjectAlpha = thread.title.includes('Project Alpha'); // Or rely on ID/duration
    const displayActive = isActive || isFrontendImpl;
-+  const [isHovered, setIsHovered] = useState(false);
-+
-+  // Calculate split line position
-+  const [splitLineTop, setSplitLineTop] = useState<number | null>(null);
-+
-+  const handleMouseMove = (e: React.MouseEvent) => {
-+    if (!isScalpelMode) {
-+        setSplitLineTop(null);
-+        return;
-+    }
-+
-+    const timelineContainer = document.getElementById('timeline-container');
-+    if (timelineContainer) {
-+        const rect = timelineContainer.getBoundingClientRect();
-+        const absoluteMinutes = e.clientY - rect.top;
-+        const snappedMinutes = Math.round(absoluteMinutes / 15) * 15;
-+        
-+        // Check if snap is within this thread
-+        if (snappedMinutes > (thread.startTime || 0) && snappedMinutes < ((thread.startTime || 0) + thread.duration)) {
-+                setSplitLineTop(snappedMinutes - (thread.startTime || 0));
-+        } else {
-+            setSplitLineTop(null);
-+        }
-+    }
-+  };
-+
+-  const [isHovered, setIsHovered] = useState(false);
  
-   const patternStyle = thread.category === 'cyber-cyan' 
-     ? { backgroundImage: "radial-gradient(circle at 2px 2px, rgba(0,240,255,1) 1px, transparent 0)", backgroundSize: "20px 20px", opacity: 0.1 }
-@@ -137,12 +231,34 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
+   // Calculate split line position
+   const [splitLineTop, setSplitLineTop] = useState<number | null>(null);
+@@ -228,13 +227,20 @@ function BoardThread({ thread, isActive, isScalpelMode, onSplit }: {
+       ? { backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmYwMDU1IiAvPgo8cGF0aCBkPSJNLTQgOEw4IC00IiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=')", opacity: 0.2 }
+       : { backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 8px)" };
+ 
++  const meltClass = thread.isCutTop && thread.isCutBottom 
++    ? 'melt-both' 
++    : thread.isCutTop 
++      ? 'melt-top' 
++      : thread.isCutBottom 
++        ? 'melt-bottom' 
++        : '';
++
    return (
      <div
        style={thread.style}
--      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''}`}
-+      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''} ${thread.isCutTop ? 'melt-top' : ''} ${thread.isCutBottom ? 'melt-bottom' : ''}`}
-+      onMouseEnter={() => setIsHovered(true)}
-+      onMouseMove={handleMouseMove}
-+      onMouseLeave={() => { setIsHovered(false); setSplitLineTop(null); }}
-+      onClick={(e) => {
-+          if (isScalpelMode) {
-+              e.stopPropagation();
-+              e.preventDefault();
-+              onSplit(thread.id, e.clientX, e.clientY);
-+          }
-+      }}
-     >
-         <div className={`relative w-full h-full overflow-hidden backdrop-blur-sm transition-all group-hover:bg-opacity-30 ${isFrontendImpl ? 'bg-gradient-to-r from-cyber-cyan/20 to-blue-900/40' : colors.bg}`}>
-             {/* Border Left/Right handled by ribbon classes or internal border */}
-             <div className={`absolute left-0 top-0 bottom-0 w-1 ${colors.indicator}`}></div>
-             
-+            {/* Split Line Indicator */}
-+            {isScalpelMode && splitLineTop !== null && (
-+                <div 
-+                    className="absolute w-full h-0.5 border-t-2 border-dashed border-white/80 z-50 pointer-events-none flex items-center justify-end pr-2 drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]"
-+                    style={{ top: `${splitLineTop}px` }}
-+                >
-+                    <span className="text-[9px] font-mono font-bold bg-black/70 text-white px-1 rounded transform -translate-y-1/2">
-+                        SPLIT
-+                    </span>
-+                </div>
-+            )}
-+            
-             {/* Background Texture */}
-             <div className="absolute inset-0 pointer-events-none" style={patternStyle}></div>
- 
-@@ -215,11 +331,67 @@ function BoardThread({ thread, isActive }: { thread: ThreadWithLayout; isActive:
- 
- export default function LoomBoard() {
-   const threads = useStore((state) => state.threads);
-+  const splitThread = useStore((state) => state.splitThread);
-   const activeThreads = threads.filter((t) => t.startTime !== null);
-   const { setNodeRef } = useDroppable({
-     id: 'loom-board',
-   });
- 
-+  const [isScalpelMode, setIsScalpelMode] = useState(false);
-+  const [sparks, setSparks] = useState<Spark[]>([]);
-+
-+  const handleSplit = (threadId: string, clientX: number, clientY: number) => {
-+    if (!isScalpelMode) return;
-+
-+    const timelineContainer = document.getElementById('timeline-container');
-+    if (!timelineContainer) return;
-+
-+    const rect = timelineContainer.getBoundingClientRect();
-+    const relativeY = clientY - rect.top; // Relative to timeline container top (which is 00:00 visual start)
-+    // Note: timeline-container is the relative parent for absolute positioning of threads.
-+    
-+    const snappedTime = Math.round(relativeY / 15) * 15;
-+    
-+    // Add sparks
-+    const id = Date.now();
-+    const colors = ['#00f0ff', '#ff0055', '#fcee0a', '#ffffff'];
-+    const newSparks = Array.from({ length: 8 }).map((_, i) => ({
-+        id: id + i,
-+        x: clientX,
-+        y: clientY,
-+        tx: (Math.random() - 0.5) * 100,
-+        ty: (Math.random() - 0.5) * 100,
-+        color: colors[Math.floor(Math.random() * colors.length)]
-+    }));
-+    
-+    setSparks((prev) => [...prev, ...newSparks]);
-+    setTimeout(() => {
-+        setSparks((prev) => prev.filter((s) => s.id < id || s.id >= id + 8));
-+    }, 800);
-+
-+    splitThread(threadId, snappedTime);
-+  };
-+
-+  useEffect(() => {
-+    const handleKeyDown = (e: KeyboardEvent) => {
-+      if (e.key === 'Alt') {
-+        setIsScalpelMode(true);
-+      }
-+    };
-+    const handleKeyUp = (e: KeyboardEvent) => {
-+      if (e.key === 'Alt') {
-+        setIsScalpelMode(false);
-+      }
-+    };
-+
-+    window.addEventListener('keydown', handleKeyDown);
-+    window.addEventListener('keyup', handleKeyUp);
-+    return () => {
-+      window.removeEventListener('keydown', handleKeyDown);
-+      window.removeEventListener('keyup', handleKeyUp);
-+    };
-+  }, []);
-+
-   // Calculate layout
-   const layoutThreads = useMemo(() => calculateThreadLayout(activeThreads), [activeThreads]);
- 
-@@ -274,7 +446,9 @@ export default function LoomBoard() {
-     };
- 
-   return (
--    <main className="flex-1 flex flex-col h-full bg-deep-void relative overflow-hidden">
-+    <main 
-+        className={`flex-1 flex flex-col h-full bg-deep-void relative overflow-hidden ${isScalpelMode ? 'cursor-scalpel' : ''}`}
-+    >
-         <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none"></div>
-         <div className="absolute inset-0 bg-gradient-to-t from-deep-void via-transparent to-deep-void pointer-events-none"></div>
-         <header className="h-16 border-b border-white/10 flex items-center justify-between px-6 bg-deep-void/90 backdrop-blur-md z-30 sticky top-0">
-@@ -310,6 +484,8 @@ export default function LoomBoard() {
-           </div>
-         </header>
-         <div className="flex-1 overflow-y-auto cyber-scrollbar relative">
-+          {isScalpelMode && <ScalpelCursor />}
-+          <SparksContainer sparks={sparks} />
-           <div className="flex min-h-[1440px] relative pb-20">
-             <div className="w-20 flex-shrink-0 border-r border-white/10 bg-panel-bg z-10">
-               <div className="relative h-full pt-2">
-@@ -328,7 +504,15 @@ export default function LoomBoard() {
- 
-               {layoutThreads.map(thread => {
-                   const isActive = currentTime >= thread.startTime! && currentTime < (thread.startTime! + thread.duration);
--                  return <BoardThread key={thread.id} thread={thread} isActive={isActive} />;
-+                  return (
-+                    <BoardThread 
-+                        key={thread.id} 
-+                        thread={thread} 
-+                        isActive={isActive} 
-+                        isScalpelMode={isScalpelMode}
-+                        onSplit={handleSplit}
-+                    />
-+                  );
-               })}
-               
-             </div>
+-      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''} ${thread.isCutTop ? 'melt-top' : ''} ${thread.isCutBottom ? 'melt-bottom' : ''}`}
+-      onMouseEnter={() => setIsHovered(true)}
++      className={`absolute px-1 group cursor-pointer hover:z-50 transition-all origin-left ${thread.layoutClass} ${isProjectAlpha ? 'hover:bg-cyber-magenta/20' : ''} ${meltClass}`}
+       onMouseMove={handleMouseMove}
+-      onMouseLeave={() => { setIsHovered(false); setSplitLineTop(null); }}
++      onMouseLeave={() => { setSplitLineTop(null); }}
+       onClick={(e) => {
+           if (isScalpelMode) {
+               e.stopPropagation();
 diff --git a/src/index.css b/src/index.css
-index ab2ad72..65175a5 100644
+index 65175a5..7f850c4 100644
 --- a/src/index.css
 +++ b/src/index.css
-@@ -95,3 +95,41 @@ body {
-   background-color: var(--color-deep-void);
-   @apply text-slate-300 h-screen overflow-hidden flex flex-row selection:bg-cyber-cyan selection:text-black;
+@@ -133,3 +133,7 @@ body {
+ .laser-beam {
+   animation: beam-pulse 2s infinite ease-in-out;
  }
 +
-+/* Scalpel Mode */
-+.cursor-scalpel {
-+  cursor: none !important;
++.melt-both {
++  clip-path: polygon(0 15%, 8% 5%, 15% 10%, 25% 2%, 35% 10%, 45% 2%, 55% 10%, 65% 2%, 75% 10%, 85% 5%, 92% 10%, 100% 0, 100% 85%, 92% 95%, 85% 90%, 75% 98%, 65% 92%, 55% 98%, 45% 90%, 35% 98%, 25% 90%, 15% 98%, 0 85%);
 +}
-+
-+/* Animations */
-+@keyframes sparkle {
-+  0% { transform: scale(0) translate(0, 0); opacity: 1; }
-+  100% { transform: scale(1.5) translate(var(--tx), var(--ty)); opacity: 0; }
-+}
-+
-+.spark {
-+  position: absolute;
-+  width: 6px;
-+  height: 6px;
-+  background: #fffb96;
-+  box-shadow: 0 0 8px #fffb96;
-+  border-radius: 50%;
-+  animation: sparkle 0.8s ease-out forwards;
-+}
-+
-+.melt-bottom {
-+  clip-path: polygon(0 0, 100% 0, 100% 85%, 92% 95%, 85% 90%, 75% 98%, 65% 92%, 55% 98%, 45% 90%, 35% 98%, 25% 90%, 15% 98%, 0 85%);
-+}
-+
-+.melt-top {
-+  clip-path: polygon(0 15%, 8% 5%, 15% 10%, 25% 2%, 35% 10%, 45% 2%, 55% 10%, 65% 2%, 75% 10%, 85% 5%, 92% 10%, 100% 0, 100% 100%, 0 100%);
-+}
-+
-+@keyframes beam-pulse {
-+  0%, 100% { opacity: 0.8; box-shadow: 0 0 15px #01cdfe, 0 0 30px #b967ff; }
-+  50% { opacity: 1; box-shadow: 0 0 25px #01cdfe, 0 0 40px #b967ff; }
-+}
-+
-+.laser-beam {
-+  animation: beam-pulse 2s infinite ease-in-out;
-+}
-diff --git a/src/store.ts b/src/store.ts
-index dad351f..4ba1112 100644
---- a/src/store.ts
-+++ b/src/store.ts
-@@ -7,6 +7,8 @@ export interface Thread {
-   category: 'cyber-cyan' | 'cyber-magenta' | 'cyber-yellow';
-   startTime: number | null; // minutes from 00:00, or null if in spool
-   description?: string;
-+  isCutTop?: boolean;
-+  isCutBottom?: boolean;
- }
- 
- interface Store {
-@@ -15,6 +17,7 @@ interface Store {
-   updateThread: (id: string, updates: Partial<Thread>) => void;
-   removeThread: (id: string) => void;
-   setThreadTime: (id: string, startTime: number | null) => void;
-+  splitThread: (originalThreadId: string, splitTime: number) => void;
-   clearThreads: () => void;
- }
- 
-@@ -100,5 +103,42 @@ export const useStore = create<Store>((set) => ({
-         t.id === id ? { ...t, startTime } : t
-       ),
-     })),
-+  splitThread: (originalThreadId, splitTime) =>
-+    set((state) => {
-+      const originalThread = state.threads.find((t) => t.id === originalThreadId);
-+      if (!originalThread || originalThread.startTime === null) return state;
-+
-+      // Validate split time
-+      if (splitTime <= originalThread.startTime || splitTime >= originalThread.startTime + originalThread.duration) {
-+        return state;
-+      }
-+
-+      const newDuration = splitTime - originalThread.startTime;
-+      const remainingDuration = originalThread.duration - newDuration;
-+
-+      const newThread: Thread = {
-+        ...originalThread,
-+        id: crypto.randomUUID(),
-+        startTime: splitTime,
-+        duration: remainingDuration,
-+        isCutTop: true,
-+        isCutBottom: originalThread.isCutBottom,
-+      };
-+
-+      return {
-+        threads: [
-+          ...state.threads.map((t) =>
-+            t.id === originalThreadId 
-+              ? { 
-+                  ...t, 
-+                  duration: newDuration, 
-+                  isCutBottom: true 
-+                } 
-+              : t
-+          ),
-+          newThread,
-+        ],
-+      };
-+    }),
-   clearThreads: () => set({ threads: [] }),
- }));
